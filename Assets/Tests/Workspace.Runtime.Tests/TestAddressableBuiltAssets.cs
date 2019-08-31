@@ -36,5 +36,19 @@ namespace Workspace.Runtime.Tests
 
             Addressables.Release(operation);
         }
+
+        [UnityTest]
+        public IEnumerator LoadMaterial3()
+        {
+            AsyncOperationHandle<Material> operation = Addressables.LoadAssetAsync<Material>("test_material_3");
+
+            yield return operation;
+
+            Assert.AreEqual(AsyncOperationStatus.Succeeded, operation.Status);
+            Assert.NotNull(operation.Result);
+            Assert.AreEqual("test_material_3", operation.Result.name);
+
+            Addressables.Release(operation);
+        }
     }
 }

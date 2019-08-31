@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 
-namespace Workspace.Editor
+namespace Workspace.Editor.Addressable.TestBuildScript
 {
     public class AddressableTestBuildScheme : AddressableAssetGroupSchema
     {

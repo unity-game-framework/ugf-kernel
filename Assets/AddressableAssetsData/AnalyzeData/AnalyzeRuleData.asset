@@ -14,10 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RuleToResults:
   - RuleName: Check Duplicate Bundle Dependencies
-    Results: []
+    Results:
+    - m_ResultName: No issues found
+      m_Severity: 0
   - RuleName: Check Resources to Addressable Duplicate Dependencies
-    Results: []
+    Results:
+    - m_ResultName: Check Resources to Addressable Duplicate Dependencies - No issues
+        found.
+      m_Severity: 0
   - RuleName: Check Scene to Addressable Duplicate Dependencies
-    Results: []
+    Results:
+    - m_ResultName: Check Scene to Addressable Duplicate Dependencies - No issues
+        found.
+      m_Severity: 0
   - RuleName: Build Bundle Layout
-    Results: []
+    Results:
+    - m_ResultName: testonlyresources_assets_test_materials.bundle:Explicit:Assets/Tests/Workspace.Runtime.Tests/Assets/test_material_1.mat
+      m_Severity: 0
+    - m_ResultName: testonlyresources_assets_test_materials.bundle:Explicit:Assets/Tests/Workspace.Runtime.Tests/Assets/test_material_2.mat
+      m_Severity: 0
