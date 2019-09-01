@@ -16,13 +16,17 @@ namespace UGF.Addressable.Editor.Scheme
 
         public override void OnGUI()
         {
-            if (EditorUserBuildSettings.activeBuildTarget == m_platform)
+            base.OnGUI();
+
+            BuildTarget activeBuildTarget = EditorUserBuildSettings.activeBuildTarget;
+
+            if (m_platform == activeBuildTarget)
             {
-                EditorGUILayout.HelpBox("Selected build target is matched: this group will be included in build.", MessageType.Info);
+                EditorGUILayout.HelpBox("Current platform is matched: this group will be included in build.", MessageType.Info);
             }
             else
             {
-                EditorGUILayout.HelpBox("Selected build target is not matched: this group will be excluded from build.", MessageType.Warning);
+                EditorGUILayout.HelpBox($"Current platform is not matched: this group will be excluded from build. (Selected:'{activeBuildTarget}')", MessageType.Warning);
             }
         }
     }

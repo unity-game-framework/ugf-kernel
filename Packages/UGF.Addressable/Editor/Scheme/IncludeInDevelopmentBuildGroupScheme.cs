@@ -11,6 +11,8 @@ namespace UGF.Addressable.Editor.Scheme
 
         public override void OnGUI()
         {
+            base.OnGUI();
+
             if (EditorUserBuildSettings.development)
             {
                 EditorGUILayout.HelpBox("Development mode is enabled: this group will be included in build.", MessageType.Info);
