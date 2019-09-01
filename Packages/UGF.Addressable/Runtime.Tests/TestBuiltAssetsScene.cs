@@ -1,14 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-namespace Workspace.Runtime.Addressable.TestBuildScript.Tests
+namespace UGF.Addressable.Runtime.Tests
 {
-    public class TestAddressableBuiltAssets : MonoBehaviour
+    public class TestBuiltAssetsScene : MonoBehaviour
     {
         private IEnumerator Start()
         {
@@ -22,7 +22,7 @@ namespace Workspace.Runtime.Addressable.TestBuildScript.Tests
             Assert.IsNotNull(operation2.Result);
 
 #if UNITY_EDITOR
-            Assert.AreNotEqual(0, operation.Result.Count);
+            Assert.AreEqual(2, operation.Result.Count);
 #else
             Assert.AreEqual(0, operation.Result.Count);
 #endif

@@ -1,13 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.TestTools;
 
-namespace Workspace.Runtime.Tests
+namespace UGF.Addressable.Runtime.Tests
 {
-    public class TestAddressableBuiltAssets
+    public class TestBuiltAssets
     {
         [UnityTest]
         public IEnumerator LoadMaterial1()
