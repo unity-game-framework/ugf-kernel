@@ -9,6 +9,7 @@
         "url": "https://github.com/unity-game-framework"
     },
     "dependencies": {
-        "com.unity.addressables": "1.1.10"
+        "com.unity.addressables": "1.1.10",
+        "com.unity.settings-manager": "1.0.0"
     }
 }
