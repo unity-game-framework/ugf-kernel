@@ -3,9 +3,17 @@ using UnityEditor;
 
 namespace UGF.Addressable.Editor.Scheme
 {
+    /// <summary>
+    /// Represents scheme that marks specific asset group to include in test builds only.
+    /// </summary>
+    /// <remarks>
+    /// The asset group with this scheme, will be included in build, if 'Include Test Groups' enabled in 'UGF.Addressable' project settings.
+    ///
+    /// Addressable project settings can be found at: "ProjectSettings/UGF/Addressable".
+    /// </remarks>
     public class IncludeWithTestsGroupScheme : IncludeGroupSchemeBase
     {
-        public override bool IsIncluded()
+        public override bool Check()
         {
             return AddressableSettings.IncludeTestGroups;
         }

@@ -2,9 +2,15 @@ using UnityEditor;
 
 namespace UGF.Addressable.Editor.Scheme
 {
+    /// <summary>
+    /// Represents scheme that marks specific asset group to include in development build only.
+    /// </summary>
+    /// <remarks>
+    /// The asset group with this scheme, will be included in build, if 'Development Mode' enabled in build settings.
+    /// </remarks>
     public class IncludeInDevelopmentBuildGroupScheme : IncludeGroupSchemeBase
     {
-        public override bool IsIncluded()
+        public override bool Check()
         {
             return EditorUserBuildSettings.development;
         }
