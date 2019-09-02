@@ -26,7 +26,7 @@ No description.
 
 ## How to Install
 
-Read about how to install any project from the `Unity Game Framework` registry: [Install Project][4].
+Read about how to install any project from the `Unity Game Framework` organization: [Install Project][4].
 
 ---
 > Unity Game Framework | Copyright 2019
