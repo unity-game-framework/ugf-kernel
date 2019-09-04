@@ -38,5 +38,10 @@ namespace UGF.Kernel.Runtime.Config
         {
             return m_result ?? throw new InvalidOperationException("The config not loaded.");
         }
+
+        public override string ToString()
+        {
+            return $"KernelConfigJsonLoader: path '{Path}'";
+        }
     }
 }

@@ -1,3 +1,5 @@
 {
-    "config": {}
+    "config": {
+        "m_name": "default_json"
+    }
 }

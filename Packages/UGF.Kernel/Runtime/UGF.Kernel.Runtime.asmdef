@@ -2,7 +2,8 @@
     "name": "UGF.Kernel.Runtime",
     "references": [
         "GUID:a4312e46e9f64bb4aa011ac96ffd2a61",
-        "GUID:d067af32d09350a4bb33960432735e4d"
+        "GUID:d067af32d09350a4bb33960432735e4d",
+        "GUID:6ca210c6fc8b79d4292f3cdb1061c73e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

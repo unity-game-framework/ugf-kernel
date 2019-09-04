@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d64e8a9fc4f0b4fbeafbce10881089, type: 3}
   m_Name: config
   m_EditorClassIdentifier: 
+  m_config:
+    m_name: default_asset

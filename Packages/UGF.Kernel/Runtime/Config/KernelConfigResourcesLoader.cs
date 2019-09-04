@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace UGF.Kernel.Runtime.Config
 {
-    public class KernelConfigAssetLoader : IKernelConfigLoader
+    public class KernelConfigResourcesLoader : IKernelConfigLoader
     {
         public string Path { get; }
 
         private IKernelConfig m_result;
 
-        public KernelConfigAssetLoader(string path)
+        public KernelConfigResourcesLoader(string path)
         {
             Path = path;
         }
@@ -34,6 +34,11 @@ namespace UGF.Kernel.Runtime.Config
         public IKernelConfig GetResult()
         {
             return m_result ?? throw new InvalidOperationException("The config not loaded.");
+        }
+
+        public override string ToString()
+        {
+            return $"KernelConfigResourcesLoader: path '{Path}'";
         }
     }
 }

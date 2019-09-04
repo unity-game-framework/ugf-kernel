@@ -163,5 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdd75ec10ec2194f84d0a7195aab95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_uninitializeOnUnityQuitting: 1
+  m_launchOnStart: 1
+  m_stopOnQuit: 1
   m_provideStaticInstance: 1
+  m_configPath: config
