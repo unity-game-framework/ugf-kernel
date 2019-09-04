@@ -12,7 +12,7 @@ namespace UGF.Kernel.Runtime.Tests
         {
             protected override IApplication CreateApplication()
             {
-                return new ApplicationUnity();
+                return new KernelApplication();
             }
         }
 
