@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UGF.Kernel.Runtime.Config
 {
     [Serializable]
-    public class KernelConfig : IKernelConfig
+    public partial class KernelConfig : IKernelConfig
     {
         [SerializeField] private string m_name = "Default";
 
