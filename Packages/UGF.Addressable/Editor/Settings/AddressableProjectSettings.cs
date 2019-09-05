@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using UnityEditor;
 using UnityEditor.SettingsManagement;
 using PackageSettings = UnityEditor.SettingsManagement.Settings;
 
@@ -6,7 +8,7 @@ namespace UGF.Addressable.Editor.Settings
     /// <summary>
     /// Represents project scoped settings for Addressable.
     /// </summary>
-    public static class AddressableSettings
+    public static class AddressableProjectSettings
     {
         /// <summary>
         /// Gets instance of the settings which stores serialized data.
@@ -20,5 +22,11 @@ namespace UGF.Addressable.Editor.Settings
 
         [UserSetting("Build", "Include Test Groups", "Determines whether to include asset groups marked with test group scheme.")]
         private static readonly UserSetting<bool> m_includeTestGroups = new UserSetting<bool>(Instance, "build.includeTestGroups", false);
+
+        [SettingsProvider, UsedImplicitly]
+        private static SettingsProvider Create()
+        {
+            return new UserSettingsProvider("Project/UGF/Addressables", Instance, new[] { Instance.GetType().Assembly }, SettingsScope.Project);
+        }
     }
 }
