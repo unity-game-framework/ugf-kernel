@@ -48,11 +48,12 @@ namespace UGF.Kernel.Runtime.Tests
             var launcher = new GameObject("launcher").AddComponent<KernelResources>();
 
             launcher.LaunchOnStart = false;
+            launcher.ConfigPath = "Config";
 
             yield return launcher.Launch();
 
             Assert.NotNull(launcher.Config);
-            Assert.AreEqual("default_asset", launcher.Config.Name);
+            Assert.AreEqual("DefaultAsset", launcher.Config.Name);
 
             Object.DestroyImmediate(launcher.gameObject);
         }
@@ -63,12 +64,12 @@ namespace UGF.Kernel.Runtime.Tests
             var launcher = new GameObject("launcher").AddComponent<KernelJson>();
 
             launcher.LaunchOnStart = false;
-            launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/config.json";
+            launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.json";
 
             yield return launcher.Launch();
 
             Assert.NotNull(launcher.Config);
-            Assert.AreEqual("default_json", launcher.Config.Name);
+            Assert.AreEqual("DefaultJson", launcher.Config.Name);
 
             Object.DestroyImmediate(launcher.gameObject);
         }
