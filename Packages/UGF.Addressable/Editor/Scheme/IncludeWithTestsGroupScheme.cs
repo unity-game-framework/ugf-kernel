@@ -15,12 +15,12 @@ namespace UGF.Addressable.Editor.Scheme
     {
         public override bool Check()
         {
-            return AddressableProjectSettings.IncludeTestGroups;
+            return AddressableProjectEditorSettings.IncludeTestGroups;
         }
 
         public override void OnGUI()
         {
-            if (AddressableProjectSettings.IncludeTestGroups)
+            if (AddressableProjectEditorSettings.IncludeTestGroups)
             {
                 EditorGUILayout.HelpBox("Include test groups options is enabled: this group will be included in build.", MessageType.Info);
             }
