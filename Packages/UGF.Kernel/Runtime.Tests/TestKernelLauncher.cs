@@ -64,7 +64,7 @@ namespace UGF.Kernel.Runtime.Tests
             var launcher = new GameObject("launcher").AddComponent<KernelJson>();
 
             launcher.LaunchOnStart = false;
-            launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.json";
+            launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.jsonc";
 
             yield return launcher.Launch();
 

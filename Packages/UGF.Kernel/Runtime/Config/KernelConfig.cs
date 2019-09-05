@@ -6,7 +6,7 @@ namespace UGF.Kernel.Runtime.Config
     [Serializable]
     public class KernelConfig : IKernelConfig
     {
-        [SerializeField] private string m_name = "default";
+        [SerializeField] private string m_name = "Default";
 
         public string Name { get { return m_name; } set { m_name = value; } }
     }
