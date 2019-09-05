@@ -2,12 +2,12 @@ using System.Collections;
 using NUnit.Framework;
 using UGF.Application.Runtime;
 using UGF.Kernel.Runtime.Config;
-using UnityEngine;
+using UGF.Testing.Runtime.Tests;
 using UnityEngine.TestTools;
 
 namespace UGF.Kernel.Runtime.Tests
 {
-    public class TestKernelLauncher
+    public class TestKernelLauncher : TestNoLogs
     {
         private class KernelResources : KernelLauncher
         {
@@ -30,48 +30,38 @@ namespace UGF.Kernel.Runtime.Tests
             }
         }
 
-        [SetUp]
-        public void Setup()
-        {
-            Debug.unityLogger.logEnabled = false;
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Debug.unityLogger.logEnabled = true;
-        }
-
         [UnityTest]
         public IEnumerator ConfigResources()
         {
-            var launcher = new GameObject("launcher").AddComponent<KernelResources>();
+            using (var scope = new TestComponentScope<KernelResources>())
+            {
+                KernelResources launcher = scope.Component;
 
-            launcher.LaunchOnStart = false;
-            launcher.ConfigPath = "Config";
+                launcher.LaunchOnStart = false;
+                launcher.ConfigPath = "Config";
 
-            yield return launcher.Launch();
+                yield return launcher.Launch();
 
-            Assert.NotNull(launcher.Config);
-            Assert.AreEqual("DefaultAsset", launcher.Config.Name);
-
-            Object.DestroyImmediate(launcher.gameObject);
+                Assert.NotNull(launcher.Config);
+                Assert.AreEqual("DefaultAsset", launcher.Config.Name);
+            }
         }
 
         [UnityTest]
         public IEnumerator ConfigJson()
         {
-            var launcher = new GameObject("launcher").AddComponent<KernelJson>();
+            using (var scope = new TestComponentScope<KernelJson>())
+            {
+                KernelJson launcher = scope.Component;
 
-            launcher.LaunchOnStart = false;
-            launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.jsonc";
+                launcher.LaunchOnStart = false;
+                launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.jsonc";
 
-            yield return launcher.Launch();
+                yield return launcher.Launch();
 
-            Assert.NotNull(launcher.Config);
-            Assert.AreEqual("DefaultJson", launcher.Config.Name);
-
-            Object.DestroyImmediate(launcher.gameObject);
+                Assert.NotNull(launcher.Config);
+                Assert.AreEqual("DefaultJson", launcher.Config.Name);
+            }
         }
     }
 }
