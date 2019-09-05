@@ -10,15 +10,22 @@ namespace UGF.Kernel.Runtime
     public class KernelLauncher : ApplicationUnityLauncher
     {
         [SerializeField] private string m_configPath = "config";
+        [SerializeField] private KernelConfigLoaderType m_configLoaderType = KernelConfigLoaderType.Resources;
 
         public string ConfigPath { get { return m_configPath; } set { m_configPath = value; } }
+        public KernelConfigLoaderType ConfigLoaderType { get { return m_configLoaderType; } set { m_configLoaderType = value; } }
         public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
 
         private IKernelConfig m_config;
 
         protected virtual IKernelConfigLoader GetConfigLoader()
         {
-            return new KernelConfigResourcesLoader(m_configPath);
+            switch (m_configLoaderType)
+            {
+                case KernelConfigLoaderType.Resources: return new KernelConfigResourcesLoader(m_configPath);
+                case KernelConfigLoaderType.Json: return new KernelConfigJsonLoader(m_configPath);
+                default: throw new ArgumentOutOfRangeException(nameof(m_configLoaderType), $"Unknown config loader type: '{m_configLoaderType}'.");
+            }
         }
 
         protected override IEnumerator PreloadResourcesAsync()

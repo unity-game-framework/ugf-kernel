@@ -1,6 +1,5 @@
 using System.Collections;
 using NUnit.Framework;
-using UGF.Application.Runtime;
 using UGF.Kernel.Runtime.Config;
 using UGF.Testing.Runtime.Tests;
 using UnityEngine.TestTools;
@@ -9,36 +8,16 @@ namespace UGF.Kernel.Runtime.Tests
 {
     public class TestKernelLauncher : TestNoLogs
     {
-        private class KernelResources : KernelLauncher
-        {
-            protected override IApplication CreateApplication()
-            {
-                return new KernelApplication();
-            }
-        }
-
-        private class KernelJson : KernelLauncher
-        {
-            protected override IKernelConfigLoader GetConfigLoader()
-            {
-                return new KernelConfigJsonLoader(ConfigPath);
-            }
-
-            protected override IApplication CreateApplication()
-            {
-                return new KernelApplication();
-            }
-        }
-
         [UnityTest]
         public IEnumerator ConfigResources()
         {
-            using (var scope = new TestComponentScope<KernelResources>())
+            using (var scope = new TestComponentScope<KernelLauncher>())
             {
-                KernelResources launcher = scope.Component;
+                KernelLauncher launcher = scope.Component;
 
                 launcher.LaunchOnStart = false;
                 launcher.ConfigPath = "Config";
+                launcher.ConfigLoaderType = KernelConfigLoaderType.Resources;
 
                 yield return launcher.Launch();
 
@@ -50,12 +29,13 @@ namespace UGF.Kernel.Runtime.Tests
         [UnityTest]
         public IEnumerator ConfigJson()
         {
-            using (var scope = new TestComponentScope<KernelJson>())
+            using (var scope = new TestComponentScope<KernelLauncher>())
             {
-                KernelJson launcher = scope.Component;
+                KernelLauncher launcher = scope.Component;
 
                 launcher.LaunchOnStart = false;
                 launcher.ConfigPath = $"{UnityEngine.Application.streamingAssetsPath}/Config.jsonc";
+                launcher.ConfigLoaderType = KernelConfigLoaderType.Json;
 
                 yield return launcher.Launch();
 
