@@ -166,5 +166,5 @@ MonoBehaviour:
   m_launchOnStart: 1
   m_stopOnQuit: 1
   m_provideStaticInstance: 1
-  m_configPath: config
+  m_configPath: Config
   m_configLoaderType: 0

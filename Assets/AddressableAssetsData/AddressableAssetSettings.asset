@@ -20,7 +20,6 @@ MonoBehaviour:
     m_Id: 
   m_overridePlayerVersion: 
   m_GroupAssets:
-  - {fileID: 11400000, guid: 9cd62db1a08b871408f69b8541c149ca, type: 2}
   - {fileID: 11400000, guid: e2cdd5c91be705d4ba3b47dae1b09426, type: 2}
   - {fileID: 11400000, guid: 73c08aa82d898c14abeceb638e2135ef, type: 2}
   m_BuildSettings:
