@@ -12,7 +12,12 @@ namespace UGF.CustomSettings.Runtime
 #if UNITY_EDITOR
                 if (Application.isPlaying)
                 {
-                    return m_instance != null ? m_instance : m_instance = Copy(base.Instance);
+                    if (m_instance == null || m_instance is Object target && target == null)
+                    {
+                        m_instance = Copy(base.Instance);
+                    }
+
+                    return m_instance;
                 }
 
                 if (m_instance != null)
@@ -30,21 +35,23 @@ namespace UGF.CustomSettings.Runtime
             }
         }
 
+#if UNITY_EDITOR
+        private TData m_instance;
+#endif
+
         protected override bool CanSave()
         {
             return !Application.isPlaying;
         }
 
 #if UNITY_EDITOR
-        private TData m_instance;
-
         private static TData Copy(TData instance)
         {
             if (instance is Object target)
             {
                 Object data = Object.Instantiate(target);
 
-                data.hideFlags = HideFlags.HideAndDontSave;
+                data.hideFlags = HideFlags.DontSave;
 
                 return (TData)(object)data;
             }

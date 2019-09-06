@@ -20,11 +20,12 @@ namespace UGF.CustomSettings.Runtime
                 Directory.CreateDirectory(directoryName);
             }
 
-            if (File.Exists(assetPath))
+            if (!File.Exists(assetPath))
             {
                 var data = ScriptableObject.CreateInstance<TData>();
 
                 UnityEditor.AssetDatabase.CreateAsset(data, assetPath);
+                UnityEditor.AssetDatabase.SaveAssets();
             }
 #endif
 

@@ -1,6 +1,8 @@
 {
     "name": "UGF.CustomSettings.Editor",
-    "references": [],
+    "references": [
+        "GUID:ff62901452104d14cae29322ac133c05"
+    ],
     "includePlatforms": [
         "Editor"
     ],
