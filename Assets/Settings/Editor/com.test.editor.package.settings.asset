@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8087039fdd0793f4899d726b7fab1fac, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bf8c44cb4d98d14f9e63735eaa694c6, type: 3}
   m_Name: com.test.editor.package.settings
   m_EditorClassIdentifier: 
-  m_material: {fileID: 2100000, guid: 74bb8ce90ac046749a7b499ea677d0c5, type: 2}
+  m_material: {fileID: 2100000, guid: d344171a1bc957b458920d64bd7f032f, type: 2}
   m_mask:
     serializedVersion: 2
     m_Bits: 32
@@ -20,8 +20,4 @@ MonoBehaviour:
   m_list:
   - {x: 0, y: 0, z: 0, w: 0}
   - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  - {x: 0, y: 0, z: 0, w: 0}
-  m_list2:
-  - {x: 6.3, y: -5.23, z: 0, w: 0}
+  m_list2: []

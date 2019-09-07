@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Editor.Tests
 {
-    public class TestSettingsEditorData : ScriptableObject
+    public class TestSettingsData : ScriptableObject
     {
         [SerializeField] private Material m_material;
         [SerializeField] private LayerMask m_mask;

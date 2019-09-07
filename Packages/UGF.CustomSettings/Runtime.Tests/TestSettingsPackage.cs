@@ -4,7 +4,7 @@ namespace UGF.CustomSettings.Runtime.Tests
 {
     public static class TestSettingsPackage
     {
-        private static readonly CustomSettingsPackage<TestSettingsPackageData> m_settings = new CustomSettingsPackage<TestSettingsPackageData>("com.test.package");
+        private static readonly CustomSettingsPackage<TestSettingsPackageData> m_settings = new CustomSettingsPackage<TestSettingsPackageData>("com.test.package2");
 
 #if UNITY_EDITOR
         [UnityEditor.SettingsProvider, UsedImplicitly]
