@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Editor
 {
-    public class CustomSettingsEditorPackage<TData> : CustomSettingsEditorAsset<TData> where TData : ScriptableObject, new()
+    public class CustomSettingsEditorPackage<TData> : CustomSettingsEditorAsset<TData> where TData : ScriptableObject
     {
         public CustomSettingsEditorPackage(string packageName, bool useExternalFolder, string settingsName = "settings") : this(packageName, settingsName, useExternalFolder ? $"ProjectSettings/Packages/{packageName}" : "Assets/Settings/Editor")
         {

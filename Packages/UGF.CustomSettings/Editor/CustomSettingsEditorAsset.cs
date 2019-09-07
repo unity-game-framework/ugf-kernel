@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace UGF.CustomSettings.Editor
 {
-    public class CustomSettingsEditorAsset<TData> : CustomSettings<TData> where TData : ScriptableObject, new()
+    public class CustomSettingsEditorAsset<TData> : CustomSettings<TData> where TData : ScriptableObject
     {
         public string AssetPath { get; }
         public bool HasExternalPath { get { return !AssetPath.StartsWith("Assets"); } }

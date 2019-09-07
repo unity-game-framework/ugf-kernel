@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public class CustomSettingsResources<TData> : CustomSettingsPlayMode<TData> where TData : ScriptableObject, new()
+    public class CustomSettingsResources<TData> : CustomSettingsPlayMode<TData> where TData : ScriptableObject
     {
         public string ResourcesPath { get; }
 

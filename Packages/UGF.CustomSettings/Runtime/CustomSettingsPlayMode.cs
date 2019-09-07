@@ -1,63 +1,42 @@
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public abstract class CustomSettingsPlayMode<TData> : CustomSettings<TData> where TData : class, new()
+    public abstract class CustomSettingsPlayMode<TData> : CustomSettings<TData> where TData : ScriptableObject
     {
-        public override TData Instance
+        public override TData Data
         {
             get
             {
 #if UNITY_EDITOR
                 if (Application.isPlaying)
                 {
-                    if (m_instance == null || m_instance is Object target && target == null)
+                    if (m_copy == null)
                     {
-                        m_instance = Copy(base.Instance);
+                        m_copy = Object.Instantiate(base.Data);
                     }
 
-                    return m_instance;
+                    return m_copy;
                 }
 
-                if (m_instance != null)
+                if (m_copy != null)
                 {
-                    if (m_instance is Object target)
-                    {
-                        Object.DestroyImmediate(target);
-                    }
+                    Object.DestroyImmediate(m_copy);
 
-                    m_instance = null;
+                    m_copy = null;
                 }
 #endif
-
-                return base.Instance;
+                return base.Data;
             }
         }
 
 #if UNITY_EDITOR
-        private TData m_instance;
+        private TData m_copy;
 #endif
 
         protected override bool CanSave()
         {
             return !Application.isPlaying;
         }
-
-#if UNITY_EDITOR
-        private static TData Copy(TData instance)
-        {
-            if (instance is Object target)
-            {
-                Object data = Object.Instantiate(target);
-
-                data.hideFlags = HideFlags.DontSave;
-
-                return (TData)(object)data;
-            }
-
-            return JsonUtility.FromJson<TData>(JsonUtility.ToJson(instance));
-        }
-#endif
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Editor
 {
-    public class CustomSettingsEditorPrefs<TData> : CustomSettings<TData> where TData : ScriptableObject, new()
+    public class CustomSettingsEditorPrefs<TData> : CustomSettings<TData> where TData : ScriptableObject
     {
         public string Key { get; }
 

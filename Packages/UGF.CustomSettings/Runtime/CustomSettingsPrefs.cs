@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public class CustomSettingsPrefs<TData> : CustomSettingsPlayMode<TData> where TData : class, new()
+    public class CustomSettingsPrefs<TData> : CustomSettingsPlayMode<TData> where TData : ScriptableObject
     {
         public string Key { get; }
         public bool ForceSave { get; }
@@ -33,8 +33,11 @@ namespace UGF.CustomSettings.Runtime
         protected override TData Load()
         {
             string text = PlayerPrefs.GetString(Key, "{}");
+            var data = ScriptableObject.CreateInstance<TData>();
 
-            return JsonUtility.FromJson<TData>(text);
+            JsonUtility.FromJsonOverwrite(text, data);
+
+            return data;
         }
     }
 }

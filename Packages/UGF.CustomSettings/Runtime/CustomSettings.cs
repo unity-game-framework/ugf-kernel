@@ -1,35 +1,35 @@
 using System;
-using Object = UnityEngine.Object;
+using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public abstract class CustomSettings<TData> where TData : class, new()
+    public abstract class CustomSettings<TData> where TData : ScriptableObject
     {
-        public virtual TData Instance
+        public virtual TData Data
         {
             get
             {
-                if (m_instance == null || m_instance is Object target && target == null)
+                if (m_data == null)
                 {
-                    m_instance = Load();
+                    m_data = Load();
+
+                    if (m_data == null)
+                    {
+                        throw new ArgumentException($"{typeof(TData).Name}: no settings data found.");
+                    }
                 }
 
-                if (m_instance == null)
-                {
-                    throw new ArgumentException($"{typeof(TData).Name}: no settings data found.");
-                }
-
-                return m_instance;
+                return m_data;
             }
         }
 
-        private TData m_instance;
+        private TData m_data;
 
         public void Save()
         {
             if (CanSave())
             {
-                Save(m_instance);
+                Save(m_data);
             }
         }
 
@@ -38,7 +38,7 @@ namespace UGF.CustomSettings.Runtime
             return true;
         }
 
-        protected abstract void Save(TData instance);
+        protected abstract void Save(TData data);
         protected abstract TData Load();
     }
 }

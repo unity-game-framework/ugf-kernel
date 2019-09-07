@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public class CustomSettingsFile<TData> : CustomSettingsPlayMode<TData> where TData : class, new()
+    public class CustomSettingsFile<TData> : CustomSettingsPlayMode<TData> where TData : ScriptableObject
     {
         public string FilePath { get; }
 
@@ -34,17 +34,16 @@ namespace UGF.CustomSettings.Runtime
         protected override TData Load()
         {
             string text = "{}";
+            var data = ScriptableObject.CreateInstance<TData>();
 
             if (File.Exists(FilePath))
             {
                 text = File.ReadAllText(FilePath);
             }
-            else
-            {
-                Debug.LogWarning($"{typeof(TData).Name}: no settings data found at file path: '{FilePath}'.");
-            }
 
-            return JsonUtility.FromJson<TData>(text);
+            JsonUtility.FromJsonOverwrite(text, data);
+
+            return data;
         }
     }
 }

@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using UGF.CustomSettings.Runtime;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
-using Object = UnityEngine.Object;
 
 namespace UGF.CustomSettings.Editor
 {
-    public class CustomSettingsProvider<TData> : SettingsProvider where TData : Object, new()
+    public class CustomSettingsProvider<TData> : SettingsProvider where TData : ScriptableObject
     {
         private AssetSettingsProvider m_provider;
         private readonly CustomSettings<TData> m_settings;
 
-        public CustomSettingsProvider(string path, CustomSettings<TData> settings, SettingsScope scopes, IEnumerable<string> keywords = null) : base(path, scopes, keywords ?? GetSearchKeywordsFromSerializedObject(new SerializedObject(settings.Instance)))
+        public CustomSettingsProvider(string path, CustomSettings<TData> settings, SettingsScope scopes, IEnumerable<string> keywords = null) : base(path, scopes, keywords ?? GetSearchKeywordsFromSerializedObject(new SerializedObject(settings.Data)))
         {
             m_settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
@@ -85,7 +85,7 @@ namespace UGF.CustomSettings.Editor
 
         private void CreateEditor()
         {
-            m_provider = AssetSettingsProvider.CreateProviderFromObject(string.Empty, m_settings.Instance);
+            m_provider = AssetSettingsProvider.CreateProviderFromObject(string.Empty, m_settings.Data);
             m_provider.OnActivate(string.Empty, null);
         }
     }

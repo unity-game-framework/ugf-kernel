@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
 {
-    public class CustomSettingsPackage<TData> : CustomSettingsResources<TData> where TData : ScriptableObject, new()
+    public class CustomSettingsPackage<TData> : CustomSettingsResources<TData> where TData : ScriptableObject
     {
         public string FolderPath { get; }
 
