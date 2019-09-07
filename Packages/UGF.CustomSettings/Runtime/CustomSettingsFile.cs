@@ -5,16 +5,16 @@ namespace UGF.CustomSettings.Runtime
 {
     public class CustomSettingsFile<TData> : CustomSettingsPlayMode<TData> where TData : class, new()
     {
-        public string Path { get; }
+        public string FilePath { get; }
 
-        public CustomSettingsFile(string path)
+        public CustomSettingsFile(string filePath)
         {
-            Path = path;
+            FilePath = filePath;
         }
 
         protected override void Save(TData instance)
         {
-            string directory = System.IO.Path.GetDirectoryName(Path);
+            string directory = Path.GetDirectoryName(FilePath);
 
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
             {
@@ -23,20 +23,20 @@ namespace UGF.CustomSettings.Runtime
 
             string data = JsonUtility.ToJson(instance, true);
 
-            File.WriteAllText(Path, data);
+            File.WriteAllText(FilePath, data);
         }
 
         protected override TData Load()
         {
             string data = "{}";
 
-            if (File.Exists(Path))
+            if (File.Exists(FilePath))
             {
-                data = File.ReadAllText(Path);
+                data = File.ReadAllText(FilePath);
             }
             else
             {
-                Debug.LogWarning($"{typeof(TData).Name}: no settings data found at file path: '{Path}'.");
+                Debug.LogWarning($"{typeof(TData).Name}: no settings data found at file path: '{FilePath}'.");
             }
 
             return JsonUtility.FromJson<TData>(data);

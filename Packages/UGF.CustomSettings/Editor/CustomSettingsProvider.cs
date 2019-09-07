@@ -20,7 +20,8 @@ namespace UGF.CustomSettings.Editor
         {
             EditorApplication.playModeStateChanged += OnEditorApplicationPlayModeStateChanged;
 
-            RecreateEditor();
+            ClearEditor();
+            CreateEditor();
 
             base.OnActivate(searchContext, rootElement);
         }
@@ -57,7 +58,8 @@ namespace UGF.CustomSettings.Editor
 
         private void OnEditorApplicationPlayModeStateChanged(PlayModeStateChange playModeStateChange)
         {
-            RecreateEditor();
+            ClearEditor();
+            CreateEditor();
         }
 
         private void ClearEditor()
@@ -69,11 +71,9 @@ namespace UGF.CustomSettings.Editor
             }
         }
 
-        private void RecreateEditor()
+        private void CreateEditor()
         {
-            ClearEditor();
-
-            m_provider = AssetSettingsProvider.CreateProviderFromObject("", m_settings.Instance);
+            m_provider = AssetSettingsProvider.CreateProviderFromObject(string.Empty, m_settings.Instance);
             m_provider.OnActivate(string.Empty, null);
         }
     }

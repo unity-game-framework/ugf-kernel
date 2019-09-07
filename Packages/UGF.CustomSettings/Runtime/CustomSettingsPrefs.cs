@@ -4,12 +4,12 @@ namespace UGF.CustomSettings.Runtime
 {
     public class CustomSettingsPrefs<TData> : CustomSettingsPlayMode<TData> where TData : class, new()
     {
-        public string PrefsKey { get; }
+        public string Key { get; }
         public bool ForceSave { get; }
 
-        public CustomSettingsPrefs(string prefsKey, bool forceSave = false)
+        public CustomSettingsPrefs(string key, bool forceSave = false)
         {
-            PrefsKey = prefsKey;
+            Key = key;
             ForceSave = forceSave;
         }
 
@@ -17,7 +17,7 @@ namespace UGF.CustomSettings.Runtime
         {
             string data = JsonUtility.ToJson(instance);
 
-            PlayerPrefs.SetString(PrefsKey, data);
+            PlayerPrefs.SetString(Key, data);
 
             if (ForceSave)
             {
@@ -27,7 +27,7 @@ namespace UGF.CustomSettings.Runtime
 
         protected override TData Load()
         {
-            string data = PlayerPrefs.GetString(PrefsKey, "{}");
+            string data = PlayerPrefs.GetString(Key, "{}");
 
             return JsonUtility.FromJson<TData>(data);
         }

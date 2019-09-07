@@ -7,7 +7,12 @@ namespace UGF.CustomSettings.Runtime.Tests
         public static bool TestBoolValue { get { return m_boolValueTest; } set { m_boolValueTest.Value = value; } }
 
         private static CustomSettingsPackage<TestCustomSettingsPackageData> m_settings = new CustomSettingsPackage<TestCustomSettingsPackageData>("com.test.package");
-        private static CustomSettingsProperty<TestCustomSettingsPackageData, bool> m_boolValueTest = new CustomSettingsProperty<TestCustomSettingsPackageData, bool>(m_settings, data => data.BoolValue, (data, value) => data.BoolValue = value);
+
+        private static CustomSettingsProperty<TestCustomSettingsPackageData, bool> m_boolValueTest = new CustomSettingsProperty<TestCustomSettingsPackageData, bool>(m_settings)
+        {
+            Getter = data => data.BoolValue,
+            Setter = (data, value) => data.BoolValue = value
+        };
 
 #if UNITY_EDITOR
         [UnityEditor.SettingsProvider, UsedImplicitly]

@@ -6,23 +6,41 @@ namespace UGF.CustomSettings.Runtime
     {
         public TValue Value
         {
-            get { return m_getter(m_instance.Instance); }
+            get
+            {
+                if (Getter == null)
+                {
+                    throw new InvalidOperationException($"{typeof(TData).Name}: this settings property cannot be read.");
+                }
+
+                return Getter(Settings.Instance);
+            }
             set
             {
-                m_setter(m_instance.Instance, value);
-                m_instance.Save();
+                if (Setter == null)
+                {
+                    throw new InvalidOperationException($"{typeof(TData).Name}: this settings property cannot be written.");
+                }
+
+                Setter(Settings.Instance, value);
+
+                if (ForceSave)
+                {
+                    Settings.Save();
+                }
             }
         }
 
-        private readonly CustomSettings<TData> m_instance;
-        private readonly Func<TData, TValue> m_getter;
-        private readonly Action<TData, TValue> m_setter;
+        public CustomSettings<TData> Settings { get; }
+        public Func<TData, TValue> Getter { get; set; }
+        public Action<TData, TValue> Setter { get; set; }
+        public bool ForceSave { get; set; } = true;
+        public bool CanRead { get { return Getter != null; } }
+        public bool CanWrite { get { return Setter != null; } }
 
-        public CustomSettingsProperty(CustomSettings<TData> instance, Func<TData, TValue> getter, Action<TData, TValue> setter)
+        public CustomSettingsProperty(CustomSettings<TData> settings)
         {
-            m_instance = instance;
-            m_getter = getter;
-            m_setter = setter;
+            Settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
         public static implicit operator TValue(CustomSettingsProperty<TData, TValue> property)
