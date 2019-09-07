@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UGF.CustomSettings.Runtime;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace UGF.CustomSettings.Editor
 {
@@ -13,7 +14,7 @@ namespace UGF.CustomSettings.Editor
 
         public CustomSettingsProvider(string path, CustomSettings<TData> settings, SettingsScope scopes, IEnumerable<string> keywords = null) : base(path, scopes, keywords ?? GetSearchKeywordsFromSerializedObject(new SerializedObject(settings.Instance)))
         {
-            m_settings = settings;
+            m_settings = settings ?? throw new ArgumentNullException(nameof(settings));
         }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)

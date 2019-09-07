@@ -10,7 +10,7 @@ namespace UGF.CustomSettings.Runtime
             {
                 if (Getter == null)
                 {
-                    throw new InvalidOperationException($"{typeof(TData).Name}: this settings property cannot be read.");
+                    throw new InvalidOperationException($"{typeof(TData).Name}: settings property cannot be read.");
                 }
 
                 return Getter(Settings.Instance);
@@ -19,7 +19,7 @@ namespace UGF.CustomSettings.Runtime
             {
                 if (Setter == null)
                 {
-                    throw new InvalidOperationException($"{typeof(TData).Name}: this settings property cannot be written.");
+                    throw new InvalidOperationException($"{typeof(TData).Name}: settings property cannot be written.");
                 }
 
                 Setter(Settings.Instance, value);

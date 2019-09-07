@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
@@ -8,6 +9,8 @@ namespace UGF.CustomSettings.Runtime
 
         public CustomSettingsResources(string resourcesPath)
         {
+            if (string.IsNullOrEmpty(resourcesPath)) throw new ArgumentException("The resources path cannot be null or empty.", nameof(resourcesPath));
+
             ResourcesPath = resourcesPath;
         }
 

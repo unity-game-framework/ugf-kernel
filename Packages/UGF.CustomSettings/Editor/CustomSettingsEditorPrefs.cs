@@ -1,3 +1,4 @@
+using System;
 using UGF.CustomSettings.Runtime;
 using UnityEditor;
 
@@ -5,26 +6,30 @@ namespace UGF.CustomSettings.Editor
 {
     public class CustomSettingsEditorPrefs<TData> : CustomSettings<TData> where TData : class, new()
     {
-        public string PrefsKey { get; }
+        public string Key { get; }
 
-        public CustomSettingsEditorPrefs(string prefsKey)
+        public CustomSettingsEditorPrefs(string key)
         {
-            PrefsKey = prefsKey;
+            if (string.IsNullOrEmpty(key)) throw new ArgumentException("The prefs key cannot be null or empty.", nameof(key));
+
+            Key = key;
         }
 
         protected override void Save(TData instance)
         {
-            string data = EditorJsonUtility.ToJson(instance);
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
 
-            EditorPrefs.SetString(PrefsKey, data);
+            string text = EditorJsonUtility.ToJson(instance);
+
+            EditorPrefs.SetString(Key, text);
         }
 
         protected override TData Load()
         {
-            string data = EditorPrefs.GetString(PrefsKey, "{}");
+            string text = EditorPrefs.GetString(Key, "{}");
             var target = new TData();
 
-            EditorJsonUtility.FromJsonOverwrite(data, target);
+            EditorJsonUtility.FromJsonOverwrite(text, target);
 
             return target;
         }

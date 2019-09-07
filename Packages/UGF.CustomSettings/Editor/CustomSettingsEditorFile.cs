@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UGF.CustomSettings.Runtime;
 using UnityEditor;
@@ -7,42 +8,46 @@ namespace UGF.CustomSettings.Editor
 {
     public class CustomSettingsEditorFile<TData> : CustomSettings<TData> where TData : class, new()
     {
-        public string Path { get; }
+        public string FilePath { get; }
 
-        public CustomSettingsEditorFile(string path)
+        public CustomSettingsEditorFile(string filePath)
         {
-            Path = path;
+            if (string.IsNullOrEmpty(filePath)) throw new ArgumentException("The file path cannot be null or empty.", nameof(filePath));
+
+            FilePath = filePath;
         }
 
         protected override void Save(TData instance)
         {
-            string directory = System.IO.Path.GetDirectoryName(Path);
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
 
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            string directory = Path.GetDirectoryName(FilePath);
+
+            if (!string.IsNullOrEmpty(directory))
             {
                 Directory.CreateDirectory(directory);
             }
 
-            string data = EditorJsonUtility.ToJson(instance, true);
+            string text = EditorJsonUtility.ToJson(instance, true);
 
-            File.WriteAllText(Path, data);
+            File.WriteAllText(FilePath, text);
         }
 
         protected override TData Load()
         {
-            string data = "{}";
+            string text = "{}";
             var target = new TData();
 
-            if (File.Exists(Path))
+            if (File.Exists(FilePath))
             {
-                data = File.ReadAllText(Path);
+                text = File.ReadAllText(FilePath);
             }
             else
             {
-                Debug.LogWarning($"{typeof(TData).Name}: no settings data found at file path: '{Path}'.");
+                Debug.LogWarning($"{typeof(TData).Name}: no settings data found at file path: '{FilePath}'.");
             }
 
-            EditorJsonUtility.FromJsonOverwrite(data, target);
+            EditorJsonUtility.FromJsonOverwrite(text, target);
 
             return target;
         }

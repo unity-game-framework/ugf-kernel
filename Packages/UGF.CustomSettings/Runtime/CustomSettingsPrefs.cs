@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime
@@ -9,15 +10,19 @@ namespace UGF.CustomSettings.Runtime
 
         public CustomSettingsPrefs(string key, bool forceSave = false)
         {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentException("The prefs key cannot be null or empty.", nameof(key));
+
             Key = key;
             ForceSave = forceSave;
         }
 
         protected override void Save(TData instance)
         {
-            string data = JsonUtility.ToJson(instance);
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
 
-            PlayerPrefs.SetString(Key, data);
+            string text = JsonUtility.ToJson(instance);
+
+            PlayerPrefs.SetString(Key, text);
 
             if (ForceSave)
             {
@@ -27,9 +32,9 @@ namespace UGF.CustomSettings.Runtime
 
         protected override TData Load()
         {
-            string data = PlayerPrefs.GetString(Key, "{}");
+            string text = PlayerPrefs.GetString(Key, "{}");
 
-            return JsonUtility.FromJson<TData>(data);
+            return JsonUtility.FromJson<TData>(text);
         }
     }
 }
