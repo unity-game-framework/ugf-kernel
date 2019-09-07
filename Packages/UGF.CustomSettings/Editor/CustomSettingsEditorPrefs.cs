@@ -1,10 +1,11 @@
 using System;
 using UGF.CustomSettings.Runtime;
 using UnityEditor;
+using UnityEngine;
 
 namespace UGF.CustomSettings.Editor
 {
-    public class CustomSettingsEditorPrefs<TData> : CustomSettings<TData> where TData : class, new()
+    public class CustomSettingsEditorPrefs<TData> : CustomSettings<TData> where TData : ScriptableObject, new()
     {
         public string Key { get; }
 
@@ -27,7 +28,7 @@ namespace UGF.CustomSettings.Editor
         protected override TData Load()
         {
             string text = EditorPrefs.GetString(Key, "{}");
-            var target = new TData();
+            var target = ScriptableObject.CreateInstance<TData>();
 
             EditorJsonUtility.FromJsonOverwrite(text, target);
 
