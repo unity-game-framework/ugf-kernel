@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Editor.Tests
 {
-    public static class TestSettingsEditorPackage
+    public static class TestSettingsEditorPackageExternal
     {
         public static Material Material { get { return m_material; } set { m_material.Value = value; } }
         public static LayerMask LayerMask { get { return m_layerMask; } set { m_layerMask.Value = value; } }
         public static bool State { get { return m_state; } set { m_state.Value = value; } }
 
-        private static readonly CustomSettingsEditorPackage<TestSettingsEditorData> m_settings = new CustomSettingsEditorPackage<TestSettingsEditorData>("com.test.editor.package");
+        private static readonly CustomSettingsEditorPackage<TestSettingsEditorData> m_settings = new CustomSettingsEditorPackage<TestSettingsEditorData>("com.test.editor.package.external", true);
 
         private static readonly CustomSettingsProperty<TestSettingsEditorData, Material> m_material = new CustomSettingsProperty<TestSettingsEditorData, Material>(m_settings)
         {
@@ -34,7 +34,7 @@ namespace UGF.CustomSettings.Editor.Tests
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()
         {
-            return new CustomSettingsProvider<TestSettingsEditorData>("Project/Test/Editor Package", m_settings, SettingsScope.Project);
+            return new CustomSettingsProvider<TestSettingsEditorData>("Project/Test/Editor External Package", m_settings, SettingsScope.Project);
         }
     }
 }

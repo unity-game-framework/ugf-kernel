@@ -38,7 +38,18 @@ namespace UGF.CustomSettings.Editor
 
         public override void OnGUI(string searchContext)
         {
-            m_provider?.OnGUI(searchContext);
+            if (m_provider != null)
+            {
+                using (var change = new EditorGUI.ChangeCheckScope())
+                {
+                    m_provider.OnGUI(searchContext);
+
+                    if (change.changed)
+                    {
+                        m_settings.Save();
+                    }
+                }
+            }
 
             base.OnGUI(searchContext);
         }

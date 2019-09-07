@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UGF.CustomSettings.Runtime.Tests
 {
-    public class TestCustomSettingsPackageData : ScriptableObject
+    public class TestSettingsPackageData : ScriptableObject
     {
         [SerializeField] private bool m_boolValue = true;
 
