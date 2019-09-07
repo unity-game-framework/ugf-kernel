@@ -2,6 +2,8 @@
     "name": "UGF.Kernel.Editor",
     "references": [
         "GUID:86ab2d835b3ec7841a902108526e043b",
+        "GUID:ff62901452104d14cae29322ac133c05",
+        "GUID:4806a292f99efd44aba38aea20847e17",
         "GUID:49818357e697641afb75d2f8acaf1861"
     ],
     "includePlatforms": [
