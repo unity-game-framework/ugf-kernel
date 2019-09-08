@@ -48,7 +48,7 @@ namespace UGF.Kernel.Runtime
 
         protected override IApplication CreateApplication()
         {
-            IApplication application = base.CreateApplication();
+            IApplication application = new KernelApplication(ProvideStaticInstance);
 
             return application;
         }
