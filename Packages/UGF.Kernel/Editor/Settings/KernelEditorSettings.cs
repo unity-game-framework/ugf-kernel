@@ -2,8 +2,6 @@ using JetBrains.Annotations;
 using UGF.CustomSettings.Editor;
 using UnityEditor;
 
-// ReSharper disable MemberHidesStaticFromOuterClass
-
 namespace UGF.Kernel.Editor.Settings
 {
     public static class KernelEditorSettings
