@@ -27,7 +27,12 @@ namespace UGF.Addressable.Editor.Settings
             }
         }
 
-        private static readonly CustomSettingsEditorPackage<AddressableEditorSettingsData> m_settings = new CustomSettingsEditorPackage<AddressableEditorSettingsData>("UGF.Addressable", true, "AddressableEditorSettings");
+        private static readonly CustomSettingsEditorPackage<AddressableEditorSettingsData> m_settings = new CustomSettingsEditorPackage<AddressableEditorSettingsData>
+        (
+            "UGF.Addressable",
+            "AddressableEditorSettings",
+            CustomSettingsEditorUtility.DefaultPackageExternalFolder
+        );
 
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()

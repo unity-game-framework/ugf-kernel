@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "com.ugf.application": "1.1.0",
-        "com.ugf.customsettings": "0.1.0-preview",
+        "com.ugf.customsettings": "0.2.0-preview",
         "com.ugf.logs": "1.0.0",
         "com.ugf.jsonc": "0.1.0-preview"
     }

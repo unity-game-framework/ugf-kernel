@@ -26,7 +26,12 @@ namespace UGF.Kernel.Editor.Settings
             }
         }
 
-        private static readonly CustomSettingsEditorPackage<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPackage<KernelEditorSettingsData>("UGF.Kernel", true, "KernelEditorSettings");
+        private static readonly CustomSettingsEditorPackage<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPackage<KernelEditorSettingsData>
+        (
+            "UGF.Kernel",
+            "KernelEditorSettings",
+            CustomSettingsEditorUtility.DefaultPackageExternalFolder
+        );
 
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()
