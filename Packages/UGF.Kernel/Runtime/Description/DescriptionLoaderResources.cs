@@ -15,7 +15,7 @@ namespace UGF.Kernel.Runtime.Description
 
         protected override IEnumerator OnLoad()
         {
-            ResourceRequest operation = Resources.LoadAsync<DescriptionAsset<TDescription>>(ResourcesPath);
+            ResourceRequest operation = Resources.LoadAsync<DescriptionAssetBase>(ResourcesPath);
 
             yield return operation;
 

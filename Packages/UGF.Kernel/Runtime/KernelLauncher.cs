@@ -26,7 +26,7 @@ namespace UGF.Kernel.Runtime
 
         protected virtual IDescriptionLoader GetConfigLoader()
         {
-            return new DescriptionLoaderResources<IKernelConfig>(m_configPath);
+            return new DescriptionLoaderResources<KernelConfig>(m_configPath);
         }
 
         protected virtual IDescriptionLoader GetConfigModuleLoader(IKernelConfigModule module)

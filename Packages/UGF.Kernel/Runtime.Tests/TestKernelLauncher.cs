@@ -20,7 +20,7 @@ namespace UGF.Kernel.Runtime.Tests
                 yield return launcher.Launch();
 
                 Assert.NotNull(launcher.Config);
-                Assert.AreEqual("DefaultAsset", launcher.Config.Name);
+                Assert.AreEqual("Default", launcher.Config.Name);
             }
         }
     }
