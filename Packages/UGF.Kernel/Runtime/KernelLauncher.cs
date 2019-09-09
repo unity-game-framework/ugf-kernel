@@ -1,56 +1,93 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
-using UGF.Kernel.Runtime.Config;
-using UGF.Logs.Runtime;
+using UGF.Kernel.Runtime.Description;
 using UnityEngine;
 
 namespace UGF.Kernel.Runtime
 {
     public class KernelLauncher : ApplicationUnityLauncher
     {
-        [SerializeField] private string m_configPath = "config";
-        [SerializeField] private KernelConfigLoaderType m_configLoaderType = KernelConfigLoaderType.Resources;
+        [SerializeField] private string m_configPath = "Config";
 
         public string ConfigPath { get { return m_configPath; } set { m_configPath = value; } }
-        public KernelConfigLoaderType ConfigLoaderType { get { return m_configLoaderType; } set { m_configLoaderType = value; } }
         public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
+        public IReadOnlyList<IKernelModuleDescription> ModuleDescriptions { get; }
 
         private IKernelConfig m_config;
+        private List<IKernelModuleDescription> m_modules = new List<IKernelModuleDescription>();
 
-        protected virtual IKernelConfigLoader GetConfigLoader()
+        public KernelLauncher()
         {
-            switch (m_configLoaderType)
-            {
-                case KernelConfigLoaderType.Resources: return new KernelConfigResourcesLoader(m_configPath);
-                case KernelConfigLoaderType.Json: return new KernelConfigJsonLoader(m_configPath);
-                default: throw new ArgumentOutOfRangeException(nameof(m_configLoaderType), $"Unknown config loader type: '{m_configLoaderType}'.");
-            }
+            ModuleDescriptions = new ReadOnlyCollection<IKernelModuleDescription>(m_modules);
+        }
+
+        protected virtual IDescriptionLoader GetConfigLoader()
+        {
+            return new DescriptionLoaderResources<IKernelConfig>(m_configPath);
+        }
+
+        protected virtual IDescriptionLoader GetConfigModuleLoader(IKernelConfigModule module)
+        {
+            return new DescriptionLoaderResources<IKernelModuleDescription>(module.AssetPath);
         }
 
         protected override IEnumerator PreloadResourcesAsync()
         {
-            IKernelConfigLoader loader = GetConfigLoader();
-
-            if (loader == null)
-            {
-                throw new ArgumentNullException(nameof(loader), "The config loader can not be null.");
-            }
-
-            Log.Debug($"Kernel: config loader '{loader}'.");
+            IDescriptionLoader loader = GetConfigLoader() ?? throw new ArgumentNullException(nameof(loader), "The config loader can not be null.");
 
             yield return loader.Load();
 
-            m_config = loader.GetResult() ?? throw new ArgumentException("The result of loading config is null.");
+            m_config = loader.GetResult<IKernelConfig>();
 
-            Log.Debug($"Kernel: config loaded '{m_config.Name}'.");
+            foreach (IKernelConfigModule module in m_config.Modules)
+            {
+                IDescriptionLoader moduleLoader = GetConfigModuleLoader(module);
+
+                yield return moduleLoader.Load();
+
+                var moduleDescription = moduleLoader.GetResult<IKernelModuleDescription>();
+
+                m_modules.Add(moduleDescription);
+            }
+
+            IComparer<IKernelModuleDescription> comparer = GetKernelModuleDescriptionComparer();
+
+            m_modules.Sort(comparer);
         }
 
         protected override IApplication CreateApplication()
         {
             IApplication application = new KernelApplication(ProvideStaticInstance);
 
+            CreateModules(application, ModuleDescriptions);
+
             return application;
+        }
+
+        protected virtual void CreateModules(IApplication application, IReadOnlyList<IKernelModuleDescription> modules)
+        {
+            for (int i = 0; i < modules.Count; i++)
+            {
+                IKernelModuleDescription module = modules[i];
+
+                module.Initialize(application);
+            }
+        }
+
+        protected override void OnStopped()
+        {
+            base.OnStopped();
+
+            m_config = null;
+            m_modules.Clear();
+        }
+
+        protected virtual IComparer<IKernelModuleDescription> GetKernelModuleDescriptionComparer()
+        {
+            return new KernelModuleDescriptionComparer();
         }
     }
 }
