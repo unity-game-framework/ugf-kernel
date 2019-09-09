@@ -1,10 +1,9 @@
 {
-    "name": "UGF.Kernel.Runtime",
+    "name": "UGF.Serialize.Utf8Json",
     "references": [
-        "GUID:a4312e46e9f64bb4aa011ac96ffd2a61",
-        "GUID:d067af32d09350a4bb33960432735e4d",
-        "GUID:6ca210c6fc8b79d4292f3cdb1061c73e",
-        "GUID:e76e47a0b9e0396439161248a194baa5"
+        "GUID:e76e47a0b9e0396439161248a194baa5",
+        "GUID:7d88aca9857e23b4e868d9ace8e59be2",
+        "GUID:005d4ab2cb930e742a4b76b585d2a5c9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
