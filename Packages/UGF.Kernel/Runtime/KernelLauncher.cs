@@ -36,36 +36,32 @@ namespace UGF.Kernel.Runtime
                 yield return null;
             }
 
-            AsyncOperationHandle<DescriptionAssetBase> configOperation = Addressables.LoadAssetAsync<DescriptionAssetBase>(m_configPath);
+            AsyncOperationHandle<DescriptionAsset> configOperation = Addressables.LoadAssetAsync<DescriptionAsset>(m_configPath);
 
             while (!configOperation.IsDone)
             {
                 yield return null;
             }
 
-            m_config = (IKernelConfig)configOperation.Result.GetDescription();
+            m_config = configOperation.Result.GetDescription<IKernelConfig>();
 
             Addressables.Release(configOperation);
 
             foreach (IKernelConfigModule module in m_config.Modules)
             {
-                AsyncOperationHandle<DescriptionAssetBase> moduleOperation = Addressables.LoadAssetAsync<DescriptionAssetBase>(module.AssetPath);
+                AsyncOperationHandle<DescriptionAsset> moduleOperation = Addressables.LoadAssetAsync<DescriptionAsset>(module.AssetPath);
 
                 while (!moduleOperation.IsDone)
                 {
                     yield return null;
                 }
 
-                var moduleDescription = (IKernelModuleDescription)moduleOperation.Result.GetDescription();
+                var moduleDescription = moduleOperation.Result.GetDescription<IKernelModuleDescription>();
 
                 m_modules.Add(moduleDescription);
 
                 Addressables.Release(moduleOperation);
             }
-
-            IComparer<IKernelModuleDescription> comparer = GetKernelModuleDescriptionComparer();
-
-            m_modules.Sort(comparer);
         }
 
         protected override IApplication CreateApplication()
@@ -93,11 +89,6 @@ namespace UGF.Kernel.Runtime
 
             m_config = null;
             m_modules.Clear();
-        }
-
-        protected virtual IComparer<IKernelModuleDescription> GetKernelModuleDescriptionComparer()
-        {
-            return new KernelModuleDescriptionComparer();
         }
     }
 }

@@ -5,8 +5,6 @@ namespace UGF.Kernel.Runtime
 {
     public interface IKernelModuleDescription : IDescription
     {
-        int Priority { get; }
-
         void Initialize(IApplication application);
     }
 }

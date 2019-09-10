@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ugf.description": "file:../../ugf-description/Packages/UGF.Description",
     "com.ugf.logs": "file:../../ugf-logs/Packages/UGF.Logs",
     "com.unity.ide.rider": "1.1.0",
     "com.unity.test-framework": "1.1.1",
