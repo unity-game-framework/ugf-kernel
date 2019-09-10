@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
-using UGF.Kernel.Runtime.Description;
+using UGF.Description.Runtime;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.AddressableAssets.ResourceLocators;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace UGF.Kernel.Runtime
 {
@@ -16,41 +19,48 @@ namespace UGF.Kernel.Runtime
         public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
         public IReadOnlyList<IKernelModuleDescription> ModuleDescriptions { get; }
 
+        private readonly List<IKernelModuleDescription> m_modules = new List<IKernelModuleDescription>();
         private IKernelConfig m_config;
-        private List<IKernelModuleDescription> m_modules = new List<IKernelModuleDescription>();
 
         public KernelLauncher()
         {
             ModuleDescriptions = new ReadOnlyCollection<IKernelModuleDescription>(m_modules);
         }
 
-        protected virtual IDescriptionLoader GetConfigLoader()
-        {
-            return new DescriptionLoaderResources<KernelConfig>(m_configPath);
-        }
-
-        protected virtual IDescriptionLoader GetConfigModuleLoader(IKernelConfigModule module)
-        {
-            return new DescriptionLoaderResources<IKernelModuleDescription>(module.AssetPath);
-        }
-
         protected override IEnumerator PreloadResourcesAsync()
         {
-            IDescriptionLoader loader = GetConfigLoader() ?? throw new ArgumentNullException(nameof(loader), "The config loader can not be null.");
+            AsyncOperationHandle<IResourceLocator> initializeOperation = Addressables.InitializeAsync();
 
-            yield return loader.Load();
+            while (!initializeOperation.IsDone)
+            {
+                yield return null;
+            }
 
-            m_config = loader.GetResult<IKernelConfig>();
+            AsyncOperationHandle<DescriptionAssetBase> configOperation = Addressables.LoadAssetAsync<DescriptionAssetBase>(m_configPath);
+
+            while (!configOperation.IsDone)
+            {
+                yield return null;
+            }
+
+            m_config = (IKernelConfig)configOperation.Result.GetDescription();
+
+            Addressables.Release(configOperation);
 
             foreach (IKernelConfigModule module in m_config.Modules)
             {
-                IDescriptionLoader moduleLoader = GetConfigModuleLoader(module);
+                AsyncOperationHandle<DescriptionAssetBase> moduleOperation = Addressables.LoadAssetAsync<DescriptionAssetBase>(module.AssetPath);
 
-                yield return moduleLoader.Load();
+                while (!moduleOperation.IsDone)
+                {
+                    yield return null;
+                }
 
-                var moduleDescription = moduleLoader.GetResult<IKernelModuleDescription>();
+                var moduleDescription = (IKernelModuleDescription)moduleOperation.Result.GetDescription();
 
                 m_modules.Add(moduleDescription);
+
+                Addressables.Release(moduleOperation);
             }
 
             IComparer<IKernelModuleDescription> comparer = GetKernelModuleDescriptionComparer();
