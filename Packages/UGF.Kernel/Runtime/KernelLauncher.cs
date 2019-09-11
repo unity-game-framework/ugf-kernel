@@ -4,63 +4,65 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
+using UGF.Kernel.Runtime.Modules;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace UGF.Kernel.Runtime
 {
     public class KernelLauncher : ApplicationUnityLauncher
     {
-        [SerializeField] private string m_configPath = "Config";
+        [SerializeField] private string m_configIdentifier = "Config";
 
-        public string ConfigPath { get { return m_configPath; } set { m_configPath = value; } }
-        public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
-        public IReadOnlyList<IKernelModuleDescription> ModuleDescriptions { get; }
+        public string ConfigIdentifier { get { return m_configIdentifier; } set { m_configIdentifier = value; } }
+        public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } set { m_config = value; } }
+        public bool HasConfig { get { return m_config != null; } }
+        public IEnumerable<ModuleBuild> Builds { get; }
 
-        private readonly List<IKernelModuleDescription> m_modules = new List<IKernelModuleDescription>();
+        private readonly List<ModuleBuild> m_builds = new List<ModuleBuild>();
         private IKernelConfig m_config;
 
         public KernelLauncher()
         {
-            ModuleDescriptions = new ReadOnlyCollection<IKernelModuleDescription>(m_modules);
+            Builds = new ReadOnlyCollection<ModuleBuild>(m_builds);
         }
 
         protected override IEnumerator PreloadResourcesAsync()
         {
-            AsyncOperationHandle<IResourceLocator> initializeOperation = Addressables.InitializeAsync();
+            yield return LoadConfig(m_configIdentifier);
+            yield return LoadModules(Config);
+        }
 
-            while (!initializeOperation.IsDone)
+        protected virtual IEnumerator LoadConfig(string configIdentifier)
+        {
+            ResourceRequest operation = Resources.LoadAsync<DescriptionAsset>(configIdentifier);
+
+            yield return operation;
+
+            DescriptionAsset asset = operation.asset as DescriptionAsset ?? throw new ArgumentNullException(nameof(operation.asset));
+            IKernelConfig config = asset.GetDescription<IKernelConfig>() ?? throw new ArgumentNullException(nameof(asset.GetDescription));
+
+            Config = config;
+        }
+
+        protected virtual IEnumerator LoadModules(IKernelConfig config)
+        {
+            foreach (IKernelModuleConfig module in config.Modules)
             {
-                yield return null;
-            }
+                ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(module.BuilderIdentifier);
 
-            AsyncOperationHandle<DescriptionAsset> configOperation = Addressables.LoadAssetAsync<DescriptionAsset>(m_configPath);
+                yield return operation;
 
-            while (!configOperation.IsDone)
-            {
-                yield return null;
-            }
+                ModuleBuilderAsset builderAsset = operation.asset as ModuleBuilderAsset ?? throw new ArgumentNullException(nameof(operation.asset));
+                IModuleBuilder builder = builderAsset.GetBuilder() ?? throw new ArgumentNullException(nameof(builderAsset.GetBuilder));
 
-            m_config = configOperation.Result.GetDescription<IKernelConfig>();
+                operation = Resources.LoadAsync<DescriptionAsset>(module.DescriptionIdentifier);
 
-            Addressables.Release(configOperation);
+                yield return operation;
 
-            foreach (IKernelConfigModule module in m_config.Modules)
-            {
-                AsyncOperationHandle<DescriptionAsset> moduleOperation = Addressables.LoadAssetAsync<DescriptionAsset>(module.AssetPath);
+                DescriptionAsset descriptionAsset = operation.asset as DescriptionAsset ?? throw new ArgumentNullException(nameof(operation.asset));
+                IModuleDescription description = descriptionAsset.GetDescription<IModuleDescription>() ?? throw new ArgumentNullException(nameof(descriptionAsset.GetDescription));
 
-                while (!moduleOperation.IsDone)
-                {
-                    yield return null;
-                }
-
-                var moduleDescription = moduleOperation.Result.GetDescription<IKernelModuleDescription>();
-
-                m_modules.Add(moduleDescription);
-
-                Addressables.Release(moduleOperation);
+                m_builds.Add(new ModuleBuild(builder, description));
             }
         }
 
@@ -68,18 +70,19 @@ namespace UGF.Kernel.Runtime
         {
             IApplication application = new KernelApplication(ProvideStaticInstance);
 
-            CreateModules(application, ModuleDescriptions);
+            CreateModules(application, Builds);
 
             return application;
         }
 
-        protected virtual void CreateModules(IApplication application, IReadOnlyList<IKernelModuleDescription> modules)
+        protected virtual void CreateModules(IApplication application, IEnumerable<ModuleBuild> builds)
         {
-            for (int i = 0; i < modules.Count; i++)
+            foreach (ModuleBuild build in builds)
             {
-                IKernelModuleDescription module = modules[i];
+                IModuleBuilder builder = build.Builder;
+                IModuleDescription description = build.Description;
 
-                module.Initialize(application);
+                builder.Build(application, description);
             }
         }
 
@@ -88,7 +91,7 @@ namespace UGF.Kernel.Runtime
             base.OnStopped();
 
             m_config = null;
-            m_modules.Clear();
+            m_builds.Clear();
         }
     }
 }

@@ -6,6 +6,6 @@ namespace UGF.Kernel.Runtime
     public interface IKernelConfig : IDescription
     {
         string Name { get; }
-        IEnumerable<IKernelConfigModule> Modules { get; }
+        IEnumerable<IKernelModuleConfig> Modules { get; }
     }
 }

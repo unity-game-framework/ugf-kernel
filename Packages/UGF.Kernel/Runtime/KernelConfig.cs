@@ -8,11 +8,11 @@ namespace UGF.Kernel.Runtime
     public class KernelConfig : IKernelConfig
     {
         [SerializeField] private string m_name = "Default";
-        [SerializeField] private List<KernelConfigModule> m_modules = new List<KernelConfigModule>();
+        [SerializeField] private List<KernelModuleConfig> m_modules = new List<KernelModuleConfig>();
 
         public string Name { get { return m_name; } set { m_name = value; } }
-        public List<KernelConfigModule> Modules { get { return m_modules; } }
+        public List<KernelModuleConfig> Modules { get { return m_modules; } set { m_modules = value; } }
 
-        IEnumerable<IKernelConfigModule> IKernelConfig.Modules { get { return m_modules; } }
+        IEnumerable<IKernelModuleConfig> IKernelConfig.Modules { get { return m_modules; } }
     }
 }
