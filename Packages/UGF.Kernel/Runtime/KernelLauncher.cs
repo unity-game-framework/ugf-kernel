@@ -3,20 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
-using UGF.Kernel.Runtime.Modules;
+using UGF.Modules.Runtime;
 using UnityEngine;
 
 namespace UGF.Kernel.Runtime
 {
     public class KernelLauncher : ApplicationUnityLauncher
     {
-        [SerializeField] private string m_configIdentifier = "Config";
+        [SerializeField] private string m_configId = "Config";
 
-        public string ConfigIdentifier { get { return m_configIdentifier; } set { m_configIdentifier = value; } }
-        public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } set { m_config = value; } }
+        public string ConfigId { get { return m_configId; } set { m_configId = value; } }
+        public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
         public bool HasConfig { get { return m_config != null; } }
-        public IEnumerable<ModuleBuild> Builds { get; }
+        public IReadOnlyList<ModuleBuild> Builds { get; }
 
         private readonly List<ModuleBuild> m_builds = new List<ModuleBuild>();
         private IKernelConfig m_config;
@@ -28,42 +27,14 @@ namespace UGF.Kernel.Runtime
 
         protected override IEnumerator PreloadResourcesAsync()
         {
-            yield return LoadConfig(m_configIdentifier);
-            yield return LoadModules(Config);
-        }
+            IKernelConfigLoader configLoader = GetConfigLoader();
+            IModuleBuildLoader buildLoader = GetModuleBuildLoader();
 
-        protected virtual IEnumerator LoadConfig(string configIdentifier)
-        {
-            ResourceRequest operation = Resources.LoadAsync<DescriptionAsset>(configIdentifier);
+            yield return configLoader.LoadAsync(m_configId);
 
-            yield return operation;
+            m_config = configLoader.GetResult();
 
-            DescriptionAsset asset = operation.asset as DescriptionAsset ?? throw new ArgumentNullException(nameof(operation.asset));
-            IKernelConfig config = asset.GetDescription<IKernelConfig>() ?? throw new ArgumentNullException(nameof(asset.GetDescription));
-
-            Config = config;
-        }
-
-        protected virtual IEnumerator LoadModules(IKernelConfig config)
-        {
-            foreach (IKernelModuleConfig module in config.Modules)
-            {
-                ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(module.BuilderIdentifier);
-
-                yield return operation;
-
-                ModuleBuilderAsset builderAsset = operation.asset as ModuleBuilderAsset ?? throw new ArgumentNullException(nameof(operation.asset));
-                IModuleBuilder builder = builderAsset.GetBuilder() ?? throw new ArgumentNullException(nameof(builderAsset.GetBuilder));
-
-                operation = Resources.LoadAsync<DescriptionAsset>(module.DescriptionIdentifier);
-
-                yield return operation;
-
-                DescriptionAsset descriptionAsset = operation.asset as DescriptionAsset ?? throw new ArgumentNullException(nameof(operation.asset));
-                IModuleDescription description = descriptionAsset.GetDescription<IModuleDescription>() ?? throw new ArgumentNullException(nameof(descriptionAsset.GetDescription));
-
-                m_builds.Add(new ModuleBuild(builder, description));
-            }
+            yield return buildLoader.LoadAsync(m_builds, m_config.Modules);
         }
 
         protected override IApplication CreateApplication()
@@ -75,10 +46,11 @@ namespace UGF.Kernel.Runtime
             return application;
         }
 
-        protected virtual void CreateModules(IApplication application, IEnumerable<ModuleBuild> builds)
+        protected virtual void CreateModules(IApplication application, IReadOnlyList<ModuleBuild> builds)
         {
-            foreach (ModuleBuild build in builds)
+            for (int i = 0; i < builds.Count; i++)
             {
+                ModuleBuild build = builds[i];
                 IModuleBuilder builder = build.Builder;
                 IModuleDescription description = build.Description;
 
@@ -92,6 +64,16 @@ namespace UGF.Kernel.Runtime
 
             m_config = null;
             m_builds.Clear();
+        }
+
+        protected virtual IKernelConfigLoader GetConfigLoader()
+        {
+            return new KernelConfigLoaderResources();
+        }
+
+        protected virtual IModuleBuildLoader GetModuleBuildLoader()
+        {
+            return new ModuleBuildLoaderResources();
         }
     }
 }

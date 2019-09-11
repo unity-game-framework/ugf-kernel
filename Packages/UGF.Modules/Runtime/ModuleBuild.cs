@@ -1,4 +1,4 @@
-namespace UGF.Kernel.Runtime.Modules
+namespace UGF.Modules.Runtime
 {
     public struct ModuleBuild
     {

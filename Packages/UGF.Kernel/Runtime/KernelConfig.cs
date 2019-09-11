@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UGF.Modules.Runtime;
 using UnityEngine;
 
 namespace UGF.Kernel.Runtime
@@ -8,11 +9,11 @@ namespace UGF.Kernel.Runtime
     public class KernelConfig : IKernelConfig
     {
         [SerializeField] private string m_name = "Default";
-        [SerializeField] private List<KernelModuleConfig> m_modules = new List<KernelModuleConfig>();
+        [SerializeField] private List<ModuleInfo> m_modules = new List<ModuleInfo>();
 
         public string Name { get { return m_name; } set { m_name = value; } }
-        public List<KernelModuleConfig> Modules { get { return m_modules; } set { m_modules = value; } }
+        public List<ModuleInfo> Modules { get { return m_modules; } set { m_modules = value; } }
 
-        IEnumerable<IKernelModuleConfig> IKernelConfig.Modules { get { return m_modules; } }
+        IReadOnlyList<ModuleInfo> IKernelConfig.Modules { get { return m_modules; } }
     }
 }

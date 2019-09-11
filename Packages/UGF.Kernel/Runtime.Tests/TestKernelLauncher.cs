@@ -15,7 +15,7 @@ namespace UGF.Kernel.Runtime.Tests
                 KernelLauncher launcher = scope.Component;
 
                 launcher.LaunchOnStart = false;
-                launcher.ConfigIdentifier = "Config";
+                launcher.ConfigId = "Config";
 
                 yield return launcher.Launch();
 
