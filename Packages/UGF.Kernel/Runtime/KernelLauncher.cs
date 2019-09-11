@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
+using UGF.Logs.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
 
@@ -27,19 +28,30 @@ namespace UGF.Kernel.Runtime
 
         protected override IEnumerator PreloadResourcesAsync()
         {
+            Log.Debug(nameof(PreloadResourcesAsync));
+
             IKernelConfigLoader configLoader = GetConfigLoader();
             IModuleBuildLoader buildLoader = GetModuleBuildLoader();
+
+            Log.Debug($"KernelConfigLoader:'{configLoader}'.");
+            Log.Debug($"ModuleBuildLoader:'{buildLoader}'.");
 
             yield return configLoader.LoadAsync(m_configId);
 
             m_config = configLoader.GetResult();
 
+            Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}'.");
+
             yield return buildLoader.LoadAsync(m_builds, m_config.Modules);
+
+            Log.Debug($"Module builds:'{m_builds.Count}'.");
         }
 
         protected override IApplication CreateApplication()
         {
             IApplication application = new KernelApplication(ProvideStaticInstance);
+
+            Log.Debug($"Create application:'{application}'.");
 
             CreateModules(application, Builds);
 
@@ -48,13 +60,21 @@ namespace UGF.Kernel.Runtime
 
         protected virtual void CreateModules(IApplication application, IReadOnlyList<ModuleBuild> builds)
         {
+            Log.Debug(nameof(CreateModules));
+
             for (int i = 0; i < builds.Count; i++)
             {
                 ModuleBuild build = builds[i];
                 IModuleBuilder builder = build.Builder;
                 IModuleDescription description = build.Description;
 
-                builder.Build(application, description);
+                Log.Debug($"Module build: registerType:'{builder.RegisterType}', builder:'{builder}', description:'{description}'.");
+
+                IApplicationModule module = builder.Build(application, description);
+
+                Log.Debug($"Module built: module'{module}'.");
+
+                application.AddModule(builder.RegisterType, module);
             }
         }
 

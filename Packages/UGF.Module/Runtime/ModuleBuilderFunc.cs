@@ -3,7 +3,9 @@ using UGF.Application.Runtime;
 
 namespace UGF.Module.Runtime
 {
-    public class ModuleBuilderFunc<TModuleDescription> : ModuleBuilder<TModuleDescription> where TModuleDescription : class, IModuleDescription
+    public class ModuleBuilderFunc<TRegisterType, TModuleDescription> : ModuleBuilder<TRegisterType, TModuleDescription>
+        where TRegisterType : IApplicationModule
+        where TModuleDescription : class, IModuleDescription
     {
         public Func<IApplication, TModuleDescription, IApplicationModule> Func { get; }
 
