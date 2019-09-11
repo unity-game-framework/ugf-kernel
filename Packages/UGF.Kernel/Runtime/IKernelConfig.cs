@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UGF.Description.Runtime;
-using UGF.Modules.Runtime;
+using UGF.Module.Runtime;
 
 namespace UGF.Kernel.Runtime
 {

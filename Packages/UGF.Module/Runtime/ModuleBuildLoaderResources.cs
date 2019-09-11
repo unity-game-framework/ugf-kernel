@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UGF.Description.Runtime;
 using UnityEngine;
 
-namespace UGF.Modules.Runtime
+namespace UGF.Module.Runtime
 {
     public class ModuleBuildLoaderResources : IModuleBuildLoader
     {

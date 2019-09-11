@@ -1,6 +1,6 @@
 using System;
 
-namespace UGF.Modules.Runtime
+namespace UGF.Module.Runtime
 {
     [Serializable]
     public struct ModuleInfo

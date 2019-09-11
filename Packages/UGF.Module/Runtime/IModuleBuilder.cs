@@ -1,6 +1,6 @@
 using UGF.Application.Runtime;
 
-namespace UGF.Modules.Runtime
+namespace UGF.Module.Runtime
 {
     public interface IModuleBuilder
     {

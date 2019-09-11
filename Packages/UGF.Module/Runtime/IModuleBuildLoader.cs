@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UGF.Modules.Runtime
+namespace UGF.Module.Runtime
 {
     public interface IModuleBuildLoader
     {

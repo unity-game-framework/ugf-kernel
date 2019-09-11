@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UGF.Modules.Runtime
+namespace UGF.Module.Runtime
 {
     public abstract class ModuleBuilderAsset : ScriptableObject
     {
