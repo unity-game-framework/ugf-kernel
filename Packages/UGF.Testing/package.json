@@ -9,6 +9,6 @@
         "url": "https://github.com/unity-game-framework"
     },
     "dependencies": {
-        "com.unity.test-framework": "1.0.18"
+        "com.unity.test-framework": "1.1.1"
     }
 }
