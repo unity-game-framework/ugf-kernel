@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 501df13bbfdb4854b9b8143f4f86e219
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: colorKeys
+      active: 1
+    - name: alphaKeys
+      active: 1
+    - name: mode
+      active: 1

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 81368158edfba2747b5e39106b971c52
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    members:
+    - name: keys
+      active: 1
+    - name: preWrapMode
+      active: 1
+    - name: postWrapMode
+      active: 1

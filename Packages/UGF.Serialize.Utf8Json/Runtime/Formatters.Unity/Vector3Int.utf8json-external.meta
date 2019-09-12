@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: fa17067c7961c844487f67869e85b065
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.Vector3Int, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: x
+      active: 1
+    - name: y
+      active: 1
+    - name: z
+      active: 1

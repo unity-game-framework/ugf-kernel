@@ -1,0 +1,21 @@
+{
+    "m_typeName": "UnityEngine.RectOffset, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "left",
+            "m_active": true
+        },
+        {
+            "m_name": "right",
+            "m_active": true
+        },
+        {
+            "m_name": "top",
+            "m_active": true
+        },
+        {
+            "m_name": "bottom",
+            "m_active": true
+        }
+    ]
+}

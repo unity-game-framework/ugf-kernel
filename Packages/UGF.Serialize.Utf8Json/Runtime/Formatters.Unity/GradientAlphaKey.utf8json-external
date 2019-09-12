@@ -1,0 +1,13 @@
+{
+    "m_typeName": "UnityEngine.GradientAlphaKey, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "alpha",
+            "m_active": true
+        },
+        {
+            "m_name": "time",
+            "m_active": true
+        }
+    ]
+}

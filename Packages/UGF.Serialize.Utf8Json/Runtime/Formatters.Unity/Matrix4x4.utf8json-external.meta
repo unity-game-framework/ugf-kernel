@@ -1,0 +1,46 @@
+fileFormatVersion: 2
+guid: 15d5492966cfecb41837c7068488bcd7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.Matrix4x4, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: m00
+      active: 1
+    - name: m10
+      active: 1
+    - name: m20
+      active: 1
+    - name: m30
+      active: 1
+    - name: m01
+      active: 1
+    - name: m11
+      active: 1
+    - name: m21
+      active: 1
+    - name: m31
+      active: 1
+    - name: m02
+      active: 1
+    - name: m12
+      active: 1
+    - name: m22
+      active: 1
+    - name: m32
+      active: 1
+    - name: m03
+      active: 1
+    - name: m13
+      active: 1
+    - name: m23
+      active: 1
+    - name: m33
+      active: 1

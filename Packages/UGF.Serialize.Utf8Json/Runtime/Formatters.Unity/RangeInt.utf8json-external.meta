@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f2c3ffae7d73c4340a9cf17ab0732167
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.RangeInt, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: start
+      active: 1
+    - name: length
+      active: 1
