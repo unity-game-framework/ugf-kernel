@@ -1,0 +1,15 @@
+{
+    "name": "UGF.Serialize.Utf8Json.Math.Runtime",
+    "references": [
+        "GUID:005d4ab2cb930e742a4b76b585d2a5c9",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

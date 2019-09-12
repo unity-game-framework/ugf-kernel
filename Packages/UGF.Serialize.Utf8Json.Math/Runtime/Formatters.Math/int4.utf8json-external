@@ -1,0 +1,261 @@
+{
+    "m_typeName": "Unity.Mathematics.int4, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "x",
+            "m_active": true
+        },
+        {
+            "m_name": "y",
+            "m_active": true
+        },
+        {
+            "m_name": "z",
+            "m_active": true
+        },
+        {
+            "m_name": "w",
+            "m_active": true
+        },
+        {
+            "m_name": "xyzw",
+            "m_active": false
+        },
+        {
+            "m_name": "xywz",
+            "m_active": false
+        },
+        {
+            "m_name": "xzyw",
+            "m_active": false
+        },
+        {
+            "m_name": "xzwy",
+            "m_active": false
+        },
+        {
+            "m_name": "xwyz",
+            "m_active": false
+        },
+        {
+            "m_name": "xwzy",
+            "m_active": false
+        },
+        {
+            "m_name": "yxzw",
+            "m_active": false
+        },
+        {
+            "m_name": "yxwz",
+            "m_active": false
+        },
+        {
+            "m_name": "yzxw",
+            "m_active": false
+        },
+        {
+            "m_name": "yzwx",
+            "m_active": false
+        },
+        {
+            "m_name": "ywxz",
+            "m_active": false
+        },
+        {
+            "m_name": "ywzx",
+            "m_active": false
+        },
+        {
+            "m_name": "zxyw",
+            "m_active": false
+        },
+        {
+            "m_name": "zxwy",
+            "m_active": false
+        },
+        {
+            "m_name": "zyxw",
+            "m_active": false
+        },
+        {
+            "m_name": "zywx",
+            "m_active": false
+        },
+        {
+            "m_name": "zwxy",
+            "m_active": false
+        },
+        {
+            "m_name": "zwyx",
+            "m_active": false
+        },
+        {
+            "m_name": "wxyz",
+            "m_active": false
+        },
+        {
+            "m_name": "wxzy",
+            "m_active": false
+        },
+        {
+            "m_name": "wyxz",
+            "m_active": false
+        },
+        {
+            "m_name": "wyzx",
+            "m_active": false
+        },
+        {
+            "m_name": "wzxy",
+            "m_active": false
+        },
+        {
+            "m_name": "wzyx",
+            "m_active": false
+        },
+        {
+            "m_name": "xyz",
+            "m_active": false
+        },
+        {
+            "m_name": "xyw",
+            "m_active": false
+        },
+        {
+            "m_name": "xzy",
+            "m_active": false
+        },
+        {
+            "m_name": "xzw",
+            "m_active": false
+        },
+        {
+            "m_name": "xwy",
+            "m_active": false
+        },
+        {
+            "m_name": "xwz",
+            "m_active": false
+        },
+        {
+            "m_name": "yxz",
+            "m_active": false
+        },
+        {
+            "m_name": "yxw",
+            "m_active": false
+        },
+        {
+            "m_name": "yzx",
+            "m_active": false
+        },
+        {
+            "m_name": "yzw",
+            "m_active": false
+        },
+        {
+            "m_name": "ywx",
+            "m_active": false
+        },
+        {
+            "m_name": "ywz",
+            "m_active": false
+        },
+        {
+            "m_name": "zxy",
+            "m_active": false
+        },
+        {
+            "m_name": "zxw",
+            "m_active": false
+        },
+        {
+            "m_name": "zyx",
+            "m_active": false
+        },
+        {
+            "m_name": "zyw",
+            "m_active": false
+        },
+        {
+            "m_name": "zwx",
+            "m_active": false
+        },
+        {
+            "m_name": "zwy",
+            "m_active": false
+        },
+        {
+            "m_name": "wxy",
+            "m_active": false
+        },
+        {
+            "m_name": "wxz",
+            "m_active": false
+        },
+        {
+            "m_name": "wyx",
+            "m_active": false
+        },
+        {
+            "m_name": "wyz",
+            "m_active": false
+        },
+        {
+            "m_name": "wzx",
+            "m_active": false
+        },
+        {
+            "m_name": "wzy",
+            "m_active": false
+        },
+        {
+            "m_name": "xy",
+            "m_active": false
+        },
+        {
+            "m_name": "xz",
+            "m_active": false
+        },
+        {
+            "m_name": "xw",
+            "m_active": false
+        },
+        {
+            "m_name": "yx",
+            "m_active": false
+        },
+        {
+            "m_name": "yz",
+            "m_active": false
+        },
+        {
+            "m_name": "yw",
+            "m_active": false
+        },
+        {
+            "m_name": "zx",
+            "m_active": false
+        },
+        {
+            "m_name": "zy",
+            "m_active": false
+        },
+        {
+            "m_name": "zw",
+            "m_active": false
+        },
+        {
+            "m_name": "wx",
+            "m_active": false
+        },
+        {
+            "m_name": "wy",
+            "m_active": false
+        },
+        {
+            "m_name": "wz",
+            "m_active": false
+        }
+    ]
+}

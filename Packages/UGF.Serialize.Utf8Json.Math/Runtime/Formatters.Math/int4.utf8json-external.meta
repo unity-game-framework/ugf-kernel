@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: 06b435c60033c2c439dcb55272e915fe
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: Unity.Mathematics.int4, Unity.Mathematics, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: x
+      active: 1
+    - name: y
+      active: 1
+    - name: z
+      active: 1
+    - name: w
+      active: 1
+    - name: xyzw
+      active: 0
+    - name: xywz
+      active: 0
+    - name: xzyw
+      active: 0
+    - name: xzwy
+      active: 0
+    - name: xwyz
+      active: 0
+    - name: xwzy
+      active: 0
+    - name: yxzw
+      active: 0
+    - name: yxwz
+      active: 0
+    - name: yzxw
+      active: 0
+    - name: yzwx
+      active: 0
+    - name: ywxz
+      active: 0
+    - name: ywzx
+      active: 0
+    - name: zxyw
+      active: 0
+    - name: zxwy
+      active: 0
+    - name: zyxw
+      active: 0
+    - name: zywx
+      active: 0
+    - name: zwxy
+      active: 0
+    - name: zwyx
+      active: 0
+    - name: wxyz
+      active: 0
+    - name: wxzy
+      active: 0
+    - name: wyxz
+      active: 0
+    - name: wyzx
+      active: 0
+    - name: wzxy
+      active: 0
+    - name: wzyx
+      active: 0
+    - name: xyz
+      active: 0
+    - name: xyw
+      active: 0
+    - name: xzy
+      active: 0
+    - name: xzw
+      active: 0
+    - name: xwy
+      active: 0
+    - name: xwz
+      active: 0
+    - name: yxz
+      active: 0
+    - name: yxw
+      active: 0
+    - name: yzx
+      active: 0
+    - name: yzw
+      active: 0
+    - name: ywx
+      active: 0
+    - name: ywz
+      active: 0
+    - name: zxy
+      active: 0
+    - name: zxw
+      active: 0
+    - name: zyx
+      active: 0
+    - name: zyw
+      active: 0
+    - name: zwx
+      active: 0
+    - name: zwy
+      active: 0
+    - name: wxy
+      active: 0
+    - name: wxz
+      active: 0
+    - name: wyx
+      active: 0
+    - name: wyz
+      active: 0
+    - name: wzx
+      active: 0
+    - name: wzy
+      active: 0
+    - name: xy
+      active: 0
+    - name: xz
+      active: 0
+    - name: xw
+      active: 0
+    - name: yx
+      active: 0
+    - name: yz
+      active: 0
+    - name: yw
+      active: 0
+    - name: zx
+      active: 0
+    - name: zy
+      active: 0
+    - name: zw
+      active: 0
+    - name: wx
+      active: 0
+    - name: wy
+      active: 0
+    - name: wz
+      active: 0

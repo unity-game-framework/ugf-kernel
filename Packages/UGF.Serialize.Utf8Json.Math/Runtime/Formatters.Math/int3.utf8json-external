@@ -1,0 +1,65 @@
+{
+    "m_typeName": "Unity.Mathematics.int3, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "x",
+            "m_active": true
+        },
+        {
+            "m_name": "y",
+            "m_active": true
+        },
+        {
+            "m_name": "z",
+            "m_active": true
+        },
+        {
+            "m_name": "xyz",
+            "m_active": false
+        },
+        {
+            "m_name": "xzy",
+            "m_active": false
+        },
+        {
+            "m_name": "yxz",
+            "m_active": false
+        },
+        {
+            "m_name": "yzx",
+            "m_active": false
+        },
+        {
+            "m_name": "zxy",
+            "m_active": false
+        },
+        {
+            "m_name": "zyx",
+            "m_active": false
+        },
+        {
+            "m_name": "xy",
+            "m_active": false
+        },
+        {
+            "m_name": "xz",
+            "m_active": false
+        },
+        {
+            "m_name": "yx",
+            "m_active": false
+        },
+        {
+            "m_name": "yz",
+            "m_active": false
+        },
+        {
+            "m_name": "zx",
+            "m_active": false
+        },
+        {
+            "m_name": "zy",
+            "m_active": false
+        }
+    ]
+}
