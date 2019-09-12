@@ -10,6 +10,6 @@
     },
     "dependencies": {
         "com.ugf.customsettings": "0.2.0-preview",
-        "com.unity.addressables": "1.1.10"
+        "com.unity.addressables": "1.2.2"
     }
 }
