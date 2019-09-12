@@ -1,16 +1,16 @@
 // THIS IS A GENERATED CODE. DO NOT EDIT.
 // ReSharper disable all
 
-namespace UGF.Serialize.Utf8Json.Resolvers
+namespace UGF.Serialize.Utf8Json.Runtime.Resolvers
 {
     using System;
     using Utf8Json;
 
-    public class UGFSerializeUtf8JsonResolver : global::Utf8Json.IJsonFormatterResolver
+    public class UGFSerializeUtf8JsonRuntimeResolver : global::Utf8Json.IJsonFormatterResolver
     {
-        public static readonly global::Utf8Json.IJsonFormatterResolver Instance = new UGFSerializeUtf8JsonResolver();
+        public static readonly global::Utf8Json.IJsonFormatterResolver Instance = new UGFSerializeUtf8JsonRuntimeResolver();
 
-        UGFSerializeUtf8JsonResolver()
+        UGFSerializeUtf8JsonRuntimeResolver()
         {
 
         }
@@ -26,7 +26,7 @@ namespace UGF.Serialize.Utf8Json.Resolvers
 
             static FormatterCache()
             {
-                var f = UGFSerializeUtf8JsonResolverGetFormatterHelper.GetFormatter(typeof(T));
+                var f = UGFSerializeUtf8JsonRuntimeResolverGetFormatterHelper.GetFormatter(typeof(T));
                 if (f != null)
                 {
                     formatter = (global::Utf8Json.IJsonFormatter<T>)f;
@@ -35,11 +35,11 @@ namespace UGF.Serialize.Utf8Json.Resolvers
         }
     }
 
-    internal static class UGFSerializeUtf8JsonResolverGetFormatterHelper
+    internal static class UGFSerializeUtf8JsonRuntimeResolverGetFormatterHelper
     {
         static readonly global::System.Collections.Generic.Dictionary<Type, int> lookup;
 
-        static UGFSerializeUtf8JsonResolverGetFormatterHelper()
+        static UGFSerializeUtf8JsonRuntimeResolverGetFormatterHelper()
         {
             lookup = new global::System.Collections.Generic.Dictionary<Type, int>(17)
             {
@@ -70,23 +70,23 @@ namespace UGF.Serialize.Utf8Json.Resolvers
 
             switch (key)
             {
-                case 0: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.WrapModeFormatter();
-                case 1: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.GradientModeFormatter();
-                case 2: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.WeightedModeFormatter();
-                case 3: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.AnimationCurveFormatter();
-                case 4: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.Vector3IntFormatter();
-                case 5: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.BoundsIntFormatter();
-                case 6: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.Color32Formatter();
-                case 7: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.GradientFormatter();
-                case 8: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.GradientAlphaKeyFormatter();
-                case 9: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.GradientColorKeyFormatter();
-                case 10: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.KeyframeFormatter();
-                case 11: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.LayerMaskFormatter();
-                case 12: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.Matrix4x4Formatter();
-                case 13: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.RangeIntFormatter();
-                case 14: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.RectIntFormatter();
-                case 15: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.RectOffsetFormatter();
-                case 16: return new UGF.Serialize.Utf8Json.Formatters.UnityEngine.Vector2IntFormatter();
+                case 0: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.WrapModeFormatter();
+                case 1: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.GradientModeFormatter();
+                case 2: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.WeightedModeFormatter();
+                case 3: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.AnimationCurveFormatter();
+                case 4: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.Vector3IntFormatter();
+                case 5: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.BoundsIntFormatter();
+                case 6: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.Color32Formatter();
+                case 7: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.GradientFormatter();
+                case 8: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.GradientAlphaKeyFormatter();
+                case 9: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.GradientColorKeyFormatter();
+                case 10: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.KeyframeFormatter();
+                case 11: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.LayerMaskFormatter();
+                case 12: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.Matrix4x4Formatter();
+                case 13: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.RangeIntFormatter();
+                case 14: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.RectIntFormatter();
+                case 15: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.RectOffsetFormatter();
+                case 16: return new UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine.Vector2IntFormatter();
                 default: return null;
             }
         }
@@ -103,7 +103,7 @@ namespace UGF.Serialize.Utf8Json.Resolvers
 #pragma warning disable 414
 #pragma warning disable 168
 
-namespace UGF.Serialize.Utf8Json.Formatters.UnityEngine
+namespace UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine
 {
     using System;
     using Utf8Json;
@@ -161,7 +161,7 @@ namespace UGF.Serialize.Utf8Json.Formatters.UnityEngine
 #pragma warning disable 219
 #pragma warning disable 168
 
-namespace UGF.Serialize.Utf8Json.Formatters.UnityEngine
+namespace UGF.Serialize.Utf8Json.Runtime.Formatters.UnityEngine
 {
     using System;
     using Utf8Json;
