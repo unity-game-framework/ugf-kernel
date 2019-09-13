@@ -1,0 +1,9 @@
+{
+    "m_typeName": "Unity.Mathematics.Random, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "state",
+            "m_active": true
+        }
+    ]
+}

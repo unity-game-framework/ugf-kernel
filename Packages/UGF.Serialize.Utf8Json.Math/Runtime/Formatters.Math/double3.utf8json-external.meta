@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 53b7e4fd6be16104ba107fea6cbef3cc
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: Unity.Mathematics.double3, Unity.Mathematics, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: x
+      active: 1
+    - name: y
+      active: 1
+    - name: z
+      active: 1

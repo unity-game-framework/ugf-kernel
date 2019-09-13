@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b6d7cb076a896df4392268e0410067a1
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: Unity.Mathematics.RigidTransform, Unity.Mathematics, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    members:
+    - name: rot
+      active: 1
+    - name: pos
+      active: 1
