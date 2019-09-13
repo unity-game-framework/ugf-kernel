@@ -22,7 +22,7 @@ namespace UGF.Serialize.Utf8Json.Math.Editor.Tests
                 Utf8JsonMathTypeGenerateInfo info = infos[i];
                 Utf8JsonExternalTypeAssetInfo assetInfo = CreateAssetInfo(info);
                 string path = $"{folderPath}/{info.Type.Name}.{Utf8JsonExternalTypeEditorUtility.ExternalTypeAssetExtensionName}";
-                string content = EditorJsonUtility.ToJson(assetInfo);
+                string content = EditorJsonUtility.ToJson(assetInfo, true);
 
                 File.WriteAllText(path, content);
             }
