@@ -15,5 +15,7 @@ MonoBehaviour:
   m_description:
     m_name: Default
     m_modules:
-    - BuilderId: AddressableModuleBuilder
-      DescriptionId: AddressableModuleDescription
+    - m_builderId: SerializeModuleBuilderAsset
+      m_descriptionId: 
+    - m_builderId: AddressableModuleBuilder
+      m_descriptionId: AddressableModuleDescription
