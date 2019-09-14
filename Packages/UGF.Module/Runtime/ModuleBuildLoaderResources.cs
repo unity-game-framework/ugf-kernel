@@ -18,8 +18,20 @@ namespace UGF.Module.Runtime
 
                 yield return operation;
 
-                ModuleBuilderAsset builderAsset = operation.asset as ModuleBuilderAsset ?? throw new ArgumentNullException(nameof(operation.asset));
-                IModuleBuilder builder = builderAsset.GetBuilder() ?? throw new ArgumentNullException(nameof(builderAsset.GetBuilder));
+                var builderAsset = operation.asset as ModuleBuilderAsset;
+
+                if (builderAsset == null)
+                {
+                    throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified builder: '{info.BuilderId}'.");
+                }
+
+                IModuleBuilder builder = builderAsset.GetBuilder();
+
+                if (builder == null)
+                {
+                    throw new ArgumentNullException(nameof(builderAsset.GetBuilder), $"Failed to get builder from the specified builder asset: '{builderAsset}'.");
+                }
+
                 IModuleDescription description = null;
 
                 if (info.HasDescription)
@@ -28,8 +40,19 @@ namespace UGF.Module.Runtime
 
                     yield return operation;
 
-                    DescriptionAsset descriptionAsset = operation.asset as DescriptionAsset ?? throw new ArgumentNullException(nameof(operation.asset));
-                    description = descriptionAsset.GetDescription<IModuleDescription>() ?? throw new ArgumentNullException(nameof(descriptionAsset.GetDescription));
+                    var descriptionAsset = operation.asset as DescriptionAsset;
+
+                    if (descriptionAsset == null)
+                    {
+                        throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified description: '{info.DescriptionId}'.");
+                    }
+
+                    description = descriptionAsset.GetDescription<IModuleDescription>();
+
+                    if (description == null)
+                    {
+                        throw new ArgumentNullException(nameof(descriptionAsset.GetDescription), $"Failed to get description from the specified description asset: '{descriptionAsset}'.");
+                    }
                 }
 
                 var build = new ModuleBuild(builder, description);

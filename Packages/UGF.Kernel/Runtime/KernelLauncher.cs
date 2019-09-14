@@ -68,15 +68,12 @@ namespace UGF.Kernel.Runtime
             {
                 ModuleBuild build = builds[i];
                 IModuleBuilder builder = build.Builder;
-                IModuleDescription description = build.Description;
+                Type registerType = builder.RegisterType;
+                IApplicationModule module = build.HasDescription ? builder.Build(application, build.Description) : builder.Build(application);
 
-                Log.Debug($"Module build: registerType:'{builder.RegisterType}', builder:'{builder}', description:'{description}'.");
+                application.AddModule(registerType, module);
 
-                IApplicationModule module = builder.Build(application, description);
-
-                Log.Debug($"Module built: module'{module}'.");
-
-                application.AddModule(builder.RegisterType, module);
+                Log.Debug($"Build Module: registerType:'{registerType}'.");
             }
         }
 

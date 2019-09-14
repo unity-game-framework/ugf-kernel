@@ -6,7 +6,7 @@ namespace UGF.Module.Runtime
     {
         public string BuilderId { get; }
         public string DescriptionId { get { return HasDescription ? m_descriptionId : throw new InvalidOperationException("A description id not specified."); } }
-        public bool HasDescription { get { return string.IsNullOrEmpty(DescriptionId); } }
+        public bool HasDescription { get { return !string.IsNullOrEmpty(m_descriptionId); } }
 
         private readonly string m_descriptionId;
 
