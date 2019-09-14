@@ -42,7 +42,9 @@ namespace UGF.Kernel.Runtime
 
             Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}'.");
 
-            yield return buildLoader.LoadAsync(m_builds, m_config.Modules);
+            IReadOnlyList<ModuleBuildInfo> modules = GetModuleBuildInfos(m_config);
+
+            yield return buildLoader.LoadAsync(m_builds, modules);
 
             Log.Debug($"Module builds:'{m_builds.Count}'.");
         }
@@ -94,6 +96,21 @@ namespace UGF.Kernel.Runtime
         protected virtual IModuleBuildLoader GetModuleBuildLoader()
         {
             return new ModuleBuildLoaderResources();
+        }
+
+        protected virtual IReadOnlyList<ModuleBuildInfo> GetModuleBuildInfos(IKernelConfig config)
+        {
+            var infos = new List<ModuleBuildInfo>();
+
+            for (int i = 0; i < config.Modules.Count; i++)
+            {
+                IKernelConfigModuleInfo module = config.Modules[i];
+                var info = new ModuleBuildInfo(module.BuilderId, module.DescriptionId);
+
+                infos.Add(info);
+            }
+
+            return infos;
         }
     }
 }

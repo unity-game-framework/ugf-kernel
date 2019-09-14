@@ -52,8 +52,8 @@ namespace UGF.Kernel.Editor
             var rectDescription = new Rect(rect.x, rectBuilder.y + height + spacing, rect.width, height);
 
             SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
-            SerializedProperty propertyBuilderId = propertyElement.FindPropertyRelative("BuilderId");
-            SerializedProperty propertyDescriptionId = propertyElement.FindPropertyRelative("DescriptionId");
+            SerializedProperty propertyBuilderId = propertyElement.FindPropertyRelative("m_builderId");
+            SerializedProperty propertyDescriptionId = propertyElement.FindPropertyRelative("m_descriptionId");
 
             var builderAsset = Resources.Load<ModuleBuilderAsset>(propertyBuilderId.stringValue);
             var descriptionAsset = Resources.Load<DescriptionAsset>(propertyDescriptionId.stringValue);

@@ -7,6 +7,7 @@ namespace UGF.Module.Runtime
     {
         Type RegisterType { get; }
 
+        IApplicationModule Build(IApplication application);
         IApplicationModule Build(IApplication application, IModuleDescription description);
     }
 }

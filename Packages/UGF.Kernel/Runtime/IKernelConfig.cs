@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UGF.Description.Runtime;
-using UGF.Module.Runtime;
 
 namespace UGF.Kernel.Runtime
 {
     public interface IKernelConfig : IDescription
     {
         string Name { get; }
-        IReadOnlyList<ModuleInfo> Modules { get; }
+        IReadOnlyList<IKernelConfigModuleInfo> Modules { get; }
     }
 }
