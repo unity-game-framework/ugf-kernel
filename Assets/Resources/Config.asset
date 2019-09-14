@@ -17,5 +17,7 @@ MonoBehaviour:
     m_modules:
     - m_builderId: SerializeModuleBuilderAsset
       m_descriptionId: 
+    - m_builderId: SerializeUtf8JsonModuleBuilderAsset
+      m_descriptionId: 
     - m_builderId: AddressableModuleBuilder
       m_descriptionId: AddressableModuleDescription
