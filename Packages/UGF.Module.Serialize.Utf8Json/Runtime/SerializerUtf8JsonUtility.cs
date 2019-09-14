@@ -1,6 +1,6 @@
 using UGF.Serialize.Runtime;
 
-namespace UGF.Serialize.Utf8Json.Runtime
+namespace UGF.Module.Serialize.Utf8Json.Runtime
 {
     /// <summary>
     /// Provides utilities to work with Utf8Json serializer.

@@ -2,7 +2,7 @@ using System;
 using UGF.Serialize.Runtime;
 using Utf8Json;
 
-namespace UGF.Serialize.Utf8Json.Runtime
+namespace UGF.Module.Serialize.Utf8Json.Runtime
 {
     public class SerializerUtf8JsonBytes : SerializerBase<byte[]>
     {
