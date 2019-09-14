@@ -36,7 +36,7 @@ namespace UGF.Kernel.Editor.Settings
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()
         {
-            return new CustomSettingsProvider<KernelEditorSettingsData>("Project/UGF/Kernel", m_settings, SettingsScope.Project);
+            return new CustomSettingsProvider<KernelEditorSettingsData>("Preferences/UGF/Kernel", m_settings, SettingsScope.User);
         }
     }
 }

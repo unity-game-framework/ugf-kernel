@@ -14,7 +14,6 @@
         "com.ugf.description": "1.0.0-preview",
         "com.ugf.jsonc": "0.1.0-preview",
         "com.ugf.logs": "1.0.0",
-        "com.ugf.serialize": "1.0.0-preview.2",
-        "com.ugf.utf8json": "2.0.0-preview.1"
+        "com.ugf.module": "0.0.0-preview"
     }
 }
