@@ -1,6 +1,9 @@
 {
-    "name": "UGF.Serialize.Utf8Json.Math.Runtime",
+    "name": "UGF.Module.Serialize.Utf8Json.Runtime",
     "references": [
+        "GUID:5f36d1c39ad974043addfca692c8cded",
+        "GUID:1b64e8c1b5d6a0544b302c8a8d107ca9",
+        "GUID:e76e47a0b9e0396439161248a194baa5",
         "GUID:005d4ab2cb930e742a4b76b585d2a5c9",
         "GUID:d8b63aba1907145bea998dd612889d6b"
     ],

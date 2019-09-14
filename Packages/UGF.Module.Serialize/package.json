@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "com.ugf.serialize": "1.0.0-preview.2",
-        "com.ugf.module": "0.0.0-preview",
-        "com.ugf.utf8json": "2.0.0-preview.2"
+        "com.ugf.module": "0.0.0-preview"
     }
 }
