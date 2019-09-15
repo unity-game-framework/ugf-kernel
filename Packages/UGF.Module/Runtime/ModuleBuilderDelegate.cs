@@ -10,7 +10,7 @@ namespace UGF.Module.Runtime
 
         public ModuleBuilderDelegate(ModuleBuilderHandler handler)
         {
-            Handler = handler;
+            Handler = handler ?? throw new ArgumentNullException(nameof(handler));
         }
 
         protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)

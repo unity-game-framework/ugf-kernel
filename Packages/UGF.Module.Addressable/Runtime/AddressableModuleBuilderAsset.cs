@@ -1,14 +1,16 @@
+using UGF.Application.Runtime;
+using UGF.Description.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
 
 namespace UGF.Module.Addressable.Runtime
 {
     [CreateAssetMenu(menuName = "UGF/Module/AddressableModuleBuilderAsset", order = 2000)]
-    public class AddressableModuleBuilderAsset : ModuleBuilderAsset
+    public class AddressableModuleBuilderAsset : ModuleBuilderAsset<IAddressableModule>
     {
-        public override IModuleBuilder GetBuilder()
+        protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)
         {
-            return new ModuleBuilderDelegate<IAddressableModule>((application, arguments) => new AddressableModule());
+            return new AddressableModule();
         }
     }
 }

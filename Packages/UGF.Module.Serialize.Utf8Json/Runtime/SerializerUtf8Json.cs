@@ -12,12 +12,14 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
 
         public SerializerUtf8Json(IJsonFormatterResolver resolver, bool readable)
         {
-            Resolver = resolver;
+            Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             Readable = readable;
         }
 
         public override string Serialize<T>(T target)
         {
+            if (target == null) throw new ArgumentNullException(nameof(target));
+
             var writer = new JsonWriter();
             IJsonFormatter<T> formatter = Resolver.GetFormatter<T>();
 
@@ -31,6 +33,8 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
 
         public override T Deserialize<T>(string data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
             byte[] bytes = Encoding.UTF8.GetBytes(data);
             var reader = new JsonReader(bytes);
             IJsonFormatter<T> formatter = Resolver.GetFormatter<T>();

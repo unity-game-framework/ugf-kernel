@@ -1,3 +1,4 @@
+using System;
 using UGF.Application.Runtime;
 using UGF.Serialize.Runtime;
 using UGF.Serialize.Runtime.Formatter;
@@ -12,7 +13,7 @@ namespace UGF.Module.Serialize.Runtime
 
         public SerializeModule(ISerializeModuleDescription description)
         {
-            Description = description;
+            Description = description ?? throw new ArgumentNullException(nameof(description));
 
             Provider.Add(SerializerFormatterUtility.SerializerBinaryName, SerializerFormatterUtility.SerializerBinary);
             Provider.Add(SerializerUnityJsonUtility.SerializerTextCompactName, SerializerUnityJsonUtility.SerializerTextCompact);

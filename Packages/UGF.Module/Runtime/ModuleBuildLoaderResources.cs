@@ -10,6 +10,9 @@ namespace UGF.Module.Runtime
     {
         public IEnumerator LoadAsync(ICollection<IModuleBuild> builds, IReadOnlyList<IModuleBuildInfo> infos)
         {
+            if (builds == null) throw new ArgumentNullException(nameof(builds));
+            if (infos == null) throw new ArgumentNullException(nameof(infos));
+
             for (int i = 0; i < infos.Count; i++)
             {
                 IModuleBuildInfo info = infos[i];

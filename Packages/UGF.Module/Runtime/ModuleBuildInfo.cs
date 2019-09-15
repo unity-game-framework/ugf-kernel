@@ -1,3 +1,5 @@
+using System;
+
 namespace UGF.Module.Runtime
 {
     public class ModuleBuildInfo : IModuleBuildInfo
@@ -7,8 +9,8 @@ namespace UGF.Module.Runtime
 
         public ModuleBuildInfo(string builderId, IModuleBuildArguments<string> arguments)
         {
-            BuilderId = builderId;
-            Arguments = arguments;
+            BuilderId = builderId ?? throw new ArgumentNullException(nameof(builderId));
+            Arguments = arguments ?? throw new ArgumentNullException(nameof(arguments));
         }
     }
 }
