@@ -15,6 +15,9 @@ MonoBehaviour:
   m_description:
     m_name: Default
     m_modules:
+    - m_builderId: FactoryModuleBuilder
+      m_arguments:
+        m_values: []
     - m_builderId: SerializeModuleBuilderAsset
       m_arguments:
         m_values:
