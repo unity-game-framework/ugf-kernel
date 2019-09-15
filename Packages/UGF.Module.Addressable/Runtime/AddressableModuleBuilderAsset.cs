@@ -8,7 +8,7 @@ namespace UGF.Module.Addressable.Runtime
     {
         public override IModuleBuilder GetBuilder()
         {
-            return new ModuleBuilderFunc<IAddressableModule>((application, arguments) => new AddressableModule());
+            return new ModuleBuilderDelegate<IAddressableModule>((application, arguments) => new AddressableModule());
         }
     }
 }

@@ -16,8 +16,13 @@ MonoBehaviour:
     m_name: Default
     m_modules:
     - m_builderId: SerializeModuleBuilderAsset
-      m_descriptionId: 
+      m_arguments:
+        m_values:
+        - SerializeModuleDescription
     - m_builderId: SerializeUtf8JsonModuleBuilderAsset
-      m_descriptionId: 
+      m_arguments:
+        m_values:
+        - SerializeUtf8JsonModuleDescription
     - m_builderId: AddressableModuleBuilder
-      m_descriptionId: AddressableModuleDescription
+      m_arguments:
+        m_values: []
