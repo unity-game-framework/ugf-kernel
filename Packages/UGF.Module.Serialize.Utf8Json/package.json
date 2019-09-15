@@ -9,9 +9,8 @@
         "url": "https://github.com/unity-game-framework"
     },
     "dependencies": {
-        "com.ugf.module.serialize": "1.0.0-preview.2",
+        "com.ugf.module.serialize": "0.0.0-preview",
         "com.ugf.utf8json": "2.0.0-preview.2",
-        "com.ugf.logs": "1.0.0",
         "com.unity.mathematics": "1.1.0"
     }
 }

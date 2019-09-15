@@ -1,9 +1,6 @@
 {
   "dependencies": {
-    "com.ugf.customsettings": "file:../../ugf-customsettings/Packages/UGF.CustomSettings",
-    "com.ugf.description": "file:../../ugf-description/Packages/UGF.Description",
     "com.ugf.factory": "file:../../ugf-factory/Packages/UGF.Factory",
-    "com.ugf.logs": "file:../../ugf-logs/Packages/UGF.Logs",
     "com.unity.ide.rider": "1.1.0",
     "com.unity.test-framework": "1.1.1",
     "com.unity.modules.ai": "1.0.0",

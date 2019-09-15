@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
-        "com.ugf.addressable": "0.0.0-preview",
-        "com.ugf.logs": "1.0.0"
+        "com.ugf.addressable": "0.0.0-preview"
     }
 }
