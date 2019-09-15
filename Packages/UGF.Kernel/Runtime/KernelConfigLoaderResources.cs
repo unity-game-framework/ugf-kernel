@@ -11,6 +11,8 @@ namespace UGF.Kernel.Runtime
 
         public IEnumerator LoadAsync(string configId)
         {
+            if (configId == null) throw new ArgumentNullException(nameof(configId));
+
             ResourceRequest operation = Resources.LoadAsync<DescriptionAsset>(configId);
 
             yield return operation;
