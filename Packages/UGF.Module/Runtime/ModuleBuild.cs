@@ -1,19 +1,17 @@
 using System;
+using UGF.Description.Runtime;
 
 namespace UGF.Module.Runtime
 {
-    public struct ModuleBuild
+    public class ModuleBuild : IModuleBuild
     {
         public IModuleBuilder Builder { get; }
-        public IModuleDescription Description { get { return m_description ?? throw new InvalidOperationException("A description not specified."); } }
-        public bool HasDescription { get { return m_description != null; } }
+        public IModuleBuildArguments<IDescription> Arguments { get; }
 
-        private readonly IModuleDescription m_description;
-
-        public ModuleBuild(IModuleBuilder builder, IModuleDescription description = null)
+        public ModuleBuild(IModuleBuilder builder, IModuleBuildArguments<IDescription> arguments)
         {
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
-            m_description = description;
+            Arguments = arguments ?? throw new ArgumentNullException(nameof(arguments));
         }
     }
 }

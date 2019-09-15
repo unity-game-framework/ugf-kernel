@@ -15,6 +15,9 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
         public IJsonFormatterResolver Resolver { get { return m_resolver; } }
         public IDictionary<Type, IJsonFormatter> Formatters { get { return m_resolver.Formatters; } }
         public IList<IJsonFormatterResolver> Resolvers { get { return m_resolver.Resolvers; } }
+        public string SerializeBytesName { get; } = SerializerUtf8JsonUtility.SerializerBytesName;
+        public string SerializerTextCompactName { get; } = SerializerUtf8JsonUtility.SerializerTextCompactName;
+        public string SerializerTextReadableName { get; } = SerializerUtf8JsonUtility.SerializerTextReadableName;
 
         private readonly Utf8JsonFormatterResolver m_resolver = Utf8JsonUtility.CreateDefaultResolver();
 
@@ -29,34 +32,24 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
         {
             base.OnInitialize();
 
-            if (Application.TryGetModule(out ISerializeModule module))
-            {
-                string bytesName = SerializerUtf8JsonUtility.SerializerBytesName;
-                string compactName = SerializerUtf8JsonUtility.SerializerTextCompactName;
-                string readableName = SerializerUtf8JsonUtility.SerializerTextReadableName;
+            var serializeModule = Application.GetModule<ISerializeModule>();
 
-                module.Provider.Add(bytesName, new SerializerUtf8JsonBytes(Resolver));
-                module.Provider.Add(compactName, new SerializerUtf8Json(Resolver, false));
-                module.Provider.Add(readableName, new SerializerUtf8Json(Resolver, true));
+            serializeModule.Provider.Add(SerializeBytesName, new SerializerUtf8JsonBytes(Resolver));
+            serializeModule.Provider.Add(SerializerTextCompactName, new SerializerUtf8Json(Resolver, false));
+            serializeModule.Provider.Add(SerializerTextReadableName, new SerializerUtf8Json(Resolver, true));
 
-                Log.Debug($"SerializeUtf8JsonModule: register '3' serializers (DataTypesCount:'{module.Provider.DataTypesCount}'): '{bytesName}', '{compactName}', '{readableName}'.");
-            }
+            Log.Debug($"SerializeUtf8JsonModule: register '3' serializers (DataTypesCount:'{serializeModule.Provider.DataTypesCount}'): '{SerializeBytesName}', '{SerializerTextCompactName}', '{SerializerTextReadableName}'.");
         }
 
         protected override void OnUninitialize()
         {
             base.OnUninitialize();
 
-            if (Application.TryGetModule(out ISerializeModule module))
-            {
-                string bytesName = SerializerUtf8JsonUtility.SerializerBytesName;
-                string compactName = SerializerUtf8JsonUtility.SerializerTextCompactName;
-                string readableName = SerializerUtf8JsonUtility.SerializerTextReadableName;
+            var serializeModule = Application.GetModule<ISerializeModule>();
 
-                module.Provider.Remove<byte[]>(bytesName);
-                module.Provider.Remove<string>(compactName);
-                module.Provider.Remove<string>(readableName);
-            }
+            serializeModule.Provider.Remove<byte[]>(SerializeBytesName);
+            serializeModule.Provider.Remove<string>(SerializerTextCompactName);
+            serializeModule.Provider.Remove<string>(SerializerTextReadableName);
         }
     }
 }

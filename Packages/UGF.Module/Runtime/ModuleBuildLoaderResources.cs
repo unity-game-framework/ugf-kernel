@@ -8,11 +8,11 @@ namespace UGF.Module.Runtime
 {
     public class ModuleBuildLoaderResources : IModuleBuildLoader
     {
-        public IEnumerator LoadAsync(ICollection<ModuleBuild> builds, IReadOnlyList<ModuleBuildInfo> infos)
+        public IEnumerator LoadAsync(ICollection<IModuleBuild> builds, IReadOnlyList<IModuleBuildInfo> infos)
         {
             for (int i = 0; i < infos.Count; i++)
             {
-                ModuleBuildInfo info = infos[i];
+                IModuleBuildInfo info = infos[i];
 
                 ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(info.BuilderId);
 
@@ -32,30 +32,32 @@ namespace UGF.Module.Runtime
                     throw new ArgumentNullException(nameof(builderAsset.GetBuilder), $"Failed to get builder from the specified builder asset: '{builderAsset}'.");
                 }
 
-                IModuleDescription description = null;
+                var arguments = new ModuleBuildArguments<IDescription>();
 
-                if (info.HasDescription)
+                foreach (string id in info.Arguments)
                 {
-                    operation = Resources.LoadAsync<DescriptionAsset>(info.DescriptionId);
+                    operation = Resources.LoadAsync<DescriptionAsset>(id);
 
                     yield return operation;
 
-                    var descriptionAsset = operation.asset as DescriptionAsset;
+                    var asset = operation.asset as DescriptionAsset;
 
-                    if (descriptionAsset == null)
+                    if (asset == null)
                     {
-                        throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified description: '{info.DescriptionId}'.");
+                        throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified description: '{id}'.");
                     }
 
-                    description = descriptionAsset.GetDescription<IModuleDescription>();
+                    IDescription description = asset.GetDescription();
 
                     if (description == null)
                     {
-                        throw new ArgumentNullException(nameof(descriptionAsset.GetDescription), $"Failed to get description from the specified description asset: '{descriptionAsset}'.");
+                        throw new ArgumentNullException(nameof(description), $"Failed to get description from the specified description asset: '{asset}'.");
                     }
+
+                    arguments.Values.Add(description);
                 }
 
-                var build = new ModuleBuild(builder, description);
+                var build = new ModuleBuild(builder, arguments);
 
                 builds.Add(build);
             }

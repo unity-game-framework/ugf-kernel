@@ -8,7 +8,7 @@ namespace UGF.Module.Serialize.Runtime
     {
         public override IModuleBuilder GetBuilder()
         {
-            return new ModuleBuilderFunc<ISerializeModule>(application => new SerializeModule());
+            return new ModuleBuilderFunc<ISerializeModule>((application, arguments) => new SerializeModule());
         }
     }
 }

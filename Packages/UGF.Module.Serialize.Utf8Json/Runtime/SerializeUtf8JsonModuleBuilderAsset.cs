@@ -9,7 +9,7 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
     {
         public override IModuleBuilder GetBuilder()
         {
-            return new ModuleBuilderFunc<IApplicationModule>(application => new SerializeUtf8JsonModule(application));
+            return new ModuleBuilderFunc<IApplicationModule>((application, arguments) => new SerializeUtf8JsonModule(application));
         }
     }
 }

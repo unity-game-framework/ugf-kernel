@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
+using UGF.Description.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
@@ -16,15 +17,9 @@ namespace UGF.Kernel.Runtime
         public string ConfigId { get { return m_configId; } set { m_configId = value; } }
         public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
         public bool HasConfig { get { return m_config != null; } }
-        public IReadOnlyList<ModuleBuild> Builds { get; }
 
-        private readonly List<ModuleBuild> m_builds = new List<ModuleBuild>();
         private IKernelConfig m_config;
-
-        public KernelLauncher()
-        {
-            Builds = new ReadOnlyCollection<ModuleBuild>(m_builds);
-        }
+        private IReadOnlyList<IModuleBuild> m_builds;
 
         protected override IEnumerator PreloadResourcesAsync()
         {
@@ -42,11 +37,13 @@ namespace UGF.Kernel.Runtime
 
             Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}'.");
 
-            IReadOnlyList<ModuleBuildInfo> modules = GetModuleBuildInfos(m_config);
+            var builds = new List<IModuleBuild>();
 
-            yield return buildLoader.LoadAsync(m_builds, modules);
+            yield return buildLoader.LoadAsync(builds, m_config.Modules);
 
-            Log.Debug($"Module builds:'{m_builds.Count}'.");
+            m_builds = new ReadOnlyCollection<IModuleBuild>(builds);
+
+            Log.Debug($"Module builds:'{builds.Count}'.");
         }
 
         protected override IApplication CreateApplication()
@@ -55,21 +52,24 @@ namespace UGF.Kernel.Runtime
 
             Log.Debug($"Create application:'{application}'.");
 
-            CreateModules(application, Builds);
+            CreateModules(application, m_builds);
+
+            m_builds = null;
 
             return application;
         }
 
-        protected virtual void CreateModules(IApplication application, IReadOnlyList<ModuleBuild> builds)
+        protected virtual void CreateModules(IApplication application, IReadOnlyList<IModuleBuild> builds)
         {
             Log.Debug(nameof(CreateModules));
 
             for (int i = 0; i < builds.Count; i++)
             {
-                ModuleBuild build = builds[i];
+                IModuleBuild build = builds[i];
                 IModuleBuilder builder = build.Builder;
+                IModuleBuildArguments<IDescription> arguments = build.Arguments;
                 Type registerType = builder.RegisterType;
-                IApplicationModule module = build.HasDescription ? builder.Build(application, build.Description) : builder.Build(application);
+                IApplicationModule module = builder.Build(application, arguments);
 
                 application.AddModule(registerType, module);
 
@@ -82,7 +82,7 @@ namespace UGF.Kernel.Runtime
             base.OnStopped();
 
             m_config = null;
-            m_builds.Clear();
+            m_builds = null;
         }
 
         protected virtual IKernelConfigLoader GetConfigLoader()
@@ -93,21 +93,6 @@ namespace UGF.Kernel.Runtime
         protected virtual IModuleBuildLoader GetModuleBuildLoader()
         {
             return new ModuleBuildLoaderResources();
-        }
-
-        protected virtual IReadOnlyList<ModuleBuildInfo> GetModuleBuildInfos(IKernelConfig config)
-        {
-            var infos = new List<ModuleBuildInfo>();
-
-            for (int i = 0; i < config.Modules.Count; i++)
-            {
-                IKernelConfigModuleInfo module = config.Modules[i];
-                var info = new ModuleBuildInfo(module.BuilderId, module.DescriptionId);
-
-                infos.Add(info);
-            }
-
-            return infos;
         }
     }
 }

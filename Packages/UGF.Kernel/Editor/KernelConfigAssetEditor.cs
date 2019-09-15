@@ -1,5 +1,4 @@
 using UGF.Description.Runtime;
-using UGF.Kernel.Runtime;
 using UGF.Module.Runtime;
 using UnityEditor;
 using UnityEditorInternal;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 namespace UGF.Kernel.Editor
 {
-    [CustomEditor(typeof(KernelConfigAsset))]
+    // [CustomEditor(typeof(KernelConfigAsset))]
     internal class KernelConfigAssetEditor : UnityEditor.Editor
     {
         private SerializedProperty m_propertyName;

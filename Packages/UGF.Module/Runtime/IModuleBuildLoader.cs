@@ -5,6 +5,6 @@ namespace UGF.Module.Runtime
 {
     public interface IModuleBuildLoader
     {
-        IEnumerator LoadAsync(ICollection<ModuleBuild> builds, IReadOnlyList<ModuleBuildInfo> infos);
+        IEnumerator LoadAsync(ICollection<IModuleBuild> builds, IReadOnlyList<IModuleBuildInfo> infos);
     }
 }

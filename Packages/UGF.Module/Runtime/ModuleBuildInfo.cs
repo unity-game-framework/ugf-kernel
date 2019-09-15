@@ -1,21 +1,14 @@
-using System;
-
 namespace UGF.Module.Runtime
 {
-    public class ModuleBuildInfo
+    public class ModuleBuildInfo : IModuleBuildInfo
     {
         public string BuilderId { get; }
-        public string DescriptionId { get { return HasDescription ? m_descriptionId : throw new InvalidOperationException("A description id not specified."); } }
-        public bool HasDescription { get { return !string.IsNullOrEmpty(m_descriptionId); } }
+        public IModuleBuildArguments<string> Arguments { get; }
 
-        private readonly string m_descriptionId;
-
-        public ModuleBuildInfo(string builderId, string descriptionId = "")
+        public ModuleBuildInfo(string builderId, IModuleBuildArguments<string> arguments)
         {
-            if (string.IsNullOrEmpty(builderId)) throw new ArgumentNullException(nameof(builderId));
-
             BuilderId = builderId;
-            m_descriptionId = descriptionId;
+            Arguments = arguments;
         }
     }
 }
