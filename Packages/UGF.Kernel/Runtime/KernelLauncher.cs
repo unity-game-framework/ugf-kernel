@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
@@ -18,18 +16,15 @@ namespace UGF.Kernel.Runtime
         public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
         public bool HasConfig { get { return m_config != null; } }
 
+        private readonly List<IModuleBuild> m_builds = new List<IModuleBuild>();
         private IKernelConfig m_config;
-        private IReadOnlyList<IModuleBuild> m_builds;
 
         protected override IEnumerator PreloadResourcesAsync()
         {
-            Log.Debug(nameof(PreloadResourcesAsync));
-
             IKernelConfigLoader configLoader = GetConfigLoader();
             IModuleBuildLoader buildLoader = GetModuleBuildLoader();
 
-            Log.Debug($"KernelConfigLoader:'{configLoader}'.");
-            Log.Debug($"ModuleBuildLoader:'{buildLoader}'.");
+            Log.Debug($"KernelConfigLoader:'{configLoader}', ModuleBuildLoader:'{buildLoader}'.");
 
             yield return configLoader.LoadAsync(m_configId);
 
@@ -37,44 +32,17 @@ namespace UGF.Kernel.Runtime
 
             Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}'.");
 
-            var builds = new List<IModuleBuild>();
-
-            yield return buildLoader.LoadAsync(builds, m_config.Modules);
-
-            m_builds = new ReadOnlyCollection<IModuleBuild>(builds);
-
-            Log.Debug($"Module builds:'{builds.Count}'.");
+            yield return buildLoader.LoadAsync(m_builds, m_config.Modules);
         }
 
         protected override IApplication CreateApplication()
         {
-            IApplication application = new KernelApplication(ProvideStaticInstance);
+            var builds = new List<IModuleBuild>(m_builds);
+            IApplication application = new KernelApplication(builds, ProvideStaticInstance);
 
-            Log.Debug($"Create application:'{application}'.");
-
-            CreateModules(application, m_builds);
-
-            m_builds = null;
+            Log.Debug($"Application: '{application}'.");
 
             return application;
-        }
-
-        protected virtual void CreateModules(IApplication application, IReadOnlyList<IModuleBuild> builds)
-        {
-            Log.Debug(nameof(CreateModules));
-
-            for (int i = 0; i < builds.Count; i++)
-            {
-                IModuleBuild build = builds[i];
-                IModuleBuilder builder = build.Builder;
-                IModuleBuildArguments<IDescription> arguments = build.Arguments;
-                Type registerType = builder.RegisterType;
-                IApplicationModule module = builder.Build(application, arguments);
-
-                application.AddModule(registerType, module);
-
-                Log.Debug($"Build Module: registerType:'{registerType}'.");
-            }
         }
 
         protected override void OnStopped()
@@ -82,7 +50,7 @@ namespace UGF.Kernel.Runtime
             base.OnStopped();
 
             m_config = null;
-            m_builds = null;
+            m_builds.Clear();
         }
 
         protected virtual IKernelConfigLoader GetConfigLoader()
