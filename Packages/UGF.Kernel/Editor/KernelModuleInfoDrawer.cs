@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UGF.Kernel.Editor
 {
-    [CustomPropertyDrawer(typeof(KernelModuleInfo))]
+    [CustomPropertyDrawer(typeof(KernelModuleInfo), true)]
     internal class KernelModuleInfoDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -18,21 +18,17 @@ namespace UGF.Kernel.Editor
             float heightBuilderId = EditorGUI.GetPropertyHeight(propertyBuilderId);
             float heightArguments = EditorGUI.GetPropertyHeight(propertyArguments);
 
-            var rectHeader = new Rect(position.x, position.y, position.width, heightHeader);
+            var rectHeader = new Rect(position.x, position.y, 0F, heightHeader);
             var rectBuilderId = new Rect(position.x, rectHeader.yMax + spacing, position.width, heightBuilderId);
             var rectArguments = new Rect(position.x, rectBuilderId.yMax + spacing, position.width, heightArguments);
 
-            EditorGUI.PropertyField(rectHeader, property);
+            property.isExpanded = EditorGUI.Foldout(rectHeader, property.isExpanded, property.displayName);
 
             if (property.isExpanded)
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
-                    var builderAsset = Resources.Load<ModuleBuilderAsset>(propertyBuilderId.stringValue);
-
-                    builderAsset = (ModuleBuilderAsset)EditorGUI.ObjectField(rectBuilderId, "Builder", builderAsset, typeof(ModuleBuilderAsset), false);
-
-                    propertyBuilderId.stringValue = builderAsset != null ? builderAsset.name : string.Empty;
+                    KernelEditorGUIUtility.ResourcesObjectField(rectBuilderId, "Builder", propertyBuilderId, typeof(ModuleBuilderAsset));
 
                     EditorGUI.PropertyField(rectArguments, propertyArguments, true);
                 }

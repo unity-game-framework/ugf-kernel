@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UGF.Kernel.Editor
 {
-    [CustomPropertyDrawer(typeof(KernelModuleInfoArguments))]
+    [CustomPropertyDrawer(typeof(KernelModuleInfoArguments), true)]
     internal class KernelModuleInfoArgumentsDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -59,9 +59,7 @@ namespace UGF.Kernel.Editor
             var builderAsset = Resources.Load<DescriptionAsset>(propertyElement.stringValue);
             string label = builderAsset != null ? builderAsset.name : $"Element {index}";
 
-            builderAsset = (DescriptionAsset)EditorGUI.ObjectField(position, label, builderAsset, typeof(DescriptionAsset), false);
-
-            propertyElement.stringValue = builderAsset != null ? builderAsset.name : string.Empty;
+            KernelEditorGUIUtility.ResourcesObjectField(position, label, propertyElement, typeof(DescriptionAsset));
         }
     }
 }
