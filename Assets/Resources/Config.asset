@@ -26,6 +26,9 @@ MonoBehaviour:
       m_arguments:
         m_values:
         - SerializeUtf8JsonModuleDescription
+    - m_builderId: UpdateModuleBuilder
+      m_arguments:
+        m_values: []
     - m_builderId: AddressableModuleBuilder
       m_arguments:
         m_values: []
