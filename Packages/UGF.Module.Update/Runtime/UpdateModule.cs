@@ -14,10 +14,10 @@ namespace UGF.Module.Update.Runtime
         public IUpdateCollection<IFixedUpdateHandler> FixedUpdate { get { return m_fixedUpdate; } }
         public IUpdateCollection<IPostLateUpdateHandler> PostLateUpdate { get { return m_postLateUpdate; } }
 
-        private readonly UpdateCollectionFunction<IPreUpdateHandler> m_preUpdate = new UpdateCollectionFunction<IPreUpdateHandler>(handler => handler.PreUpdate());
-        private readonly UpdateCollection<IUpdateHandler> m_update = new UpdateCollection<IUpdateHandler>();
-        private readonly UpdateCollectionFunction<IFixedUpdateHandler> m_fixedUpdate = new UpdateCollectionFunction<IFixedUpdateHandler>(handler => handler.OnFixedUpdate());
-        private readonly UpdateCollectionFunction<IPostLateUpdateHandler> m_postLateUpdate = new UpdateCollectionFunction<IPostLateUpdateHandler>(handler => handler.OnPostLateUpdate());
+        private readonly UpdateSetHandler<IPreUpdateHandler> m_preUpdate = new UpdateSetHandler<IPreUpdateHandler>(handler => handler.PreUpdate());
+        private readonly UpdateSet<IUpdateHandler> m_update = new UpdateSet<IUpdateHandler>();
+        private readonly UpdateSetHandler<IFixedUpdateHandler> m_fixedUpdate = new UpdateSetHandler<IFixedUpdateHandler>(handler => handler.OnFixedUpdate());
+        private readonly UpdateSetHandler<IPostLateUpdateHandler> m_postLateUpdate = new UpdateSetHandler<IPostLateUpdateHandler>(handler => handler.OnPostLateUpdate());
 
         protected override void OnInitialize()
         {
