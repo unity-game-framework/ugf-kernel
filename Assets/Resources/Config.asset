@@ -29,6 +29,9 @@ MonoBehaviour:
     - m_builderId: UpdateModuleBuilder
       m_arguments:
         m_values: []
+    - m_builderId: CoroutineModuleBuilder
+      m_arguments:
+        m_values: []
     - m_builderId: AddressableModuleBuilder
       m_arguments:
         m_values: []
