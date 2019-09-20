@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Coroutine = UGF.Coroutines.Runtime.Coroutine;
 
-namespace UGF.Module.Scenes.Runtime
+namespace UGF.Module.Scenes.Runtime.Coroutines
 {
     public class SceneUnloadCoroutine : Coroutine
     {

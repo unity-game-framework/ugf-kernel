@@ -2,6 +2,7 @@ using System;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Module.Coroutines.Runtime;
+using UGF.Module.Scenes.Runtime.Coroutines;
 using UnityEngine.SceneManagement;
 
 namespace UGF.Module.Scenes.Runtime
