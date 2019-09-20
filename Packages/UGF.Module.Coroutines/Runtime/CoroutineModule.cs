@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime.Unity;
+using UGF.Initialize.Runtime;
 
 namespace UGF.Module.Coroutines.Runtime
 {
@@ -27,8 +28,7 @@ namespace UGF.Module.Coroutines.Runtime
         public void Start(IEnumerator routine)
         {
             if (routine == null) throw new ArgumentNullException(nameof(routine));
-
-            ValidateState(true);
+            if (m_executer == null) throw new InitializeStateException("Module not initialized.");
 
             m_executer.Start(routine);
         }
@@ -36,8 +36,7 @@ namespace UGF.Module.Coroutines.Runtime
         public void Stop(IEnumerator routine)
         {
             if (routine == null) throw new ArgumentNullException(nameof(routine));
-
-            ValidateState(true);
+            if (m_executer == null) throw new InitializeStateException("Module not initialized.");
 
             m_executer.Stop(routine);
         }

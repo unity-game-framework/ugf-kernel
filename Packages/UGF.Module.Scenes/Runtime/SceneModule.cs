@@ -13,7 +13,7 @@ namespace UGF.Module.Scenes.Runtime
 
         public SceneModule(ICoroutineModule coroutineModule)
         {
-            CoroutineModule = coroutineModule;
+            CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
         }
 
         public ICoroutine<Scene> LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
@@ -29,7 +29,7 @@ namespace UGF.Module.Scenes.Runtime
 
         public ICoroutine UnloadSceneAsync(Scene scene, SceneUnloadParameters parameters)
         {
-            if (!scene.IsValid()) throw new ArgumentException("The specified scene not valid.", nameof(scene));
+            if (!scene.IsValid()) throw new ArgumentException("The specified scene is invalid.", nameof(scene));
 
             var coroutine = new SceneUnloadCoroutine(scene, parameters);
 

@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f34851acb4a284cbd408bf8ad624f2, type: 3}
-  m_Name: AddressableModuleBuilder
+  m_Script: {fileID: 11500000, guid: 2874303372d3705429db4cf913a243c1, type: 3}
+  m_Name: AddressableAssetsModuleBuilder
   m_EditorClassIdentifier: 

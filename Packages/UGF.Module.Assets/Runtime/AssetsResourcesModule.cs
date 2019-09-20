@@ -14,7 +14,7 @@ namespace UGF.Module.Assets.Runtime
 
         public AssetsResourcesModule(ICoroutineModule coroutineModule)
         {
-            CoroutineModule = coroutineModule;
+            CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
         }
 
         public ICoroutine<T> LoadAsync<T>(string key)

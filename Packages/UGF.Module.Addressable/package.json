@@ -10,6 +10,8 @@
     },
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
+        "com.ugf.module.assets": "0.0.0-preview",
+        "com.ugf.module.scenes": "0.0.0-preview",
         "com.ugf.addressable": "0.0.0-preview"
     }
 }
