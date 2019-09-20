@@ -2,56 +2,19 @@ using System;
 using System.Collections.Generic;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
-using UGF.Coroutines.Runtime.Unity;
 using UGF.Module.Assets.Runtime.Coroutines;
+using UGF.Module.Coroutines.Runtime;
 using UnityEngine;
 
 namespace UGF.Module.Assets.Runtime
 {
     public class AssetsResourcesModule : ApplicationModuleBase, IAssetsModule
     {
-        public ICoroutineExecuter CoroutineExecuter
+        public ICoroutineModule CoroutineModule { get; }
+
+        public AssetsResourcesModule(ICoroutineModule coroutineModule)
         {
-            get
-            {
-                if (m_coroutineExecuter != null)
-                {
-                    return m_coroutineExecuter;
-                }
-
-                ValidateState(true);
-
-                return m_executer;
-            }
-        }
-
-        private readonly ICoroutineExecuter m_coroutineExecuter;
-        private CoroutineExecuterUnity m_executer;
-
-        public AssetsResourcesModule(ICoroutineExecuter coroutineExecuter = null)
-        {
-            m_coroutineExecuter = coroutineExecuter;
-        }
-
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-
-            if (m_coroutineExecuter == null)
-            {
-                m_executer = new CoroutineExecuterUnity();
-            }
-        }
-
-        protected override void OnUninitialize()
-        {
-            base.OnUninitialize();
-
-            if (m_executer != null)
-            {
-                m_executer.Dispose();
-                m_executer = null;
-            }
+            CoroutineModule = coroutineModule;
         }
 
         public ICoroutine<T> LoadAsync<T>(string key)
@@ -61,7 +24,7 @@ namespace UGF.Module.Assets.Runtime
             ResourceRequest request = Resources.LoadAsync(key, typeof(T));
             var coroutine = new ResourceRequestCoroutine<T>(request);
 
-            CoroutineExecuter.Start(coroutine);
+            CoroutineModule.Start(coroutine);
 
             return coroutine;
         }
@@ -74,7 +37,7 @@ namespace UGF.Module.Assets.Runtime
             ResourceRequest request = Resources.LoadAsync(key, assetType);
             var coroutine = new ResourceRequestCoroutine<object>(request);
 
-            CoroutineExecuter.Start(coroutine);
+            CoroutineModule.Start(coroutine);
 
             return null;
         }
