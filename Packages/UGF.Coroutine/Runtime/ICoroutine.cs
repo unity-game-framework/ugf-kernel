@@ -7,8 +7,5 @@ namespace UGF.Coroutine.Runtime
         bool IsCompleted { get; }
 
         event CoroutineHandler Completed;
-
-        T GetResult<T>();
-        object GetResult();
     }
 }
