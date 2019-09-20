@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace UGF.Coroutine.Runtime
+namespace UGF.Coroutines.Runtime
 {
     public abstract class Coroutine : ICoroutine
     {

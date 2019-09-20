@@ -1,7 +1,7 @@
 using System.Collections;
 using UGF.Application.Runtime;
 
-namespace UGF.Module.Coroutine.Runtime
+namespace UGF.Module.Coroutines.Runtime
 {
     public interface ICoroutineModule : IApplicationModule
     {

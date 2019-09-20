@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UGF.Coroutine.Runtime.Unity
+namespace UGF.Coroutines.Runtime.Unity
 {
     public class CoroutineExecuterUnityMonoBehaviour : MonoBehaviour
     {

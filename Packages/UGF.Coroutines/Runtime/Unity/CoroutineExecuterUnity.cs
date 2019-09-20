@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UGF.Coroutine.Runtime.Unity
+namespace UGF.Coroutines.Runtime.Unity
 {
     public class CoroutineExecuterUnity : ICoroutineExecuter, IDisposable
     {

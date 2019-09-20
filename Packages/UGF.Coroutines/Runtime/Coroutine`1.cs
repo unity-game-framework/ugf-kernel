@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UGF.Coroutine.Runtime
+namespace UGF.Coroutines.Runtime
 {
     public abstract class Coroutine<TResult> : ICoroutine<TResult>
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using UGF.Application.Runtime;
-using UGF.Coroutine.Runtime.Unity;
+using UGF.Coroutines.Runtime.Unity;
 
-namespace UGF.Module.Coroutine.Runtime
+namespace UGF.Module.Coroutines.Runtime
 {
     public class CoroutineModule : ApplicationModuleBase, ICoroutineModule
     {

@@ -3,7 +3,7 @@ using UGF.Description.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
 
-namespace UGF.Module.Coroutine.Runtime
+namespace UGF.Module.Coroutines.Runtime
 {
     [CreateAssetMenu(menuName = "UGF/Module.Coroutine/CoroutineModuleBuilderAsset", order = 2000)]
     public class CoroutineModuleBuilderAsset : ModuleBuilderAsset<ICoroutineModule>

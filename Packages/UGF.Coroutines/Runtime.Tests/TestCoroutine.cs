@@ -1,7 +1,7 @@
 using System.Collections;
 using NUnit.Framework;
 
-namespace UGF.Coroutine.Runtime.Tests
+namespace UGF.Coroutines.Runtime.Tests
 {
     public class TestCoroutine
     {

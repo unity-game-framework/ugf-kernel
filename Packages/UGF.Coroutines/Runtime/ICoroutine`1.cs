@@ -1,4 +1,4 @@
-namespace UGF.Coroutine.Runtime
+namespace UGF.Coroutines.Runtime
 {
     public interface ICoroutine<out TResult> : ICoroutine
     {

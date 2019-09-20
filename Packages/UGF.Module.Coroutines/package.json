@@ -1,6 +1,6 @@
 {
-    "name": "com.ugf.module.coroutine",
-    "displayName": "UGF.Module.Coroutine",
+    "name": "com.ugf.module.coroutines",
+    "displayName": "UGF.Module.Coroutines",
     "version": "0.0.0-preview",
     "unity": "2019.2",
     "description": "No description.",
@@ -10,6 +10,6 @@
     },
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
-        "com.ugf.coroutine": "0.0.0-preview"
+        "com.ugf.coroutines": "0.0.0-preview"
     }
 }
