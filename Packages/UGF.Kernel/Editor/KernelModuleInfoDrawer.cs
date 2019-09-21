@@ -1,3 +1,4 @@
+using System.IO;
 using UGF.Kernel.Runtime;
 using UGF.Module.Runtime;
 using UnityEditor;
@@ -22,7 +23,10 @@ namespace UGF.Kernel.Editor
             var rectBuilderId = new Rect(position.x, rectHeader.yMax + spacing, position.width, heightBuilderId);
             var rectArguments = new Rect(position.x, rectBuilderId.yMax + spacing, position.width, heightArguments);
 
-            property.isExpanded = EditorGUI.Foldout(rectHeader, property.isExpanded, property.displayName);
+            string assetName = Path.GetFileNameWithoutExtension(propertyBuilderId.stringValue);
+            string headerLabel = !string.IsNullOrEmpty(assetName) ? assetName : property.displayName;
+
+            property.isExpanded = EditorGUI.Foldout(rectHeader, property.isExpanded, headerLabel);
 
             if (property.isExpanded)
             {
