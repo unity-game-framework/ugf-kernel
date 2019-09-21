@@ -7,10 +7,10 @@ namespace UGF.Module.Assets.Runtime
 {
     public interface IAssetsModule : IApplicationModule
     {
-        ICoroutine<T> LoadAsync<T>(string key);
-        ICoroutine<object> LoadAsync(string key, Type assetType);
-        ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string key);
-        ICoroutine<IReadOnlyList<object>> LoadAllAsync(string key, Type assetType);
+        ICoroutine<T> LoadAsync<T>(string assetName);
+        ICoroutine<object> LoadAsync(string assetName, Type assetType);
+        ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string assetName);
+        ICoroutine<IReadOnlyList<object>> LoadAllAsync(string assetName, Type assetType);
         void Release<T>(T asset);
         void Release(object asset);
     }

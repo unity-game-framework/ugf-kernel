@@ -17,11 +17,11 @@ namespace UGF.Module.Assets.Runtime
             CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
         }
 
-        public ICoroutine<T> LoadAsync<T>(string key)
+        public ICoroutine<T> LoadAsync<T>(string assetName)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
 
-            ResourceRequest request = Resources.LoadAsync(key, typeof(T));
+            ResourceRequest request = Resources.LoadAsync(assetName, typeof(T));
             var coroutine = new ResourceRequestCoroutine<T>(request);
 
             CoroutineModule.Start(coroutine);
@@ -29,12 +29,12 @@ namespace UGF.Module.Assets.Runtime
             return coroutine;
         }
 
-        public ICoroutine<object> LoadAsync(string key, Type assetType)
+        public ICoroutine<object> LoadAsync(string assetName, Type assetType)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
             if (assetType == null) throw new ArgumentNullException(nameof(assetType));
 
-            ResourceRequest request = Resources.LoadAsync(key, assetType);
+            ResourceRequest request = Resources.LoadAsync(assetName, assetType);
             var coroutine = new ResourceRequestCoroutine<object>(request);
 
             CoroutineModule.Start(coroutine);
@@ -42,12 +42,12 @@ namespace UGF.Module.Assets.Runtime
             return null;
         }
 
-        public ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string key)
+        public ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string assetName)
         {
             throw new NotSupportedException("Async loading collection of assets from the Resources not supported.");
         }
 
-        public ICoroutine<IReadOnlyList<object>> LoadAllAsync(string key, Type assetType)
+        public ICoroutine<IReadOnlyList<object>> LoadAllAsync(string assetName, Type assetType)
         {
             throw new NotSupportedException("Async loading collection of assets from the Resources not supported.");
         }
