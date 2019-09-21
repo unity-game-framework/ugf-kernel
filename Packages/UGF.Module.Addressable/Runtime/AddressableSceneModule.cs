@@ -35,7 +35,7 @@ namespace UGF.Module.Addressable.Runtime
             Log.Debug($"AddressableSceneModule initialized: locators:'{Addressables.ResourceLocators.Count}', runtimePath:'{Addressables.RuntimePath}'.");
         }
 
-        public ICoroutine<Scene> LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
+        public ISceneLoadCoroutine LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
         {
             if (sceneName == null) throw new ArgumentNullException(nameof(sceneName));
 

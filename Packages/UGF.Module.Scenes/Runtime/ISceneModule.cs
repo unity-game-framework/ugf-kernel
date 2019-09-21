@@ -6,7 +6,7 @@ namespace UGF.Module.Scenes.Runtime
 {
     public interface ISceneModule : IApplicationModule
     {
-        ICoroutine<Scene> LoadSceneAsync(string sceneName, SceneLoadParameters parameters);
+        ISceneLoadCoroutine LoadSceneAsync(string sceneName, SceneLoadParameters parameters);
         ICoroutine UnloadSceneAsync(Scene scene, SceneUnloadParameters parameters);
     }
 }

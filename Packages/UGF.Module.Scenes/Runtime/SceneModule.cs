@@ -16,7 +16,7 @@ namespace UGF.Module.Scenes.Runtime
             CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
         }
 
-        public ICoroutine<Scene> LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
+        public ISceneLoadCoroutine LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
         {
             if (sceneName == null) throw new ArgumentNullException(nameof(sceneName));
 
