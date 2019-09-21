@@ -38,3 +38,7 @@ MonoBehaviour:
     - m_builderId: SceneModuleBuilder
       m_arguments:
         m_values: []
+    - m_builderId: DescriptionModuleBuilder
+      m_arguments:
+        m_values:
+        - DescriptionModuleDescription
