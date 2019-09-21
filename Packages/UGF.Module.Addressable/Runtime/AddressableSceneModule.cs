@@ -51,7 +51,7 @@ namespace UGF.Module.Addressable.Runtime
         {
             if (!scene.IsValid()) throw new ArgumentException("The specified scene is invalid.", nameof(scene));
 
-            throw new NotImplementedException();
+            throw new NotSupportedException("Unloading scene without 'SceneInstance' not supported in Addressables.");
         }
     }
 }
