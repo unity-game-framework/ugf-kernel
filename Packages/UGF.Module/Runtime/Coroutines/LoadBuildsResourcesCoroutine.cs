@@ -1,21 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using UGF.Coroutines.Runtime;
 using UGF.Description.Runtime;
 using UnityEngine;
 
-namespace UGF.Module.Runtime
+namespace UGF.Module.Runtime.Coroutines
 {
-    public class ModuleBuildLoaderResources : IModuleBuildLoader
+    public class LoadBuildsResourcesCoroutine : Coroutine<IReadOnlyList<IModuleBuild>>
     {
-        public IEnumerator LoadAsync(ICollection<IModuleBuild> builds, IReadOnlyList<IModuleBuildInfo> infos)
-        {
-            if (builds == null) throw new ArgumentNullException(nameof(builds));
-            if (infos == null) throw new ArgumentNullException(nameof(infos));
+        public IReadOnlyList<IModuleBuildInfo> Infos { get; }
 
-            for (int i = 0; i < infos.Count; i++)
+        public LoadBuildsResourcesCoroutine(IReadOnlyList<IModuleBuildInfo> infos)
+        {
+            Infos = infos ?? throw new ArgumentNullException(nameof(infos));
+        }
+
+        protected override IEnumerator Routine()
+        {
+            var builds = new List<IModuleBuild>();
+
+            for (int i = 0; i < Infos.Count; i++)
             {
-                IModuleBuildInfo info = infos[i];
+                IModuleBuildInfo info = Infos[i];
 
                 ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(info.BuilderId);
 
@@ -64,6 +72,8 @@ namespace UGF.Module.Runtime
 
                 builds.Add(build);
             }
+
+            Result = new ReadOnlyCollection<IModuleBuild>(builds);
         }
     }
 }

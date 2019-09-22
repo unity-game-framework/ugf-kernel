@@ -11,7 +11,7 @@ namespace UGF.Module.Scenes.Runtime
 
         public static SceneLoadParameters Default { get; } = new SceneLoadParameters(LoadSceneMode.Single);
 
-        public SceneLoadParameters(LoadSceneMode mode, bool activate = true, LocalPhysicsMode physicsMode = LocalPhysicsMode.None, bool unloadUnused = false)
+        public SceneLoadParameters(LoadSceneMode mode, bool activate = true, LocalPhysicsMode physicsMode = LocalPhysicsMode.None, bool unloadUnused = false) : this()
         {
             Mode = mode;
             Activate = activate;
