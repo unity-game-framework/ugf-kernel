@@ -10,6 +10,6 @@
     },
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
-        "com.ugf.update": "1.0.0-preview"
+        "com.ugf.update": "2.0.0-preview"
     }
 }
