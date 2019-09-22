@@ -4,7 +4,7 @@ using UGF.Description.Runtime;
 
 namespace UGF.Module.Runtime
 {
-    public abstract class ModuleBuilderAsset<TRegisterType> : ModuleBuilderAsset where TRegisterType : class, IApplicationModule
+    public abstract class ModuleBuilderAsset<TRegisterType> : ModuleBuilderAsset where TRegisterType : IApplicationModule
     {
         public override Type RegisterType { get; } = typeof(TRegisterType);
 

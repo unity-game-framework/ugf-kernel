@@ -1,0 +1,16 @@
+{
+    "name": "UGF.Module.Editor",
+    "references": [
+        "GUID:5f36d1c39ad974043addfca692c8cded"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
