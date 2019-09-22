@@ -22,7 +22,7 @@ namespace UGF.Coroutines.Runtime
             protected set { m_result = value; }
         }
 
-        public bool HasResult { get { return typeof(TResult).IsValueType || EqualityComparer<TResult>.Default.Equals(m_result, default); } }
+        public bool HasResult { get { return typeof(TResult).IsValueType || !EqualityComparer<TResult>.Default.Equals(m_result, default); } }
 
         public event CoroutineHandler<TResult> Completed;
 
