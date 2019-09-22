@@ -14,7 +14,7 @@ namespace UGF.Coroutines.Runtime
             {
                 if (!HasResult)
                 {
-                    throw new InvalidOperationException("The result value not specified.");
+                    throw new InvalidOperationException($"Coroutine result not specified: '{GetType()}'.");
                 }
 
                 return m_result;
@@ -32,7 +32,7 @@ namespace UGF.Coroutines.Runtime
         private TResult m_result;
         private CoroutineHandler m_completed;
         private IEnumerator m_enumerator;
-        private bool m_moveNext;
+        private bool m_moveNext = true;
 
         protected abstract IEnumerator Routine();
 
