@@ -12,7 +12,7 @@ namespace UGF.Kernel.Runtime.Tests
         {
             using (var scope = new TestComponentScope<KernelLauncher>())
             {
-                KernelLauncher launcher = scope.Component;
+                KernelLauncher launcher = scope.Target;
 
                 launcher.LaunchOnStart = false;
                 launcher.ConfigId = "Config";
