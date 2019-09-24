@@ -14,7 +14,7 @@ namespace UGF.Module.Coroutines.Runtime
         {
             base.OnInitialize();
 
-            m_executer = new CoroutineExecuterUnity(false, "CoroutineModuleExecuter");
+            m_executer = new CoroutineExecuterUnity("CoroutineModuleExecuter");
         }
 
         protected override void OnUninitialize()
