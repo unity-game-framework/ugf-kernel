@@ -1,16 +1,17 @@
 using System;
 using System.Text;
 using UGF.Serialize.Runtime;
+using UGF.Utf8Json.Runtime;
 using Utf8Json;
 
 namespace UGF.Module.Serialize.Utf8Json.Runtime
 {
     public class SerializerUtf8Json : SerializerBase<string>
     {
-        public IJsonFormatterResolver Resolver { get; }
+        public IUtf8JsonFormatterResolver Resolver { get; }
         public bool Readable { get; }
 
-        public SerializerUtf8Json(IJsonFormatterResolver resolver, bool readable)
+        public SerializerUtf8Json(IUtf8JsonFormatterResolver resolver, bool readable)
         {
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             Readable = readable;
@@ -49,7 +50,18 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
 
         public override object Deserialize(Type targetType, string data)
         {
-            throw new NotSupportedException("Utf8Json: an abstract typeless serialization not supported.");
+            if (targetType == null) throw new ArgumentNullException(nameof(targetType));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
+            if (Resolver.TryGetFormatter(targetType, out IJsonFormatter value) && value is IJsonFormatter<object> formatter)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(data);
+                var reader = new JsonReader(bytes);
+
+                return formatter.Deserialize(ref reader, Resolver);
+            }
+
+            throw new ArgumentException($"The typeless formatter for the specified target type not found: '{targetType}', type: '{typeof(object)}'.", nameof(targetType));
         }
     }
 }

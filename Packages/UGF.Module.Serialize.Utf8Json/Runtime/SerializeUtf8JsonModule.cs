@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using UGF.Application.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Serialize.Runtime;
 using UGF.Module.Serialize.Utf8Json.Runtime.Resolvers;
 using UGF.Utf8Json.Runtime;
-using Utf8Json;
 
 namespace UGF.Module.Serialize.Utf8Json.Runtime
 {
@@ -13,9 +11,7 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
     {
         public IApplication Application { get; }
         public ISerializeUtf8JsonModuleDescription Description { get; }
-        public IJsonFormatterResolver Resolver { get { return m_resolver; } }
-        public IDictionary<Type, IJsonFormatter> Formatters { get { return m_resolver.Formatters; } }
-        public IList<IJsonFormatterResolver> Resolvers { get { return m_resolver.Resolvers; } }
+        public IUtf8JsonFormatterResolver Resolver { get { return m_resolver; } }
 
         private readonly Utf8JsonFormatterResolver m_resolver = Utf8JsonUtility.CreateDefaultResolver();
 
@@ -24,7 +20,7 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
             Application = application ?? throw new ArgumentNullException(nameof(application));
             Description = description ?? throw new ArgumentNullException(nameof(description));
 
-            m_resolver.Resolvers.Add(UGFModuleSerializeUtf8JsonRuntimeResolver.Instance);
+            m_resolver.AddResolver(UGFModuleSerializeUtf8JsonRuntimeResolver.Instance);
         }
 
         protected override void OnInitialize()
