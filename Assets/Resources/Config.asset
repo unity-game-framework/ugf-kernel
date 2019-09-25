@@ -18,11 +18,11 @@ MonoBehaviour:
     - m_builderId: FactoryModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: SerializeModuleBuilderAsset
+    - m_builderId: SerializeModuleBuilder
       m_arguments:
         m_values:
         - SerializeModuleDescription
-    - m_builderId: SerializeUtf8JsonModuleBuilderAsset
+    - m_builderId: SerializeUtf8JsonModuleBuilder
       m_arguments:
         m_values:
         - SerializeUtf8JsonModuleDescription
