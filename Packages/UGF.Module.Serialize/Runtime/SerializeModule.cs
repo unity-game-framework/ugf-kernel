@@ -9,26 +9,28 @@ namespace UGF.Module.Serialize.Runtime
     public class SerializeModule : ApplicationModuleBase, ISerializeModule
     {
         public ISerializeModuleDescription Description { get; }
-        public ISerializerProvider Provider { get; } = new SerializerProvider();
+        public ISerializerProvider Provider { get { return m_provider; } }
+
+        private readonly SerializerProvider m_provider = new SerializerProvider();
 
         public SerializeModule(ISerializeModuleDescription description)
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
 
-            Provider.Add(SerializerFormatterUtility.SerializerBinaryName, SerializerFormatterUtility.SerializerBinary);
-            Provider.Add(SerializerUnityJsonUtility.SerializerTextCompactName, SerializerUnityJsonUtility.SerializerTextCompact);
-            Provider.Add(SerializerUnityJsonUtility.SerializerTextReadableName, SerializerUnityJsonUtility.SerializerTextReadable);
-            Provider.Add(SerializerUnityJsonUtility.SerializerBytesName, SerializerUnityJsonUtility.SerializerBytes);
+            m_provider.Add(SerializerFormatterUtility.SerializerBinaryName, SerializerFormatterUtility.SerializerBinary);
+            m_provider.Add(SerializerUnityJsonUtility.SerializerTextCompactName, SerializerUnityJsonUtility.SerializerTextCompact);
+            m_provider.Add(SerializerUnityJsonUtility.SerializerTextReadableName, SerializerUnityJsonUtility.SerializerTextReadable);
+            m_provider.Add(SerializerUnityJsonUtility.SerializerBytesName, SerializerUnityJsonUtility.SerializerBytes);
         }
 
         public ISerializer<byte[]> GetDefaultBytesSerializer()
         {
-            return Provider.Get<byte[]>(Description.DefaultBytesSerializerName);
+            return m_provider.Get<byte[]>(Description.DefaultBytesSerializerName);
         }
 
         public ISerializer<string> GetDefaultTextSerializer()
         {
-            return Provider.Get<string>(Description.DefaultTextSerializerName);
+            return m_provider.Get<string>(Description.DefaultTextSerializerName);
         }
     }
 }

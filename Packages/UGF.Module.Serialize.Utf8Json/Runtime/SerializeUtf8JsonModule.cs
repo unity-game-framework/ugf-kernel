@@ -10,42 +10,50 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
     public class SerializeUtf8JsonModule : ApplicationModuleBase, ISerializeUtf8JsonModule
     {
         public IApplication Application { get; }
+        public ISerializeModule SerializeModule { get; }
         public ISerializeUtf8JsonModuleDescription Description { get; }
         public IUtf8JsonFormatterResolver Resolver { get { return m_resolver; } }
+        public ISerializeUtf8JsonUnionProvider UnionProvider { get { return m_unionProvider; } }
 
         private readonly Utf8JsonFormatterResolver m_resolver = Utf8JsonUtility.CreateDefaultResolver();
+        private readonly SerializeUtf8JsonUnionProvider m_unionProvider;
 
-        public SerializeUtf8JsonModule(IApplication application, ISerializeUtf8JsonModuleDescription description)
+        public SerializeUtf8JsonModule(IApplication application, ISerializeModule serializeModule, ISerializeUtf8JsonModuleDescription description)
         {
             Application = application ?? throw new ArgumentNullException(nameof(application));
+            SerializeModule = serializeModule ?? throw new ArgumentNullException(nameof(serializeModule));
             Description = description ?? throw new ArgumentNullException(nameof(description));
 
             m_resolver.AddResolver(UGFModuleSerializeUtf8JsonRuntimeResolver.Instance);
+            m_unionProvider = new SerializeUtf8JsonUnionProvider(m_resolver);
         }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
-            var serializeModule = Application.GetModule<ISerializeModule>();
+            string bytesName = Description.BytesSerializerName;
+            string compactName = Description.TextCompactSerializerName;
+            string readableName = Description.TextReadableSerializerName;
 
-            serializeModule.Provider.Add(Description.BytesSerializerName, new SerializerUtf8JsonBytes(Resolver));
-            serializeModule.Provider.Add(Description.TextCompactSerializerName, new SerializerUtf8Json(Resolver, false));
-            serializeModule.Provider.Add(Description.TextReadableSerializerName, new SerializerUtf8Json(Resolver, true));
+            var bytes = new SerializerUtf8JsonBytes(m_resolver, m_unionProvider);
+            var compact = new SerializerUtf8Json(m_resolver, m_unionProvider, false);
+            var readable = new SerializerUtf8Json(m_resolver, m_unionProvider, true);
 
-            Log.Debug($"SerializeUtf8JsonModule: register '3' serializers (DataTypesCount:'{serializeModule.Provider.DataTypesCount}'):" +
-                      $"'{Description.BytesSerializerName}', '{Description.TextCompactSerializerName}', '{Description.TextReadableSerializerName}'.");
+            SerializeModule.Provider.Add(bytesName, bytes);
+            SerializeModule.Provider.Add(compactName, compact);
+            SerializeModule.Provider.Add(readableName, readable);
+
+            Log.Debug($"SerializeUtf8JsonModule: register '3' serializers: '{bytesName}', '{readable}', '{compact}'.");
         }
 
         protected override void OnUninitialize()
         {
             base.OnUninitialize();
 
-            var serializeModule = Application.GetModule<ISerializeModule>();
-
-            serializeModule.Provider.Remove<byte[]>(Description.BytesSerializerName);
-            serializeModule.Provider.Remove<string>(Description.TextCompactSerializerName);
-            serializeModule.Provider.Remove<string>(Description.TextReadableSerializerName);
+            SerializeModule.Provider.Remove<byte[]>(Description.BytesSerializerName);
+            SerializeModule.Provider.Remove<string>(Description.TextCompactSerializerName);
+            SerializeModule.Provider.Remove<string>(Description.TextReadableSerializerName);
         }
     }
 }

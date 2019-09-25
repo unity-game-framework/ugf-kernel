@@ -1,5 +1,6 @@
 using UGF.Application.Runtime;
 using UGF.Module.Runtime;
+using UGF.Module.Serialize.Runtime;
 using UnityEngine;
 
 namespace UGF.Module.Serialize.Utf8Json.Runtime
@@ -9,7 +10,9 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
     {
         protected override IApplicationModule OnBuild(IApplication application, ISerializeUtf8JsonModuleDescription description)
         {
-            return new SerializeUtf8JsonModule(application, description);
+            var serializeModule = application.GetModule<ISerializeModule>();
+
+            return new SerializeUtf8JsonModule(application, serializeModule, description);
         }
     }
 }
