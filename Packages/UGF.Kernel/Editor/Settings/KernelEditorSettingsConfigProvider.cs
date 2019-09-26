@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using UGF.Kernel.Runtime;
 using UnityEditor;
 
 namespace UGF.Kernel.Editor.Settings
@@ -8,9 +9,17 @@ namespace UGF.Kernel.Editor.Settings
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()
         {
-            return KernelEditorSettings.ConfigProvideProjectSettings
-                ? AssetSettingsProvider.CreateProviderFromResourcePath("Project/UGF/Kernel Config", KernelEditorSettings.ConfigResourcesPath)
-                : null;
+            if (KernelEditorUserSettings.ShowConfigInProjectSettings)
+            {
+                KernelConfigAsset asset = KernelEditorUserSettings.ProjectSettingsConfig;
+
+                if (asset != null)
+                {
+                    return AssetSettingsProvider.CreateProviderFromObject("Project/UGF/Kernel Config", asset);
+                }
+            }
+
+            return null;
         }
     }
 }

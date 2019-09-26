@@ -1,36 +1,35 @@
 using JetBrains.Annotations;
 using UGF.CustomSettings.Editor;
+using UGF.Kernel.Runtime;
 using UnityEditor;
 
 namespace UGF.Kernel.Editor.Settings
 {
-    public static class KernelEditorSettings
+    public static class KernelEditorUserSettings
     {
-        public static bool ConfigProvideProjectSettings
+        public static bool ShowConfigInProjectSettings
         {
-            get { return m_settings.Data.ConfigProvideProjectSettings; }
+            get { return m_settings.Data.ShowConfigInProjectSettings; }
             set
             {
-                m_settings.Data.ConfigProvideProjectSettings = value;
+                m_settings.Data.ShowConfigInProjectSettings = value;
                 m_settings.Save();
             }
         }
 
-        public static string ConfigResourcesPath
+        public static KernelConfigAsset ProjectSettingsConfig
         {
-            get { return m_settings.Data.ConfigResourcesPath; }
+            get { return m_settings.Data.ProjectSettingsConfig; }
             set
             {
-                m_settings.Data.ConfigResourcesPath = value;
+                m_settings.Data.ProjectSettingsConfig = value;
                 m_settings.Save();
             }
         }
 
-        private static readonly CustomSettingsEditorPackage<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPackage<KernelEditorSettingsData>
+        private static readonly CustomSettingsEditorPrefs<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPrefs<KernelEditorSettingsData>
         (
-            "UGF.Kernel",
-            "KernelEditorSettings",
-            CustomSettingsEditorUtility.DefaultPackageExternalFolder
+            "Packages.UGF.Kernel.KernelEditorSettings"
         );
 
         [SettingsProvider, UsedImplicitly]
