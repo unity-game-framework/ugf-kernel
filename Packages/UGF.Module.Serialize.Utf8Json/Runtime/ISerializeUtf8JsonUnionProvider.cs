@@ -9,7 +9,7 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
         IReadOnlyCollection<Type> TargetTypes { get; }
 
         void Add<TUnionType, TTargetType>(string typeIdentifier) where TTargetType : TUnionType;
-        void Add(Type unionType, string typeIdentifier, Type targetType, IJsonFormatter formatter);
+        void Add(Type unionType, Type targetType, string typeIdentifier, IJsonFormatter formatter);
         void Add(Type unionType, Type targetType);
         void Remove(Type unionType, Type targetType);
         Type GetUnionType(Type targetType);
