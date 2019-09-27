@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Logs.Runtime;
@@ -29,8 +30,8 @@ namespace UGF.Module.Addressable.Runtime
 
         private struct SceneInstanceInfo
         {
-            public Scene Scene;
-            public AsyncOperation AsyncOperation;
+            [UsedImplicitly] public Scene Scene;
+            [UsedImplicitly] public AsyncOperation AsyncOperation;
         }
 
         public AddressableSceneModule(ICoroutineModule coroutineModule)

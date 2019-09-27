@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Module.Assets.Runtime.Coroutines;
@@ -42,23 +41,12 @@ namespace UGF.Module.Assets.Runtime
             return null;
         }
 
-        public ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string assetName)
-        {
-            throw new NotSupportedException("Async loading collection of assets from the Resources not supported.");
-        }
-
-        public ICoroutine<IReadOnlyList<object>> LoadAllAsync(string assetName, Type assetType)
-        {
-            throw new NotSupportedException("Async loading collection of assets from the Resources not supported.");
-        }
-
         public void Release<T>(T asset)
         {
         }
 
         public void Release(object asset)
         {
-            if (asset == null) throw new ArgumentNullException(nameof(asset));
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Logs.Runtime;
@@ -59,35 +58,8 @@ namespace UGF.Module.Addressable.Runtime
             return null;
         }
 
-        public ICoroutine<IReadOnlyList<T>> LoadAllAsync<T>(string key)
-        {
-            if (key == null) throw new ArgumentNullException(nameof(key));
-
-            AsyncOperationHandle<IList<T>> handler = Addressables.LoadAssetsAsync<T>(key, null);
-            var coroutine = new OperationHandleListCoroutine<T>(handler);
-
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
-        }
-
-        public ICoroutine<IReadOnlyList<object>> LoadAllAsync(string key, Type assetType)
-        {
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (assetType == null) throw new ArgumentNullException(nameof(assetType));
-
-            AsyncOperationHandle<IList<object>> handler = Addressables.LoadAssetsAsync<object>(key, null);
-            var coroutine = new OperationHandleListCoroutine<object>(handler);
-
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
-        }
-
         public void Release<T>(T asset)
         {
-            if (asset == null) throw new ArgumentNullException(nameof(asset));
-
             Addressables.Release(asset);
         }
 
