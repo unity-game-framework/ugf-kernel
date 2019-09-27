@@ -39,11 +39,11 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
             return JsonSerializer.Serialize(value, resolver);
         }
 
-        public static Task<byte[]> SerializeAsync<T>(T value, IJsonFormatterResolver resolver)
+        public static async Task<byte[]> SerializeAsync<T>(T value, IJsonFormatterResolver resolver)
         {
             if (resolver == null) throw new ArgumentNullException(nameof(resolver));
 
-            return Task.Run(() => JsonSerializer.Serialize(value, resolver));
+            return await Task.Run(() => JsonSerializer.Serialize(value, resolver));
         }
 
         public static T DeserializeFromString<T>(string data, IJsonFormatterResolver resolver)
@@ -62,12 +62,12 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
             return JsonSerializer.Deserialize<T>(data, resolver);
         }
 
-        public static Task<T> DeserializeAsync<T>(byte[] data, IJsonFormatterResolver resolver)
+        public static async Task<T> DeserializeAsync<T>(byte[] data, IJsonFormatterResolver resolver)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
             if (resolver == null) throw new ArgumentNullException(nameof(resolver));
 
-            return Task.Run(() => JsonSerializer.Deserialize<T>(data, resolver));
+            return await Task.Run(() => JsonSerializer.Deserialize<T>(data, resolver));
         }
     }
 }
