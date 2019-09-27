@@ -1,6 +1,6 @@
 {
-    "name": "com.ugf.kernel",
-    "displayName": "UGF.Kernel",
+    "name": "com.ugf.assets",
+    "displayName": "UGF.Assets",
     "version": "0.0.0-preview",
     "unity": "2019.2",
     "description": "No description.",
@@ -9,7 +9,6 @@
         "url": "https://github.com/unity-game-framework"
     },
     "dependencies": {
-        "com.ugf.module": "0.0.0-preview",
-        "com.ugf.testing": "0.1.1-preview"
+        "com.ugf.coroutines": "0.1.0-preview"
     }
 }

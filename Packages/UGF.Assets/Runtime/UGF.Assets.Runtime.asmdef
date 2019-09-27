@@ -1,0 +1,14 @@
+{
+    "name": "UGF.Assets.Runtime",
+    "references": [
+        "GUID:e98043744c06bce4b86b467be38834f3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
