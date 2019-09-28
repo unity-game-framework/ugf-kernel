@@ -55,7 +55,7 @@ namespace UGF.Module.Addressable.Runtime
 
             CoroutineModule.Start(coroutine);
 
-            return null;
+            return coroutine;
         }
 
         public void Release<T>(T asset)

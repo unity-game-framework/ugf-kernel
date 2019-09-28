@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Addressable.Runtime.Coroutines;
 using UGF.Module.Coroutines.Runtime;
 using UGF.Module.Scenes.Runtime;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -20,19 +17,6 @@ namespace UGF.Module.Addressable.Runtime
     public class AddressableSceneModule : ApplicationModuleBaseAsync, ISceneModule
     {
         public ICoroutineModule CoroutineModule { get; }
-
-        [StructLayout(LayoutKind.Explicit)]
-        private struct SceneInstanceConverter
-        {
-            [FieldOffset(0)] public SceneInstance SceneInstance;
-            [FieldOffset(0)] public SceneInstanceInfo SceneInstanceInfo;
-        }
-
-        private struct SceneInstanceInfo
-        {
-            [UsedImplicitly] public Scene Scene;
-            [UsedImplicitly] public AsyncOperation AsyncOperation;
-        }
 
         public AddressableSceneModule(ICoroutineModule coroutineModule)
         {
@@ -67,21 +51,13 @@ namespace UGF.Module.Addressable.Runtime
         {
             if (!scene.IsValid()) throw new ArgumentException("The specified scene is invalid.", nameof(scene));
 
-            SceneInstance sceneInstance = GetSceneInstance(scene);
+            SceneInstance sceneInstance = AddressableUtility.GetAsSceneInstance(scene);
             AsyncOperationHandle<SceneInstance> handler = Addressables.UnloadSceneAsync(sceneInstance);
             var coroutine = new OperationHandleCoroutine<SceneInstance>(handler);
 
             CoroutineModule.Start(coroutine);
 
             return coroutine;
-        }
-
-        private static SceneInstance GetSceneInstance(Scene scene)
-        {
-            var info = new SceneInstanceInfo { Scene = scene, AsyncOperation = null };
-            var converter = new SceneInstanceConverter { SceneInstanceInfo = info };
-
-            return converter.SceneInstance;
         }
     }
 }
