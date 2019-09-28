@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UGF.Addressable.Editor.Settings
+namespace UGF.Module.Addressable.Editor.Settings
 {
     internal class AddressableEditorSettingsData : ScriptableObject
     {

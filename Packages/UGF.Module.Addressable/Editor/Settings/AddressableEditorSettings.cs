@@ -1,8 +1,9 @@
 using JetBrains.Annotations;
 using UGF.CustomSettings.Editor;
+using UGF.Module.Addressable.Editor.Scheme;
 using UnityEditor;
 
-namespace UGF.Addressable.Editor.Settings
+namespace UGF.Module.Addressable.Editor.Settings
 {
     /// <summary>
     /// Represents editor settings for Addressable.
@@ -10,7 +11,7 @@ namespace UGF.Addressable.Editor.Settings
     public static class AddressableEditorSettings
     {
         /// <summary>
-        /// Gets or sets value that determines whether to include asset groups with '<see cref="UGF.Addressable.Editor.Scheme.IncludeWithTestsGroupScheme"/>' scheme.
+        /// Gets or sets value that determines whether to include asset groups with '<see cref="IncludeWithTestsGroupScheme"/>' scheme.
         /// </summary>
         /// <remarks>
         /// This property determines whether to include 'AddressableAssetGroup' with assets for testing only into build.

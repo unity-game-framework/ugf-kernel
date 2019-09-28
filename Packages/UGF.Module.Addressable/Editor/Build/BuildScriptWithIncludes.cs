@@ -1,10 +1,10 @@
 using System;
-using UGF.Addressable.Editor.Scheme;
+using UGF.Module.Addressable.Editor.Scheme;
 using UnityEditor.AddressableAssets.Build.DataBuilders;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-namespace UGF.Addressable.Editor.Build
+namespace UGF.Module.Addressable.Editor.Build
 {
     /// <summary>
     /// Represents extended '<see cref="BuildScriptPackedMode"/>' to additionally check '<see cref="IncludeGroupSchemeBase"/>' schemes,

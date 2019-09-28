@@ -1,6 +1,6 @@
 using UnityEditor.AddressableAssets.Settings;
 
-namespace UGF.Addressable.Editor.Scheme
+namespace UGF.Module.Addressable.Editor.Scheme
 {
     /// <summary>
     /// Represents abstract base class to implement asset group scheme that determines whether to include specific asset group in build.

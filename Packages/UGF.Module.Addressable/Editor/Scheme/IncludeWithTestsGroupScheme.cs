@@ -1,7 +1,7 @@
-using UGF.Addressable.Editor.Settings;
+using UGF.Module.Addressable.Editor.Settings;
 using UnityEditor;
 
-namespace UGF.Addressable.Editor.Scheme
+namespace UGF.Module.Addressable.Editor.Scheme
 {
     /// <summary>
     /// Represents scheme that marks specific asset group to include in test builds only.

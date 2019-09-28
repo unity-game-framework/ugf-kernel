@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UGF.Addressable.Editor.Scheme
+namespace UGF.Module.Addressable.Editor.Scheme
 {
     /// <summary>
     /// Represents scheme that marks specific asset group to include in build for specified platform only.
