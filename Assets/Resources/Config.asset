@@ -32,10 +32,10 @@ MonoBehaviour:
     - m_builderId: CoroutineModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: AssetsResourcesModuleBuilder
+    - m_builderId: AddressableAssetsModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: SceneModuleBuilder
+    - m_builderId: AddressableSceneModuleBuilder
       m_arguments:
         m_values: []
     - m_builderId: DescriptionModuleBuilder
