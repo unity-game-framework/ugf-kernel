@@ -1,6 +1,7 @@
 using UGF.Application.Runtime;
 using UGF.Module.Assets.Runtime;
 using UGF.Module.Runtime;
+using UGF.Module.Serialize.Runtime;
 using UnityEngine;
 
 namespace UGF.Module.Descriptions.Runtime
@@ -11,8 +12,9 @@ namespace UGF.Module.Descriptions.Runtime
         protected override IApplicationModule OnBuild(IApplication application, IDescriptionModuleDescription description)
         {
             var assetsModule = application.GetModule<IAssetsModule>();
+            var serializeModule = application.GetModule<ISerializeModule>();
 
-            return new DescriptionModule(description, assetsModule);
+            return new DescriptionModule(assetsModule, serializeModule, description);
         }
     }
 }
