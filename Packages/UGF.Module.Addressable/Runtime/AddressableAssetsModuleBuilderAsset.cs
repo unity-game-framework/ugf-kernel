@@ -1,7 +1,6 @@
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
 using UGF.Module.Assets.Runtime;
-using UGF.Module.Coroutines.Runtime;
 using UGF.Module.Runtime;
 using UnityEngine;
 
@@ -12,9 +11,7 @@ namespace UGF.Module.Addressable.Runtime
     {
         protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)
         {
-            var coroutineModule = application.GetModule<ICoroutineModule>();
-
-            return new AddressableAssetsModule(coroutineModule);
+            return new AddressableAssetsModule();
         }
     }
 }

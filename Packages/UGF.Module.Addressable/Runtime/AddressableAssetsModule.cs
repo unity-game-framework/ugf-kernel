@@ -5,7 +5,6 @@ using UGF.Coroutines.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Addressable.Runtime.Coroutines;
 using UGF.Module.Assets.Runtime;
-using UGF.Module.Coroutines.Runtime;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -14,13 +13,6 @@ namespace UGF.Module.Addressable.Runtime
 {
     public class AddressableAssetsModule : ApplicationModuleBaseAsync, IAssetsModule
     {
-        public ICoroutineModule CoroutineModule { get; }
-
-        public AddressableAssetsModule(ICoroutineModule coroutineModule)
-        {
-            CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
-        }
-
         protected override IEnumerator OnInitializeAsync()
         {
             AsyncOperationHandle<IResourceLocator> operation = Addressables.InitializeAsync();
@@ -38,11 +30,8 @@ namespace UGF.Module.Addressable.Runtime
             if (key == null) throw new ArgumentNullException(nameof(key));
 
             AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>(key);
-            var coroutine = new OperationHandleCoroutine<T>(handler);
 
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
+            return new OperationHandleCoroutine<T>(handler);
         }
 
         public ICoroutine<object> LoadAsync(string key, Type assetType)
@@ -51,11 +40,8 @@ namespace UGF.Module.Addressable.Runtime
             if (assetType == null) throw new ArgumentNullException(nameof(assetType));
 
             AsyncOperationHandle<object> handler = Addressables.LoadAssetAsync<object>(key);
-            var coroutine = new OperationHandleCoroutine<object>(handler);
 
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
+            return new OperationHandleCoroutine<object>(handler);
         }
 
         public void Release<T>(T asset)

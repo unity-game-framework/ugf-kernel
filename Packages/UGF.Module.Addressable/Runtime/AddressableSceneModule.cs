@@ -4,7 +4,6 @@ using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Addressable.Runtime.Coroutines;
-using UGF.Module.Coroutines.Runtime;
 using UGF.Module.Scenes.Runtime;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
@@ -16,13 +15,6 @@ namespace UGF.Module.Addressable.Runtime
 {
     public class AddressableSceneModule : ApplicationModuleBaseAsync, ISceneModule
     {
-        public ICoroutineModule CoroutineModule { get; }
-
-        public AddressableSceneModule(ICoroutineModule coroutineModule)
-        {
-            CoroutineModule = coroutineModule ?? throw new ArgumentNullException(nameof(coroutineModule));
-        }
-
         protected override IEnumerator OnInitializeAsync()
         {
             AsyncOperationHandle<IResourceLocator> operation = Addressables.InitializeAsync();
@@ -40,11 +32,8 @@ namespace UGF.Module.Addressable.Runtime
             if (sceneName == null) throw new ArgumentNullException(nameof(sceneName));
 
             AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync(sceneName, parameters.Mode, parameters.Activate);
-            var coroutine = new OperationHandleSceneCoroutine(handler, parameters);
 
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
+            return new OperationHandleSceneCoroutine(handler, parameters);
         }
 
         public ICoroutine UnloadSceneAsync(Scene scene, SceneUnloadParameters parameters)
@@ -53,11 +42,8 @@ namespace UGF.Module.Addressable.Runtime
 
             SceneInstance sceneInstance = AddressableUtility.GetAsSceneInstance(scene);
             AsyncOperationHandle<SceneInstance> handler = Addressables.UnloadSceneAsync(sceneInstance);
-            var coroutine = new OperationHandleCoroutine<SceneInstance>(handler);
 
-            CoroutineModule.Start(coroutine);
-
-            return coroutine;
+            return new OperationHandleCoroutine<SceneInstance>(handler);
         }
     }
 }
