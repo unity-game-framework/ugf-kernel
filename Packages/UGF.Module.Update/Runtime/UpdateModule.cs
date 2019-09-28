@@ -1,9 +1,9 @@
 using UGF.Application.Runtime;
 using UGF.Module.Update.Runtime.Handlers;
 using UGF.Update.Runtime;
-using UnityEngine.Experimental.LowLevel;
+using UnityEngine.LowLevel;
 using UnityEngine.Profiling;
-using PlayerLoops = UnityEngine.Experimental.PlayerLoop;
+using PlayerLoops = UnityEngine.PlayerLoop;
 
 namespace UGF.Module.Update.Runtime
 {
