@@ -43,7 +43,10 @@ namespace UGF.Kernel.Editor
 
             if (m_editors.Count > 0)
             {
-                DrawEditors();
+                using (new CustomSettingsGUIScope())
+                {
+                    DrawEditors();
+                }
             }
             else
             {
