@@ -11,6 +11,7 @@
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
         "com.ugf.module.assets": "0.0.0-preview",
-        "com.ugf.module.serialize": "0.0.0-preview"
+        "com.ugf.module.serialize": "0.0.0-preview",
+        "com.unity.addressables": "1.2.4"
     }
 }

@@ -1,0 +1,14 @@
+{
+    "name": "UGF.Module.Descriptions.Editor.Addressables",
+    "references": [
+        "GUID:ef43ed24bd308e344887e784df0f1d30"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
