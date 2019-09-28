@@ -15,30 +15,38 @@ MonoBehaviour:
   m_description:
     m_name: Default
     m_modules:
-    - m_builderId: FactoryModuleBuilder
+    - m_active: 1
+      m_builderId: FactoryModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: SerializeModuleBuilder
+    - m_active: 1
+      m_builderId: SerializeModuleBuilder
       m_arguments:
         m_values:
         - SerializeModuleDescription
-    - m_builderId: SerializeUtf8JsonModuleBuilder
+    - m_active: 1
+      m_builderId: SerializeUtf8JsonModuleBuilder
       m_arguments:
         m_values:
         - SerializeUtf8JsonModuleDescription
-    - m_builderId: UpdateModuleBuilder
+    - m_active: 1
+      m_builderId: UpdateModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: CoroutineModuleBuilder
+    - m_active: 1
+      m_builderId: CoroutineModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: AddressableAssetsModuleBuilder
+    - m_active: 1
+      m_builderId: AddressableAssetsModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: AddressableSceneModuleBuilder
+    - m_active: 1
+      m_builderId: AddressableSceneModuleBuilder
       m_arguments:
         m_values: []
-    - m_builderId: DescriptionModuleBuilder
+    - m_active: 1
+      m_builderId: DescriptionModuleBuilder
       m_arguments:
         m_values:
         - DescriptionModuleDescription
