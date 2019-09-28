@@ -25,52 +25,43 @@ namespace UGF.Module.Runtime.Coroutines
             {
                 IModuleBuildInfo info = Infos[i];
 
-                ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(info.BuilderId);
-
-                yield return operation;
-
-                var builderAsset = operation.asset as ModuleBuilderAsset;
-
-                if (builderAsset == null)
+                if (info.Active)
                 {
-                    throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified builder: '{info.BuilderId}'.");
-                }
-
-                IModuleBuilder builder = builderAsset.GetBuilder();
-
-                if (builder == null)
-                {
-                    throw new ArgumentNullException(nameof(builderAsset.GetBuilder), $"Failed to get builder from the specified builder asset: '{builderAsset}'.");
-                }
-
-                var arguments = new ModuleBuildArguments<IDescription>();
-
-                foreach (string id in info.Arguments)
-                {
-                    operation = Resources.LoadAsync<DescriptionAsset>(id);
+                    ResourceRequest operation = Resources.LoadAsync<ModuleBuilderAsset>(info.BuilderId);
 
                     yield return operation;
 
-                    var asset = operation.asset as DescriptionAsset;
+                    var builderAsset = (ModuleBuilderAsset)operation.asset;
+                    IModuleBuilder builder = builderAsset.GetBuilder();
 
-                    if (asset == null)
+                    if (builder == null)
                     {
-                        throw new ArgumentNullException(nameof(operation.asset), $"Failed to load specified description: '{id}'.");
+                        throw new ArgumentNullException(nameof(builderAsset.GetBuilder), $"Failed to get builder from the specified builder asset: '{builderAsset}'.");
                     }
 
-                    IDescription description = asset.GetDescription();
+                    var arguments = new ModuleBuildArguments<IDescription>();
 
-                    if (description == null)
+                    foreach (string id in info.Arguments)
                     {
-                        throw new ArgumentNullException(nameof(description), $"Failed to get description from the specified description asset: '{asset}'.");
+                        operation = Resources.LoadAsync<DescriptionAsset>(id);
+
+                        yield return operation;
+
+                        var asset = (DescriptionAsset)operation.asset;
+                        IDescription description = asset.GetDescription();
+
+                        if (description == null)
+                        {
+                            throw new ArgumentNullException(nameof(description), $"Failed to get description from the specified description asset: '{asset}'.");
+                        }
+
+                        arguments.Values.Add(description);
                     }
 
-                    arguments.Values.Add(description);
+                    var build = new ModuleBuild(builder, arguments);
+
+                    builds.Add(build);
                 }
-
-                var build = new ModuleBuild(builder, arguments);
-
-                builds.Add(build);
             }
 
             Result = new ReadOnlyCollection<IModuleBuild>(builds);

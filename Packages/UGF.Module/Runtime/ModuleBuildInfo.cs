@@ -4,6 +4,7 @@ namespace UGF.Module.Runtime
 {
     public class ModuleBuildInfo : IModuleBuildInfo
     {
+        public bool Active { get; set; } = true;
         public string BuilderId { get; }
         public IModuleBuildArguments<string> Arguments { get; }
 

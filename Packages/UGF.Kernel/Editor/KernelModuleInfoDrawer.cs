@@ -15,17 +15,20 @@ namespace UGF.Kernel.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            SerializedProperty propertyActive = property.FindPropertyRelative("m_active");
             SerializedProperty propertyBuilderId = property.FindPropertyRelative("m_builderId");
             SerializedProperty propertyArguments = property.FindPropertyRelative("m_arguments");
             SerializedProperty propertyValues = property.FindPropertyRelative("m_arguments.m_values");
 
             float spacing = EditorGUIUtility.standardVerticalSpacing;
             float heightHeader = EditorGUIUtility.singleLineHeight;
+            float heightActive = EditorGUI.GetPropertyHeight(propertyActive);
             float heightBuilderId = EditorGUI.GetPropertyHeight(propertyBuilderId);
             float heightArguments = heightHeader * propertyValues.arraySize;
 
             var rectHeader = new Rect(position.x, position.y, 0F, heightHeader);
-            var rectBuilderId = new Rect(position.x, rectHeader.yMax + spacing, position.width, heightBuilderId);
+            var rectActive = new Rect(position.x, rectHeader.yMax + spacing, position.width, heightActive);
+            var rectBuilderId = new Rect(position.x, rectActive.yMax + spacing, position.width, heightBuilderId);
             var rectArguments = new Rect(position.x, rectBuilderId.yMax + spacing, position.width, heightArguments);
 
             string assetName = Path.GetFileNameWithoutExtension(propertyBuilderId.stringValue);
@@ -38,6 +41,8 @@ namespace UGF.Kernel.Editor
             {
                 using (new EditorGUI.IndentLevelScope())
                 {
+                    EditorGUI.PropertyField(rectActive, propertyActive);
+
                     KernelEditorGUIUtility.ResourcesObjectField(rectBuilderId, "Builder", propertyBuilderId, typeof(ModuleBuilderAsset));
 
                     DrawArguments(rectArguments, propertyArguments, arguments);
@@ -47,6 +52,7 @@ namespace UGF.Kernel.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
+            SerializedProperty propertyActive = property.FindPropertyRelative("m_active");
             SerializedProperty propertyBuilderId = property.FindPropertyRelative("m_builderId");
             SerializedProperty propertyValues = property.FindPropertyRelative("m_arguments.m_values");
 
@@ -55,6 +61,7 @@ namespace UGF.Kernel.Editor
             float height = 0F;
             float spacing = EditorGUIUtility.standardVerticalSpacing;
             float heightHeader = EditorGUIUtility.singleLineHeight;
+            float heightActive = EditorGUI.GetPropertyHeight(propertyActive);
             float heightBuilderId = EditorGUI.GetPropertyHeight(propertyBuilderId);
             float heightArguments = heightHeader * argumentsCount + spacing * argumentsCount;
 
@@ -62,7 +69,7 @@ namespace UGF.Kernel.Editor
 
             if (property.isExpanded)
             {
-                height += heightBuilderId + heightArguments;
+                height += heightActive + heightBuilderId + heightArguments + spacing;
             }
 
             return height + spacing;
