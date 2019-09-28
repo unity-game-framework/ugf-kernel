@@ -11,11 +11,13 @@ namespace UGF.Kernel.Editor
     internal class KernelConfigAssetEditor : UnityEditor.Editor
     {
         private readonly Dictionary<SerializedProperty, UnityEditor.Editor> m_editors = new Dictionary<SerializedProperty, UnityEditor.Editor>();
+        private SerializedProperty m_propertyScript;
         private SerializedProperty m_propertyName;
         private ReorderableList m_list;
 
         private void OnEnable()
         {
+            m_propertyScript = serializedObject.FindProperty("m_Script");
             m_propertyName = serializedObject.FindProperty("m_description.m_name");
 
             SerializedProperty propertyModules = serializedObject.FindProperty("m_description.m_modules");
@@ -31,6 +33,11 @@ namespace UGF.Kernel.Editor
         public override void OnInspectorGUI()
         {
             serializedObject.UpdateIfRequiredOrScript();
+
+            using (new EditorGUI.DisabledScope(true))
+            {
+                EditorGUILayout.PropertyField(m_propertyScript);
+            }
 
             using (new CustomSettingsGUIScope())
             {
