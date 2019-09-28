@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.ugf.utf8json": "file:D:/AProjects/unity-game-framework/ugf-utf8json/Packages/UGF.Utf8Json",
     "com.unity.ide.rider": "1.1.1",
     "com.unity.test-framework": "1.1.3",
     "com.unity.modules.ai": "1.0.0",
