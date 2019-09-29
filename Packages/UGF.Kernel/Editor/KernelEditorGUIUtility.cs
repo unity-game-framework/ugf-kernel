@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -26,7 +24,7 @@ namespace UGF.Kernel.Editor
 
             asset = EditorGUILayout.ObjectField(label, asset, assetType, false);
 
-            return asset != null ? GetResourcesFolderPath(asset) : string.Empty;
+            return asset != null ? KernelEditorUtility.GetResourcesFolderPath(asset) : string.Empty;
         }
 
         public static void ResourcesObjectField(Rect position, string label, SerializedProperty serializedProperty, Type assetType)
@@ -46,37 +44,7 @@ namespace UGF.Kernel.Editor
 
             asset = EditorGUI.ObjectField(position, label, asset, assetType, false);
 
-            return asset != null ? GetResourcesFolderPath(asset) : string.Empty;
-        }
-
-        public static string GetResourcesFolderPath(Object asset)
-        {
-            if (asset == null) throw new ArgumentNullException(nameof(asset));
-
-            string assetPath = AssetDatabase.GetAssetPath(asset);
-
-            return GetResourcesFolderPath(assetPath);
-        }
-
-        public static string GetResourcesFolderPath(string assetPath)
-        {
-            if (assetPath == null) throw new ArgumentNullException(nameof(assetPath));
-
-            var builder = new StringBuilder(assetPath.Length);
-            DirectoryInfo directory = Directory.GetParent(assetPath);
-            string name = Path.GetFileNameWithoutExtension(assetPath);
-
-            builder.Append(name);
-
-            while (directory != null && directory.Name != "Resources")
-            {
-                builder.Insert(0, '/');
-                builder.Insert(0, directory.Name);
-
-                directory = directory.Parent;
-            }
-
-            return builder.ToString();
+            return asset != null ? KernelEditorUtility.GetResourcesFolderPath(asset) : string.Empty;
         }
     }
 }
