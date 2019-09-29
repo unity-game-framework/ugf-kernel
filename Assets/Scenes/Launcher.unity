@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -130,6 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1832432749}
   - component: {fileID: 1832432750}
+  - component: {fileID: 1832432752}
+  - component: {fileID: 1832432751}
   m_Layer: 0
   m_Name: KernelLauncher
   m_TagString: Untagged
@@ -167,3 +170,29 @@ MonoBehaviour:
   m_stopOnQuit: 1
   m_provideStaticInstance: 1
   m_configId: Config
+  m_configLoader: {fileID: 1832432752}
+  m_moduleBuildsLoader: {fileID: 1832432751}
+--- !u!114 &1832432751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832432748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46661946d0748147bacc6a853a23c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1832432752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832432748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27af3642c5ac5d3489092e188b1c9dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

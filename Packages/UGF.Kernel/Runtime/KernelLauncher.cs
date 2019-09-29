@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UGF.Application.Runtime;
 using UGF.Coroutines.Runtime;
-using UGF.Kernel.Runtime.Coroutines;
+using UGF.Kernel.Runtime.Loaders;
 using UGF.Logs.Runtime;
 using UGF.Module.Runtime;
-using UGF.Module.Runtime.Coroutines;
 using UnityEngine;
 
 namespace UGF.Kernel.Runtime
@@ -14,9 +13,52 @@ namespace UGF.Kernel.Runtime
     public class KernelLauncher : ApplicationUnityLauncher
     {
         [SerializeField] private string m_configId = "Config";
+        [SerializeField] private KernelConfigLoader m_configLoader;
+        [SerializeField] private KernelModuleBuildsLoader m_moduleBuildsLoader;
 
         public string ConfigId { get { return m_configId; } set { m_configId = value; } }
-        public IKernelConfig Config { get { return m_config ?? throw new InvalidOperationException("Config not loaded."); } }
+
+        public IKernelConfigLoader ConfigLoader
+        {
+            get
+            {
+                if (m_configLoader == null)
+                {
+                    throw new ArgumentNullException(nameof(m_configLoader), "The config loader not specified.");
+                }
+
+                return m_configLoader;
+            }
+            set { m_configLoader = (KernelConfigLoader)value; }
+        }
+
+        public IKernelModuleBuildsLoader ModuleBuildsLoader
+        {
+            get
+            {
+                if (m_moduleBuildsLoader == null)
+                {
+                    throw new ArgumentNullException(nameof(m_moduleBuildsLoader), "The module builds loader not specified.");
+                }
+
+                return m_moduleBuildsLoader;
+            }
+            set { m_moduleBuildsLoader = (KernelModuleBuildsLoader)value; }
+        }
+
+        public IKernelConfig Config
+        {
+            get
+            {
+                if (m_config == null)
+                {
+                    throw new InvalidOperationException("The Config not yet loaded.");
+                }
+
+                return m_config;
+            }
+        }
+
         public bool HasConfig { get { return m_config != null; } }
 
         private IKernelConfig m_config;
@@ -24,17 +66,17 @@ namespace UGF.Kernel.Runtime
 
         protected override IEnumerator PreloadResourcesAsync()
         {
-            ICoroutine<IKernelConfig> loadConfigCoroutine = LoadConfig(m_configId);
+            ICoroutine<IKernelConfig> configCoroutine = ConfigLoader.Load(m_configId);
 
-            yield return loadConfigCoroutine;
+            yield return configCoroutine;
 
-            m_config = loadConfigCoroutine.Result;
+            m_config = configCoroutine.Result;
 
-            ICoroutine<IReadOnlyList<IModuleBuild>> loadModuleBuildsCoroutine = LoadModuleBuilds(m_config.Modules);
+            ICoroutine<IReadOnlyList<IModuleBuild>> moduleBuildsCoroutine = ModuleBuildsLoader.Load(m_config.Modules);
 
-            yield return loadModuleBuildsCoroutine;
+            yield return moduleBuildsCoroutine;
 
-            m_builds = loadModuleBuildsCoroutine.Result;
+            m_builds = moduleBuildsCoroutine.Result;
 
             Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}', builds:'{m_builds.Count}'.");
         }
@@ -54,20 +96,6 @@ namespace UGF.Kernel.Runtime
 
             m_config = null;
             m_builds = null;
-        }
-
-        protected virtual ICoroutine<IKernelConfig> LoadConfig(string configId)
-        {
-            if (configId == null) throw new ArgumentNullException(nameof(configId));
-
-            return new LoadConfigResourcesCoroutine(configId);
-        }
-
-        protected virtual ICoroutine<IReadOnlyList<IModuleBuild>> LoadModuleBuilds(IReadOnlyList<IModuleBuildInfo> infos)
-        {
-            if (infos == null) throw new ArgumentNullException(nameof(infos));
-
-            return new LoadBuildsResourcesCoroutine(infos);
         }
     }
 }
