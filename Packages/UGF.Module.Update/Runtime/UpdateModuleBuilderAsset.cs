@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UGF.Module.Update.Runtime
 {
-    [CreateAssetMenu(menuName = "UGF/Module.Update/UpdateModuleBuilderAsset", order = 2000)]
+    [CreateAssetMenu(menuName = "UGF/Module.Update/UpdateModuleBuilder", order = 2000)]
     public class UpdateModuleBuilderAsset : ModuleBuilderAsset<IUpdateModule>
     {
         protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)

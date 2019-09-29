@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UGF.Kernel.Runtime
 {
-    [CreateAssetMenu(menuName = "UGF/Kernel/KernelConfigAsset", order = 2000)]
+    [CreateAssetMenu(menuName = "UGF/Kernel/KernelConfig", order = 2000)]
     public class KernelConfigAsset : DescriptionAsset<KernelConfig>
     {
     }

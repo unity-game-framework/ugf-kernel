@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    [CreateAssetMenu(menuName = "UGF/Module.Descriptions/DescriptionModuleBuilderAsset", order = 2000)]
+    [CreateAssetMenu(menuName = "UGF/Module.Descriptions/DescriptionModuleBuilder", order = 2000)]
     public class DescriptionModuleBuilderAsset : ModuleBuilderAsset<DescriptionModule, IDescriptionModuleDescription>
     {
         protected override IApplicationModule OnBuild(IApplication application, IDescriptionModuleDescription description)

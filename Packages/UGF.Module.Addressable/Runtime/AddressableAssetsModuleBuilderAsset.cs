@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UGF.Module.Addressable.Runtime
 {
-    [CreateAssetMenu(menuName = "UGF/Module.Addressable/AddressableAssetsModuleBuilderAsset", order = 2000)]
+    [CreateAssetMenu(menuName = "UGF/Module.Addressable/AddressableAssetsModuleBuilder", order = 2000)]
     public class AddressableAssetsModuleBuilderAsset : ModuleBuilderAsset<IAssetsModule>
     {
         protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)
