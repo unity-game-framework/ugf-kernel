@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UGF.CustomSettings.Editor;
 using UGF.Description.Runtime;
 using UGF.Kernel.Runtime;
 using UGF.Module.Runtime;
@@ -26,7 +27,7 @@ namespace UGF.Kernel.Editor
             float heightBuilderId = EditorGUI.GetPropertyHeight(propertyBuilderId);
             float heightArguments = heightHeader * propertyValues.arraySize;
 
-            var rectHeader = new Rect(position.x, position.y, 0F, heightHeader);
+            var rectHeader = new Rect(position.x - 15F, position.y, 15F, heightHeader);
             var rectActive = new Rect(position.x, rectHeader.yMax + spacing, position.width, heightActive);
             var rectBuilderId = new Rect(position.x, rectActive.yMax + spacing, position.width, heightBuilderId);
             var rectArguments = new Rect(position.x, rectBuilderId.yMax + spacing, position.width, heightArguments);
@@ -35,7 +36,10 @@ namespace UGF.Kernel.Editor
             string headerLabel = !string.IsNullOrEmpty(assetName) ? assetName : property.displayName;
             List<Type> arguments = GetArguments(propertyBuilderId);
 
-            property.isExpanded = EditorGUI.Foldout(rectHeader, property.isExpanded, headerLabel);
+            using (new CustomSettingsGUIScope(false))
+            {
+                property.isExpanded = EditorGUI.Foldout(rectHeader, property.isExpanded, headerLabel);
+            }
 
             if (property.isExpanded)
             {
@@ -72,7 +76,7 @@ namespace UGF.Kernel.Editor
                 height += heightActive + heightBuilderId + heightArguments + spacing;
             }
 
-            return height + spacing;
+            return height;
         }
 
         private static void DrawArguments(Rect position, SerializedProperty property, IReadOnlyList<Type> arguments)
