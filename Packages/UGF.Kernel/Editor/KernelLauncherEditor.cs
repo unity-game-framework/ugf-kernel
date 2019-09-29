@@ -25,6 +25,8 @@ namespace UGF.Kernel.Editor
 
         public override void OnInspectorGUI()
         {
+            serializedObject.UpdateIfRequiredOrScript();
+
             using (new EditorGUI.DisabledScope(true))
             {
                 EditorGUILayout.PropertyField(m_propertyScript);
@@ -33,6 +35,8 @@ namespace UGF.Kernel.Editor
             KernelEditorGUIUtility.ResourcesObjectField("Config", m_propertyConfigId, typeof(KernelConfigAsset));
 
             DrawPropertiesExcluding(serializedObject, m_exclude);
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawInfo()
