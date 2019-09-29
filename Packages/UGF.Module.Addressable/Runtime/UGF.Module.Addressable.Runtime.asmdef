@@ -1,6 +1,7 @@
 {
     "name": "UGF.Module.Addressable.Runtime",
     "references": [
+        "GUID:86ab2d835b3ec7841a902108526e043b",
         "GUID:5f36d1c39ad974043addfca692c8cded",
         "GUID:a4312e46e9f64bb4aa011ac96ffd2a61",
         "GUID:d067af32d09350a4bb33960432735e4d",
@@ -19,5 +20,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }
