@@ -22,5 +22,8 @@
         "com.ugf"
       ]
     }
+  ],
+  "testables": [
+    "com.ugf.testing"
   ]
 }
