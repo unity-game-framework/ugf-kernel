@@ -1,0 +1,17 @@
+{
+    "m_typeName": "UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "keys",
+            "m_active": true
+        },
+        {
+            "m_name": "preWrapMode",
+            "m_active": true
+        },
+        {
+            "m_name": "postWrapMode",
+            "m_active": true
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f661c96ac4f51b1488a7ec1c5bd3a86e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: Unity.Mathematics.bool4, Unity.Mathematics, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: x
+      active: 1
+    - name: y
+      active: 1
+    - name: z
+      active: 1
+    - name: w
+      active: 1

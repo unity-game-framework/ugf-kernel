@@ -1,0 +1,13 @@
+{
+    "m_typeName": "Unity.Mathematics.uint3x2, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "c0",
+            "m_active": true
+        },
+        {
+            "m_name": "c1",
+            "m_active": true
+        }
+    ]
+}

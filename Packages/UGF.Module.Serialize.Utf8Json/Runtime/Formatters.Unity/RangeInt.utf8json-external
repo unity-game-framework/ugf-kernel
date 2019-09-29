@@ -1,0 +1,13 @@
+{
+    "m_typeName": "UnityEngine.RangeInt, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "start",
+            "m_active": true
+        },
+        {
+            "m_name": "length",
+            "m_active": true
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "UGF.Kernel.Editor.Tests",
+    "references": [
+        "GUID:86ab2d835b3ec7841a902108526e043b",
+        "GUID:cc0ff3c90a5266f4aa9abfb5251c7275"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": []
+}

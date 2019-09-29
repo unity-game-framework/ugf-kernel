@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 000ed8c910d7e444b9c66906451fd705
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.GradientAlphaKey, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    members:
+    - name: alpha
+      active: 1
+    - name: time
+      active: 1

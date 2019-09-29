@@ -1,0 +1,13 @@
+{
+    "m_typeName": "Unity.Mathematics.RigidTransform, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "rot",
+            "m_active": true
+        },
+        {
+            "m_name": "pos",
+            "m_active": true
+        }
+    ]
+}

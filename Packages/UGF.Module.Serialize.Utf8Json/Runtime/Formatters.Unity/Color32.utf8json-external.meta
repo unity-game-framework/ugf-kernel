@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: fa62a754d4af66f4cade7261cea70fc7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: r
+      active: 1
+    - name: g
+      active: 1
+    - name: b
+      active: 1
+    - name: a
+      active: 1

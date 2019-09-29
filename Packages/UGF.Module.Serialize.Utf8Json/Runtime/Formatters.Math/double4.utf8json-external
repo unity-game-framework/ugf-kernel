@@ -1,0 +1,21 @@
+{
+    "m_typeName": "Unity.Mathematics.double4, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "x",
+            "m_active": true
+        },
+        {
+            "m_name": "y",
+            "m_active": true
+        },
+        {
+            "m_name": "z",
+            "m_active": true
+        },
+        {
+            "m_name": "w",
+            "m_active": true
+        }
+    ]
+}

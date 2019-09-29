@@ -1,0 +1,37 @@
+{
+    "m_typeName": "UnityEngine.Keyframe, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "time",
+            "m_active": true
+        },
+        {
+            "m_name": "value",
+            "m_active": true
+        },
+        {
+            "m_name": "inTangent",
+            "m_active": true
+        },
+        {
+            "m_name": "outTangent",
+            "m_active": true
+        },
+        {
+            "m_name": "inWeight",
+            "m_active": true
+        },
+        {
+            "m_name": "outWeight",
+            "m_active": true
+        },
+        {
+            "m_name": "weightedMode",
+            "m_active": true
+        },
+        {
+            "m_name": "tangentMode",
+            "m_active": true
+        }
+    ]
+}

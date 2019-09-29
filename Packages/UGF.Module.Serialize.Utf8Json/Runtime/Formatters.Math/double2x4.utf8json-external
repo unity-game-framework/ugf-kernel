@@ -1,0 +1,21 @@
+{
+    "m_typeName": "Unity.Mathematics.double2x4, Unity.Mathematics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "c0",
+            "m_active": true
+        },
+        {
+            "m_name": "c1",
+            "m_active": true
+        },
+        {
+            "m_name": "c2",
+            "m_active": true
+        },
+        {
+            "m_name": "c3",
+            "m_active": true
+        }
+    ]
+}

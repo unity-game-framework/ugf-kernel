@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: 81044ca817e886242bba7878c9913c37
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.BoundsInt, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: x
+      active: 0
+    - name: y
+      active: 0
+    - name: z
+      active: 0
+    - name: min
+      active: 0
+    - name: max
+      active: 0
+    - name: xMin
+      active: 0
+    - name: yMin
+      active: 0
+    - name: zMin
+      active: 0
+    - name: xMax
+      active: 0
+    - name: yMax
+      active: 0
+    - name: zMax
+      active: 0
+    - name: position
+      active: 1
+    - name: size
+      active: 1

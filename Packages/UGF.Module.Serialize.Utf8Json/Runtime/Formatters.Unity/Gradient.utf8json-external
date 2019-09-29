@@ -1,0 +1,17 @@
+{
+    "m_typeName": "UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "colorKeys",
+            "m_active": true
+        },
+        {
+            "m_name": "alphaKeys",
+            "m_active": true
+        },
+        {
+            "m_name": "mode",
+            "m_active": true
+        }
+    ]
+}

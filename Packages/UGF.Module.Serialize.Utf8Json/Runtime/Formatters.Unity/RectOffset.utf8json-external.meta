@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 004df02a0402d1a48bdc34c6df21ef7d
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8e70e03d822ac994ba422b38bbca3a27, type: 3}
+  info:
+    typeName: UnityEngine.RectOffset, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    members:
+    - name: left
+      active: 1
+    - name: right
+      active: 1
+    - name: top
+      active: 1
+    - name: bottom
+      active: 1

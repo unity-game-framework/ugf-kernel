@@ -1,0 +1,21 @@
+{
+    "m_typeName": "UnityEngine.Color32, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "m_members": [
+        {
+            "m_name": "r",
+            "m_active": true
+        },
+        {
+            "m_name": "g",
+            "m_active": true
+        },
+        {
+            "m_name": "b",
+            "m_active": true
+        },
+        {
+            "m_name": "a",
+            "m_active": true
+        }
+    ]
+}
