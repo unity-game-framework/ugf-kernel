@@ -1,8 +1,8 @@
 {
     "name": "com.ugf.kernel",
     "displayName": "UGF.Kernel",
-    "version": "0.0.0-preview",
-    "unity": "2019.2",
+    "version": "0.1.0-preview",
+    "unity": "2019.3",
     "description": "No description.",
     "author": {
         "name": "Unity Game Framework",
