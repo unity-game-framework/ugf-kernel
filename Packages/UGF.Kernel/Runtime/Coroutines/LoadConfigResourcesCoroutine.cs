@@ -22,6 +22,12 @@ namespace UGF.Kernel.Runtime.Coroutines
             yield return operation;
 
             var asset = (DescriptionAsset)operation.asset;
+
+            if (asset == null)
+            {
+                throw new ArgumentNullException(nameof(asset), $"The result of loading asset is null: '{ConfigId}'.");
+            }
+
             var config = asset.GetDescription<IKernelConfig>();
 
             Result = config;
