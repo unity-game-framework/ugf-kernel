@@ -8,13 +8,20 @@ namespace UGF.Module.Coroutines.Runtime
 {
     public class CoroutineModule : ApplicationModuleBase, ICoroutineModule
     {
+        public ICoroutineModuleDescription Description { get; }
+
         private CoroutineExecuterUnity m_executer;
+
+        public CoroutineModule(ICoroutineModuleDescription description)
+        {
+            Description = description;
+        }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
-            m_executer = new CoroutineExecuterUnity("CoroutineModuleExecuter");
+            m_executer = new CoroutineExecuterUnity("CoroutineModuleExecuter", Description.DontDestroyOnLoadExecuter);
         }
 
         protected override void OnUninitialize()

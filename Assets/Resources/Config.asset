@@ -36,7 +36,8 @@ MonoBehaviour:
     - m_active: 1
       m_builderId: CoroutineModuleBuilder
       m_arguments:
-        m_values: []
+        m_values:
+        - CoroutineModuleDescription
     - m_active: 1
       m_builderId: AddressableAssetsModuleBuilder
       m_arguments:
