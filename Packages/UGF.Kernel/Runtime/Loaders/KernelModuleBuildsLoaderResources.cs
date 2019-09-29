@@ -12,7 +12,7 @@ namespace UGF.Kernel.Runtime.Loaders
         {
             if (infos == null) throw new ArgumentNullException(nameof(infos));
 
-            return new LoadBuildsResourcesCoroutine(infos);
+            return new LoadModuleBuildsResourcesCoroutine(infos);
         }
     }
 }

@@ -9,11 +9,11 @@ using UnityEngine;
 
 namespace UGF.Kernel.Runtime.Coroutines
 {
-    public class LoadBuildsResourcesCoroutine : Coroutine<IReadOnlyList<IModuleBuild>>
+    public class LoadModuleBuildsResourcesCoroutine : Coroutine<IReadOnlyList<IModuleBuild>>
     {
         public IReadOnlyList<IModuleBuildInfo> Infos { get; }
 
-        public LoadBuildsResourcesCoroutine(IReadOnlyList<IModuleBuildInfo> infos)
+        public LoadModuleBuildsResourcesCoroutine(IReadOnlyList<IModuleBuildInfo> infos)
         {
             Infos = infos ?? throw new ArgumentNullException(nameof(infos));
         }
