@@ -1,13 +1,14 @@
-using UGF.Module.Descriptions.Runtime.Addressable;
+using UGF.Module.Descriptions.Runtime;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace UGF.Module.Descriptions.Editor.Addressable
+namespace UGF.Module.Descriptions.Editor
 {
-    [CustomEditor(typeof(DescriptionAddressableModuleDescriptionAsset))]
-    internal class DescriptionAddressableModuleDescriptionAssetEditor : UnityEditor.Editor
+    [CustomEditor(typeof(DescriptionModuleBuilderAsset), true)]
+    internal class DescriptionModuleBuilderAssetEditor : UnityEditor.Editor
     {
+        private readonly GUIContent[] m_labels = { new GUIContent("Register Name"), new GUIContent("Asset Name") };
         private SerializedProperty m_propertyScript;
         private ReorderableList m_list;
 
@@ -49,43 +50,19 @@ namespace UGF.Module.Descriptions.Editor.Addressable
         {
             SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
             SerializedProperty propertyRegisterName = propertyElement.FindPropertyRelative("m_registerName");
-            SerializedProperty propertyAsset = propertyElement.FindPropertyRelative("m_asset");
 
-            float spacing = EditorGUIUtility.standardVerticalSpacing;
-            float heightHeader = EditorGUIUtility.singleLineHeight;
-            float heightRegisterName = EditorGUI.GetPropertyHeight(propertyRegisterName);
-            float heightAsset = EditorGUI.GetPropertyHeight(propertyAsset);
+            rect.y += EditorGUIUtility.standardVerticalSpacing;
+            rect.height = EditorGUIUtility.singleLineHeight;
 
-            rect.x += 15F;
-            rect.width -= 15F;
-            rect.y += spacing;
-
-            var rectHeader = new Rect(rect.x, rect.y, rect.width, heightHeader);
-            var rectRegisterName = new Rect(rect.x, rectHeader.yMax + spacing, rect.width, heightRegisterName);
-            var rectAsset = new Rect(rect.x, rectRegisterName.yMax + spacing, rect.width, heightAsset);
-
-            string registerName = propertyRegisterName.stringValue;
-            string headerLabel = !string.IsNullOrEmpty(registerName) ? registerName : propertyElement.displayName;
-
-            propertyElement.isExpanded = EditorGUI.Foldout(rectHeader, propertyElement.isExpanded, headerLabel, true);
-
-            if (propertyElement.isExpanded)
-            {
-                using (new EditorGUI.IndentLevelScope())
-                {
-                    EditorGUI.PropertyField(rectRegisterName, propertyRegisterName);
-
-                    EditorGUI.PropertyField(rectAsset, propertyAsset, new GUIContent("Asset"));
-                }
-            }
+            EditorGUI.MultiPropertyField(rect, m_labels, propertyRegisterName);
         }
 
         private float OnElementHeight(int index)
         {
-            SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
             float spacing = EditorGUIUtility.standardVerticalSpacing;
+            float height = EditorGUIUtility.singleLineHeight;
 
-            return EditorGUI.GetPropertyHeight(propertyElement, true) + spacing * 3F;
+            return height + spacing * 2F;
         }
 
         private void OnAdd(ReorderableList list)
@@ -96,12 +73,10 @@ namespace UGF.Module.Descriptions.Editor.Addressable
 
             SerializedProperty propertyElement = propertyModules.GetArrayElementAtIndex(propertyModules.arraySize - 1);
             SerializedProperty propertyRegisterName = propertyElement.FindPropertyRelative("m_registerName");
-            SerializedProperty propertyAssetGuid = propertyElement.FindPropertyRelative("m_asset.m_AssetGUID");
-            SerializedProperty propertySubObjectName = propertyElement.FindPropertyRelative("m_asset.m_SubObjectName");
+            SerializedProperty propertyAssetName = propertyElement.FindPropertyRelative("m_assetName");
 
             propertyRegisterName.stringValue = string.Empty;
-            propertyAssetGuid.stringValue = string.Empty;
-            propertySubObjectName.stringValue = string.Empty;
+            propertyAssetName.stringValue = string.Empty;
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -1,7 +1,7 @@
 {
-    "name": "UGF.Module.Descriptions.Editor.Addressables",
+    "name": "UGF.Module.Descriptions.Editor",
     "references": [
-        "GUID:ef43ed24bd308e344887e784df0f1d30"
+        "GUID:707f8c0cf560d6c45b8b0cd682bdd2c0"
     ],
     "includePlatforms": [
         "Editor"
