@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85fc61fb602d9445bcb5f2419edd02b, type: 3}
-  m_Name: SerializeUtf8JsonModuleDescription
+  m_Script: {fileID: 11500000, guid: 2874303372d3705429db4cf913a243c1, type: 3}
+  m_Name: AddressableAssetsModule
   m_EditorClassIdentifier: 
-  m_description:
-    m_bytesSerializerName: utf8json-bytes
-    m_textCompactSerializerName: utf8json-text-compact
-    m_textReadableSerializerName: utf8json-text-readable

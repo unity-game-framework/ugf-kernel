@@ -19,5 +19,15 @@ namespace UGF.Module.Editor
                 EditorGUILayout.HelpBox($"Register Type: '{builder.RegisterType}'.", MessageType.Info);
             }
         }
+
+        protected override void DrawDescription()
+        {
+            SerializedProperty propertyDescription = serializedObject.FindProperty("m_description");
+
+            if (propertyDescription != null)
+            {
+                base.DrawDescription();
+            }
+        }
     }
 }

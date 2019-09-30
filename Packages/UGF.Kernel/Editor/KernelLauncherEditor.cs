@@ -46,6 +46,7 @@ namespace UGF.Kernel.Editor
                 m_builder.Append("No application.");
             }
 
+            EditorGUILayout.Space();
             EditorGUILayout.HelpBox(m_builder.ToString(), MessageType.Info);
         }
     }
