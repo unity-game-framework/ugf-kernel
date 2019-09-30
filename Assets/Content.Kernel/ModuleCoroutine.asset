@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403cc0362adc4844893f3809b0922759, type: 3}
-  m_Name: UnityModule
+  m_Script: {fileID: 11500000, guid: fac4172030c34cc47a00535b27ce8b93, type: 3}
+  m_Name: ModuleCoroutine
   m_EditorClassIdentifier: 
+  m_description:
+    m_dontDestroyOnLoadExecuter: 1
