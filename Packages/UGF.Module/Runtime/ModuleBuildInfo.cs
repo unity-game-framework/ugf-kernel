@@ -5,12 +5,12 @@ namespace UGF.Module.Runtime
     public class ModuleBuildInfo : IModuleBuildInfo
     {
         public bool Active { get; set; } = true;
-        public string BuilderId { get; }
-        public IModuleBuildArguments<string> Arguments { get; }
+        public IModuleBuilder Builder { get; }
+        public IModuleBuildArguments<object> Arguments { get; }
 
-        public ModuleBuildInfo(string builderId, IModuleBuildArguments<string> arguments)
+        public ModuleBuildInfo(IModuleBuilder builder, IModuleBuildArguments<object> arguments)
         {
-            BuilderId = builderId ?? throw new ArgumentNullException(nameof(builderId));
+            Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             Arguments = arguments ?? throw new ArgumentNullException(nameof(arguments));
         }
     }

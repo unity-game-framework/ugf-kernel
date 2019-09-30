@@ -5,6 +5,6 @@ namespace UGF.Kernel.Runtime.Loaders
 {
     public abstract class KernelConfigLoader : MonoBehaviour, IKernelConfigLoader
     {
-        public abstract ICoroutine<IKernelConfig> Load(string configId);
+        public abstract ICoroutine<IKernelConfig> Load();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
 
 namespace UGF.Module.Runtime
 {
@@ -13,7 +12,7 @@ namespace UGF.Module.Runtime
             Handler = handler ?? throw new ArgumentNullException(nameof(handler));
         }
 
-        protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)
+        protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<object> arguments)
         {
             return Handler(application, arguments);
         }

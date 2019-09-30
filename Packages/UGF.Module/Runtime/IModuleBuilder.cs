@@ -1,6 +1,5 @@
 using System;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
 
 namespace UGF.Module.Runtime
 {
@@ -8,6 +7,6 @@ namespace UGF.Module.Runtime
     {
         Type RegisterType { get; }
 
-        IApplicationModule Build(IApplication application, IModuleBuildArguments<IDescription> arguments);
+        IApplicationModule Build(IApplication application, IModuleBuildArguments<object> arguments);
     }
 }

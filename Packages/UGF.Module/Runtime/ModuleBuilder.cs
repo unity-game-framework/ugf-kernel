@@ -1,6 +1,5 @@
 using System;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
 
 namespace UGF.Module.Runtime
 {
@@ -8,7 +7,7 @@ namespace UGF.Module.Runtime
     {
         public Type RegisterType { get; } = typeof(TRegisterType);
 
-        public IApplicationModule Build(IApplication application, IModuleBuildArguments<IDescription> arguments)
+        public IApplicationModule Build(IApplication application, IModuleBuildArguments<object> arguments)
         {
             if (application == null) throw new ArgumentNullException(nameof(application));
             if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -16,6 +15,6 @@ namespace UGF.Module.Runtime
             return OnBuild(application, arguments);
         }
 
-        protected abstract IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments);
+        protected abstract IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<object> arguments);
     }
 }

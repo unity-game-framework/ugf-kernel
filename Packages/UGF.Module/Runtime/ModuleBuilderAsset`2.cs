@@ -1,17 +1,20 @@
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
+using UnityEngine;
 
 namespace UGF.Module.Runtime
 {
     public abstract class ModuleBuilderAsset<TRegisterType, TDescription> : ModuleBuilderAsset<TRegisterType>
         where TRegisterType : IApplicationModule
-        where TDescription : IDescription
+        where TDescription : IDescription, new()
     {
-        protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<IDescription> arguments)
-        {
-            var description = arguments.Get<TDescription>();
+        [SerializeField] private TDescription m_description = new TDescription();
 
-            return OnBuild(application, description);
+        public TDescription Description { get { return m_description; } }
+
+        protected override IApplicationModule OnBuild(IApplication application, IModuleBuildArguments<object> arguments)
+        {
+            return OnBuild(application, m_description);
         }
 
         protected abstract IApplicationModule OnBuild(IApplication application, TDescription description);

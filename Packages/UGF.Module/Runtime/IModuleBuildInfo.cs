@@ -3,7 +3,7 @@ namespace UGF.Module.Runtime
     public interface IModuleBuildInfo
     {
         bool Active { get; }
-        string BuilderId { get; }
-        IModuleBuildArguments<string> Arguments { get; }
+        IModuleBuilder Builder { get; }
+        IModuleBuildArguments<object> Arguments { get; }
     }
 }

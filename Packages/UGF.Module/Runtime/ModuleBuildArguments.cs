@@ -8,6 +8,8 @@ namespace UGF.Module.Runtime
     {
         public List<TValue> Values { get; } = new List<TValue>();
 
+        public static ModuleBuildArguments<TValue> Empty { get; } = new ModuleBuildArguments<TValue>();
+
         public T Get<T>()
         {
             if (!TryGet(out T argument))

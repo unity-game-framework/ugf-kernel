@@ -10,7 +10,6 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
 {
     public class SerializeUtf8JsonModule : ApplicationModuleBase, ISerializeUtf8JsonModule
     {
-        public IApplication Application { get; }
         public ISerializeModule SerializeModule { get; }
         public ISerializeUtf8JsonModuleDescription Description { get; }
         public IUtf8JsonFormatterResolver Resolver { get { return m_resolver; } }
@@ -20,9 +19,8 @@ namespace UGF.Module.Serialize.Utf8Json.Runtime
         private readonly UnionSerializer m_unionSerializer = new UnionSerializer();
         private readonly SerializeUtf8JsonUnionProvider m_unionProvider;
 
-        public SerializeUtf8JsonModule(IApplication application, ISerializeModule serializeModule, ISerializeUtf8JsonModuleDescription description)
+        public SerializeUtf8JsonModule(ISerializeModule serializeModule, ISerializeUtf8JsonModuleDescription description)
         {
-            Application = application ?? throw new ArgumentNullException(nameof(application));
             SerializeModule = serializeModule ?? throw new ArgumentNullException(nameof(serializeModule));
             Description = description ?? throw new ArgumentNullException(nameof(description));
 

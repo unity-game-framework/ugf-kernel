@@ -7,9 +7,9 @@ using UnityEngine;
 namespace UGF.Module.Descriptions.Runtime
 {
     [CreateAssetMenu(menuName = "UGF/Module.Descriptions/DescriptionModuleBuilder", order = 2000)]
-    public class DescriptionModuleBuilderAsset : ModuleBuilderAsset<DescriptionModule, IDescriptionModuleDescription>
+    public class DescriptionModuleBuilderAsset : ModuleBuilderAsset<DescriptionModule, DescriptionModuleDescription>
     {
-        protected override IApplicationModule OnBuild(IApplication application, IDescriptionModuleDescription description)
+        protected override IApplicationModule OnBuild(IApplication application, DescriptionModuleDescription description)
         {
             var assetsModule = application.GetModule<IAssetsModule>();
             var serializeModule = application.GetModule<ISerializeModule>();

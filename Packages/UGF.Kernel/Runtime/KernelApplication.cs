@@ -1,26 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UGF.Application.Runtime;
-using UGF.Description.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Runtime;
 
 namespace UGF.Kernel.Runtime
 {
-    public class KernelApplication : ApplicationUnity
+    public class KernelApplication : ApplicationUnity, IKernelApplication
     {
-        public IReadOnlyList<IModuleBuild> Builds { get; }
+        public IKernelConfig Config { get; }
 
-        public KernelApplication(IReadOnlyList<IModuleBuild> builds, bool provideStaticInstance = true) : base(provideStaticInstance)
+        public KernelApplication(IKernelConfig config, bool provideStaticInstance = true) : base(provideStaticInstance)
         {
-            Builds = builds ?? throw new ArgumentNullException(nameof(builds));
+            Config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         protected override void OnPreInitialize()
         {
             base.OnPreInitialize();
 
-            CreateModules(Builds);
+            CreateModules(Config);
         }
 
         protected override void OnPostUninitialize()
@@ -32,15 +31,15 @@ namespace UGF.Kernel.Runtime
 
         protected override void OnInitializeModules()
         {
-            for (int i = 0; i < Builds.Count; i++)
+            for (int i = 0; i < Config.Modules.Count; i++)
             {
-                IModuleBuild build = Builds[i];
-                IApplicationModule module = Modules[build.Builder.RegisterType];
+                IModuleBuilder builder = Config.Modules[i].Builder;
+                IApplicationModule module = Modules[builder.RegisterType];
 
                 module.Initialize();
             }
 
-            if (Modules.Count != Builds.Count)
+            if (Modules.Count != Config.Modules.Count)
             {
                 foreach (KeyValuePair<Type, IApplicationModule> pair in Modules)
                 {
@@ -54,15 +53,15 @@ namespace UGF.Kernel.Runtime
 
         protected override void OnUninitializeModules()
         {
-            for (int i = Builds.Count - 1; i >= 0; i--)
+            for (int i = Config.Modules.Count - 1; i >= 0; i--)
             {
-                IModuleBuild build = Builds[i];
-                IApplicationModule module = Modules[build.Builder.RegisterType];
+                IModuleBuilder builder = Config.Modules[i].Builder;
+                IApplicationModule module = Modules[builder.RegisterType];
 
                 module.Uninitialize();
             }
 
-            if (Modules.Count != Builds.Count)
+            if (Modules.Count != Config.Modules.Count)
             {
                 foreach (KeyValuePair<Type, IApplicationModule> pair in Modules)
                 {
@@ -74,21 +73,24 @@ namespace UGF.Kernel.Runtime
             }
         }
 
-        protected virtual void CreateModules(IReadOnlyList<IModuleBuild> builds)
+        protected virtual void CreateModules(IKernelConfig config)
         {
-            Log.Debug($"Create modules: '{builds.Count}'");
+            Log.Debug($"Create modules: '{config.Modules.Count}'");
 
-            for (int i = 0; i < builds.Count; i++)
+            for (int i = 0; i < config.Modules.Count; i++)
             {
-                IModuleBuild build = builds[i];
-                IModuleBuilder builder = build.Builder;
-                IModuleBuildArguments<IDescription> arguments = build.Arguments;
-                Type registerType = builder.RegisterType;
-                IApplicationModule module = builder.Build(this, arguments);
+                IModuleBuildInfo info = config.Modules[i];
 
-                AddModule(registerType, module);
+                if (info.Active)
+                {
+                    IModuleBuilder builder = info.Builder;
+                    Type registerType = builder.RegisterType;
+                    IApplicationModule module = builder.Build(this, info.Arguments);
 
-                Log.Debug($"Build Module: registerType:'{registerType}', module:'{module}'.");
+                    AddModule(registerType, module);
+
+                    Log.Debug($"Build Module: registerType:'{registerType}', module:'{module}'.");
+                }
             }
         }
     }
