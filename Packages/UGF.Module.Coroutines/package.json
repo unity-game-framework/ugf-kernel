@@ -10,6 +10,6 @@
     },
     "dependencies": {
         "com.ugf.module": "0.0.0-preview",
-        "com.ugf.coroutines": "0.0.0-preview"
+        "com.ugf.coroutines": "0.1.0-preview"
     }
 }

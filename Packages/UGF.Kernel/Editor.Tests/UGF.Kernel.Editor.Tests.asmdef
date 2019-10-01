@@ -1,9 +1,6 @@
 {
     "name": "UGF.Kernel.Editor.Tests",
-    "references": [
-        "GUID:86ab2d835b3ec7841a902108526e043b",
-        "GUID:cc0ff3c90a5266f4aa9abfb5251c7275"
-    ],
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -17,5 +14,6 @@
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }
