@@ -8,7 +8,7 @@ namespace UGF.Module.Descriptions.Editor
     [CustomEditor(typeof(DescriptionModuleBuilderAsset), true)]
     internal class DescriptionModuleBuilderAssetEditor : UnityEditor.Editor
     {
-        private readonly GUIContent[] m_labels = { new GUIContent("Register Name"), new GUIContent("Asset Name") };
+        private readonly GUIContent[] m_labels = { new GUIContent("Name"), new GUIContent("Asset") };
         private SerializedProperty m_propertyScript;
         private ReorderableList m_list;
 
