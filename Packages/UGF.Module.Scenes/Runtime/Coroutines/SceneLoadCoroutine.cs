@@ -16,6 +16,8 @@ namespace UGF.Module.Scenes.Runtime.Coroutines
 
         public SceneLoadCoroutine(string sceneName, SceneLoadParameters parameters)
         {
+            if (string.IsNullOrEmpty(sceneName)) throw new ArgumentException("Value cannot be null or empty.", nameof(sceneName));
+
             SceneName = sceneName;
             Parameters = parameters;
         }

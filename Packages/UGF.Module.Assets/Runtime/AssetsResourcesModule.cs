@@ -10,7 +10,7 @@ namespace UGF.Module.Assets.Runtime
     {
         public ICoroutine<T> LoadAsync<T>(string assetName)
         {
-            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
 
             ResourceRequest request = Resources.LoadAsync(assetName, typeof(T));
 
@@ -19,7 +19,7 @@ namespace UGF.Module.Assets.Runtime
 
         public ICoroutine<object> LoadAsync(string assetName, Type assetType)
         {
-            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
             if (assetType == null) throw new ArgumentNullException(nameof(assetType));
 
             ResourceRequest request = Resources.LoadAsync(assetName, assetType);

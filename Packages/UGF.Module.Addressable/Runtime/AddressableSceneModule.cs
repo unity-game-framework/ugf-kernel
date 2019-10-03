@@ -29,7 +29,7 @@ namespace UGF.Module.Addressable.Runtime
 
         public ISceneLoadCoroutine LoadSceneAsync(string sceneName, SceneLoadParameters parameters)
         {
-            if (sceneName == null) throw new ArgumentNullException(nameof(sceneName));
+            if (string.IsNullOrEmpty(sceneName)) throw new ArgumentException("Value cannot be null or empty.", nameof(sceneName));
 
             AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync(sceneName, parameters.Mode, parameters.Activate);
 

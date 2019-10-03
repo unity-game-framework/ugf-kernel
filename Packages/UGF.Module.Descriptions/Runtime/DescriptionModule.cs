@@ -50,7 +50,7 @@ namespace UGF.Module.Descriptions.Runtime
 
         public void Add(string name, IDescription description)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
             if (description == null) throw new ArgumentNullException(nameof(description));
             if (m_descriptions.ContainsKey(name)) throw new ArgumentException($"A description with the specified name already registered: '{name}'.", nameof(name));
 
@@ -59,21 +59,21 @@ namespace UGF.Module.Descriptions.Runtime
 
         public void Remove(string name)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
 
             m_descriptions.Remove(name);
         }
 
         public T GetDescription<T>(string name) where T : IDescription
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
 
             return (T)m_descriptions[name];
         }
 
         public bool TryGetDescription<T>(string name, out T description) where T : IDescription
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
 
             if (m_descriptions.TryGetValue(name, out IDescription value) && value is T cast)
             {
@@ -87,7 +87,7 @@ namespace UGF.Module.Descriptions.Runtime
 
         public ICoroutine<IDescription> LoadAsync(string assetName, Type assetType)
         {
-            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
             if (assetType == null) throw new ArgumentNullException(nameof(assetType));
 
             return new DescriptionLoadCoroutine(AssetsModule, SerializeModule, assetName, assetType);
@@ -95,7 +95,7 @@ namespace UGF.Module.Descriptions.Runtime
 
         public ICoroutine<T> LoadAsync<T>(string assetName) where T : IDescription
         {
-            if (assetName == null) throw new ArgumentNullException(nameof(assetName));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
 
             return new DescriptionLoadCoroutine<T>(AssetsModule, SerializeModule, assetName);
         }

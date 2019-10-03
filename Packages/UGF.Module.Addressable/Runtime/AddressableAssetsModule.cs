@@ -25,21 +25,21 @@ namespace UGF.Module.Addressable.Runtime
             Log.Debug($"AddressableAssetsModule initialized: locators:'{Addressables.ResourceLocators.Count}', runtimePath:'{Addressables.RuntimePath}'.");
         }
 
-        public ICoroutine<T> LoadAsync<T>(string key)
+        public ICoroutine<T> LoadAsync<T>(string assetName)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
 
-            AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>(key);
+            AsyncOperationHandle<T> handler = Addressables.LoadAssetAsync<T>(assetName);
 
             return new OperationHandleCoroutine<T>(handler);
         }
 
-        public ICoroutine<object> LoadAsync(string key, Type assetType)
+        public ICoroutine<object> LoadAsync(string assetName, Type assetType)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
             if (assetType == null) throw new ArgumentNullException(nameof(assetType));
 
-            AsyncOperationHandle<object> handler = Addressables.LoadAssetAsync<object>(key);
+            AsyncOperationHandle<object> handler = Addressables.LoadAssetAsync<object>(assetName);
 
             return new OperationHandleCoroutine<object>(handler);
         }

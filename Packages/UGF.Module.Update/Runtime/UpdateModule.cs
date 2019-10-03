@@ -1,8 +1,8 @@
 using UGF.Application.Runtime;
 using UGF.Module.Update.Runtime.Handlers;
 using UGF.Update.Runtime;
+using Unity.Profiling;
 using UnityEngine.LowLevel;
-using UnityEngine.Profiling;
 using PlayerLoops = UnityEngine.PlayerLoop;
 
 namespace UGF.Module.Update.Runtime
@@ -18,12 +18,16 @@ namespace UGF.Module.Update.Runtime
         private readonly UpdateSet<IUpdateHandler> m_update = new UpdateSet<IUpdateHandler>();
         private readonly UpdateSetHandler<IFixedUpdateHandler> m_fixedUpdate = new UpdateSetHandler<IFixedUpdateHandler>(handler => handler.OnFixedUpdate());
         private readonly UpdateSetHandler<IPostLateUpdateHandler> m_postLateUpdate = new UpdateSetHandler<IPostLateUpdateHandler>(handler => handler.OnPostLateUpdate());
+        private static ProfilerMarker m_preUpdateMarker = new ProfilerMarker("UpdateModule.OnPreUpdate");
+        private static ProfilerMarker m_updateMarker = new ProfilerMarker("UpdateModule.OnUpdate");
+        private static ProfilerMarker m_fixedUpdateMarker = new ProfilerMarker("UpdateModule.OnFixedUpdate");
+        private static ProfilerMarker m_postLateUpdateMarker = new ProfilerMarker("UpdateModule.OnPostLateUpdate");
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
-            PlayerLoopSystem playerLoop = PlayerLoop.GetDefaultPlayerLoop();
+            PlayerLoopSystem playerLoop = PlayerLoop.GetCurrentPlayerLoop();
 
             UpdateUtility.TryAddUpdateFunction(playerLoop, typeof(PlayerLoops.PreUpdate), OnPreUpdate);
             UpdateUtility.TryAddUpdateFunction(playerLoop, typeof(PlayerLoops.Update), OnUpdate);
@@ -37,43 +41,42 @@ namespace UGF.Module.Update.Runtime
         {
             base.OnUninitialize();
 
-            PlayerLoop.SetPlayerLoop(PlayerLoop.GetDefaultPlayerLoop());
+            PlayerLoopSystem playerLoop = PlayerLoop.GetCurrentPlayerLoop();
+
+            UpdateUtility.TryRemoveUpdateFunction(playerLoop, typeof(PlayerLoops.PreUpdate), OnPreUpdate);
+            UpdateUtility.TryRemoveUpdateFunction(playerLoop, typeof(PlayerLoops.Update), OnUpdate);
+            UpdateUtility.TryRemoveUpdateFunction(playerLoop, typeof(PlayerLoops.FixedUpdate), OnFixedUpdate);
+            UpdateUtility.TryRemoveUpdateFunction(playerLoop, typeof(PlayerLoops.PostLateUpdate), OnPostLateUpdate);
+
+            PlayerLoop.SetPlayerLoop(playerLoop);
         }
 
         private void OnPreUpdate()
         {
-            Profiler.BeginSample("UpdateModule.OnPreUpdate");
-
+            m_preUpdateMarker.Begin();
             m_preUpdate.ApplyQueueAndUpdate();
-
-            Profiler.EndSample();
+            m_preUpdateMarker.End();
         }
 
         private void OnUpdate()
         {
-            Profiler.BeginSample("UpdateModule.OnUpdate");
-
+            m_updateMarker.Begin();
             m_update.ApplyQueueAndUpdate();
-
-            Profiler.EndSample();
+            m_updateMarker.End();
         }
 
         private void OnFixedUpdate()
         {
-            Profiler.BeginSample("UpdateModule.OnFixedUpdate");
-
+            m_fixedUpdateMarker.Begin();
             m_fixedUpdate.ApplyQueueAndUpdate();
-
-            Profiler.EndSample();
+            m_fixedUpdateMarker.End();
         }
 
         private void OnPostLateUpdate()
         {
-            Profiler.BeginSample("UpdateModule.OnPostLateUpdate");
-
+            m_postLateUpdateMarker.Begin();
             m_postLateUpdate.ApplyQueueAndUpdate();
-
-            Profiler.EndSample();
+            m_postLateUpdateMarker.End();
         }
     }
 }
