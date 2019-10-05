@@ -5,19 +5,13 @@ using UnityEditor;
 namespace UGF.Module.Editor
 {
     [CustomEditor(typeof(ModuleBuilderAsset), true)]
-    internal class ModuleBuilderAssetEditor : DescriptionAssetEditor
+    public class ModuleBuilderAssetEditor : DescriptionAssetEditor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            var builder = (ModuleBuilderAsset)target;
-
-            if (builder != null)
-            {
-                EditorGUILayout.Space();
-                EditorGUILayout.HelpBox($"Register Type: '{builder.RegisterType}'.", MessageType.Info);
-            }
+            DrawModuleInfo();
         }
 
         protected override void DrawDescription()
@@ -28,6 +22,22 @@ namespace UGF.Module.Editor
             {
                 base.DrawDescription();
             }
+        }
+
+        protected virtual void DrawModuleInfo()
+        {
+            var builder = target as ModuleBuilderAsset;
+
+            if (builder != null)
+            {
+                DrawModuleInfo(builder);
+            }
+        }
+
+        protected virtual void DrawModuleInfo(IModuleBuilder builder)
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.HelpBox($"Register Type: '{builder.RegisterType}'.", MessageType.Info);
         }
     }
 }

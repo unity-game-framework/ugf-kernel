@@ -1,4 +1,5 @@
 using UGF.Module.Descriptions.Runtime;
+using UGF.Module.Editor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -6,15 +7,14 @@ using UnityEngine;
 namespace UGF.Module.Descriptions.Editor
 {
     [CustomEditor(typeof(DescriptionModuleBuilderAsset), true)]
-    internal class DescriptionModuleBuilderAssetEditor : UnityEditor.Editor
+    internal class DescriptionModuleBuilderAssetEditor : ModuleBuilderAssetEditor
     {
         private readonly GUIContent[] m_labels = { new GUIContent("Name"), new GUIContent("Asset") };
-        private SerializedProperty m_propertyScript;
         private ReorderableList m_list;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            m_propertyScript = serializedObject.FindProperty("m_Script");
+            base.OnEnable();
 
             SerializedProperty propertyAssetInfos = serializedObject.FindProperty("m_description.m_assetInfos");
 
@@ -25,18 +25,9 @@ namespace UGF.Module.Descriptions.Editor
             m_list.onAddCallback = OnAdd;
         }
 
-        public override void OnInspectorGUI()
+        protected override void DrawDescription()
         {
-            serializedObject.UpdateIfRequiredOrScript();
-
-            using (new EditorGUI.DisabledScope(true))
-            {
-                EditorGUILayout.PropertyField(m_propertyScript);
-            }
-
             m_list.DoLayoutList();
-
-            serializedObject.ApplyModifiedProperties();
         }
 
         private void OnDrawHeader(Rect rect)
