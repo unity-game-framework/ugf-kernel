@@ -75,8 +75,6 @@ namespace UGF.Kernel.Runtime
 
         protected virtual void CreateModules(IKernelConfig config)
         {
-            Log.Debug($"Create modules: '{config.Modules.Count}'");
-
             for (int i = 0; i < config.Modules.Count; i++)
             {
                 IModuleBuildInfo info = config.Modules[i];
