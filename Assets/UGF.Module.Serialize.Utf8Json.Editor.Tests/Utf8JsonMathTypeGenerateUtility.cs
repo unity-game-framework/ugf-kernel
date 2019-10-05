@@ -6,7 +6,7 @@ using UGF.Utf8Json.Editor.ExternalType;
 using Unity.Mathematics;
 using UnityEditor;
 
-namespace UGF.Serialize.Utf8Json.Math.Editor.Tests
+namespace UGF.Module.Serialize.Utf8Json.Editor.Tests
 {
     public static class Utf8JsonMathTypeGenerateUtility
     {

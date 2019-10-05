@@ -1,7 +1,6 @@
 using System;
-using UGF.Utf8Json.Editor.ExternalType;
 
-namespace UGF.Serialize.Utf8Json.Math.Editor.Tests
+namespace UGF.Module.Serialize.Utf8Json.Editor.Tests
 {
     public class Utf8JsonMathTypeGenerateInfo
     {
