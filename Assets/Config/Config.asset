@@ -20,8 +20,6 @@ MonoBehaviour:
     - m_active: 1
       m_builder: {fileID: 11400000, guid: 6de9b26e5258f644aaa26b5a1397ac19, type: 2}
     - m_active: 1
-      m_builder: {fileID: 11400000, guid: 2c9aaee08fc80b0408d9e73ce4c64e8e, type: 2}
-    - m_active: 1
       m_builder: {fileID: 11400000, guid: 43606de62acf6ae4d881e85416b1be6c, type: 2}
     - m_active: 1
       m_builder: {fileID: 11400000, guid: 3b45616d103281d4b85e5994c096d1c0, type: 2}
