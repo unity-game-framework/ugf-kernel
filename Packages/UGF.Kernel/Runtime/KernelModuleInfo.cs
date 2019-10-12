@@ -8,13 +8,12 @@ namespace UGF.Kernel.Runtime
     public class KernelModuleInfo : IModuleBuildInfo
     {
         [SerializeField] private bool m_active = true;
-        [SerializeField] private string m_builderId;
-        [SerializeField] private KernelModuleInfoArguments m_arguments = new KernelModuleInfoArguments();
+        [SerializeField] private ModuleBuilderAsset m_builder;
 
         public bool Active { get { return m_active; } set { m_active = value; } }
-        public string BuilderId { get { return m_builderId; } set { m_builderId = value; } }
-        public KernelModuleInfoArguments Arguments { get { return m_arguments; } }
+        public ModuleBuilderAsset Builder { get { return m_builder; } set { m_builder = value; } }
+        public IModuleBuildArguments<object> Arguments { get; } = ModuleBuildArguments<object>.Empty;
 
-        IModuleBuildArguments<string> IModuleBuildInfo.Arguments { get { return Arguments; } }
+        IModuleBuilder IModuleBuildInfo.Builder { get { return m_builder; } }
     }
 }

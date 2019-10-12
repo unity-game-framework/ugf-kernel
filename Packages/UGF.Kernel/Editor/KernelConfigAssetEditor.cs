@@ -71,24 +71,29 @@ namespace UGF.Kernel.Editor
         private void OnDrawElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
-            float spacing = EditorGUIUtility.standardVerticalSpacing;
+            SerializedProperty propertyActive = propertyElement.FindPropertyRelative("m_active");
+            SerializedProperty propertyBuilder = propertyElement.FindPropertyRelative("m_builder");
 
-            rect.x += 15F;
-            rect.width -= 15F;
+            float spacing = EditorGUIUtility.standardVerticalSpacing;
+            float heightActive = EditorGUI.GetPropertyHeight(propertyActive);
+            float heightBuilder = EditorGUI.GetPropertyHeight(propertyBuilder);
+
             rect.y += spacing;
 
-            using (new EditorGUI.IndentLevelScope(-EditorGUI.indentLevel))
-            {
-                EditorGUI.PropertyField(rect, propertyElement, true);
-            }
+            var rectActive = new Rect(rect.x, rect.y, 15F, heightActive);
+            var rectBuilder = new Rect(rectActive.xMax + spacing, rect.y, rect.width - rectActive.width - spacing, heightBuilder);
+
+            propertyActive.boolValue = EditorGUI.ToggleLeft(rectActive, GUIContent.none, propertyActive.boolValue);
+
+            EditorGUI.PropertyField(rectBuilder, propertyBuilder, GUIContent.none);
         }
 
         private float OnElementHeight(int index)
         {
-            SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
             float spacing = EditorGUIUtility.standardVerticalSpacing;
+            float height = EditorGUIUtility.singleLineHeight;
 
-            return EditorGUI.GetPropertyHeight(propertyElement, true) + spacing * 3F;
+            return height + spacing * 2F;
         }
 
         private void OnAdd(ReorderableList list)
@@ -98,11 +103,11 @@ namespace UGF.Kernel.Editor
             propertyModules.InsertArrayElementAtIndex(propertyModules.arraySize);
 
             SerializedProperty propertyElement = propertyModules.GetArrayElementAtIndex(propertyModules.arraySize - 1);
-            SerializedProperty propertyBuilderId = propertyElement.FindPropertyRelative("m_builderId");
-            SerializedProperty propertyArgumentValues = propertyElement.FindPropertyRelative("m_arguments.m_values");
+            SerializedProperty propertyActive = propertyElement.FindPropertyRelative("m_active");
+            SerializedProperty propertyBuilder = propertyElement.FindPropertyRelative("m_builder");
 
-            propertyBuilderId.stringValue = string.Empty;
-            propertyArgumentValues.ClearArray();
+            propertyActive.boolValue = true;
+            propertyBuilder.objectReferenceValue = null;
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -133,28 +138,13 @@ namespace UGF.Kernel.Editor
 
         private void CreateEditors(SerializedProperty propertyElement)
         {
-            SerializedProperty propertyBuilderId = propertyElement.FindPropertyRelative("m_builderId");
-            SerializedProperty propertyArgumentValues = propertyElement.FindPropertyRelative("m_arguments.m_values");
+            SerializedProperty propertyBuilder = propertyElement.FindPropertyRelative("m_builder");
 
-            CreateEditor(propertyBuilderId);
-
-            for (int i = 0; i < propertyArgumentValues.arraySize; i++)
+            if (propertyBuilder.objectReferenceValue != null)
             {
-                SerializedProperty propertyValue = propertyArgumentValues.GetArrayElementAtIndex(i);
+                UnityEditor.Editor editor = CreateEditor(propertyBuilder.objectReferenceValue);
 
-                CreateEditor(propertyValue);
-            }
-        }
-
-        private void CreateEditor(SerializedProperty serializedProperty)
-        {
-            Object asset = Resources.Load(serializedProperty.stringValue);
-
-            if (asset != null)
-            {
-                UnityEditor.Editor editor = UnityEditor.Editor.CreateEditor(asset);
-
-                m_editors.Add(serializedProperty, editor);
+                m_editors.Add(propertyElement, editor);
             }
         }
 

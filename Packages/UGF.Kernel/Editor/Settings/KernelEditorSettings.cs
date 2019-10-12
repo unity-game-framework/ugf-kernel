@@ -5,37 +5,29 @@ using UnityEditor;
 
 namespace UGF.Kernel.Editor.Settings
 {
-    public static class KernelEditorUserSettings
+    public static class KernelEditorSettings
     {
-        public static bool ShowConfigInProjectSettings
+        public static KernelConfigAsset Config
         {
-            get { return m_settings.Data.ShowConfigInProjectSettings; }
+            get { return m_settings.Data.Config; }
             set
             {
-                m_settings.Data.ShowConfigInProjectSettings = value;
+                m_settings.Data.Config = value;
                 m_settings.Save();
             }
         }
 
-        public static KernelConfigAsset ProjectSettingsConfig
-        {
-            get { return m_settings.Data.ProjectSettingsConfig; }
-            set
-            {
-                m_settings.Data.ProjectSettingsConfig = value;
-                m_settings.Save();
-            }
-        }
-
-        private static readonly CustomSettingsEditorPrefs<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPrefs<KernelEditorSettingsData>
+        private static readonly CustomSettingsEditorPackage<KernelEditorSettingsData> m_settings = new CustomSettingsEditorPackage<KernelEditorSettingsData>
         (
-            "Packages.UGF.Kernel.KernelEditorSettings"
+            "UGF.Kernel",
+            "KernelEditorSettings",
+            CustomSettingsEditorUtility.DefaultPackageExternalFolder
         );
 
         [SettingsProvider, UsedImplicitly]
         private static SettingsProvider GetSettingsProvider()
         {
-            return new CustomSettingsProvider<KernelEditorSettingsData>("Preferences/UGF/Kernel", m_settings, SettingsScope.User);
+            return new CustomSettingsProvider<KernelEditorSettingsData>("Project/UGF/Kernel", m_settings, SettingsScope.Project);
         }
     }
 }

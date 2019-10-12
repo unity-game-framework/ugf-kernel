@@ -4,6 +4,6 @@ namespace UGF.Kernel.Runtime.Loaders
 {
     public interface IKernelConfigLoader
     {
-        ICoroutine<IKernelConfig> Load(string configId);
+        ICoroutine<IKernelConfig> Load();
     }
 }
