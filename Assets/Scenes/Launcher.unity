@@ -131,7 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1832432749}
   - component: {fileID: 1832432750}
-  - component: {fileID: 1832432752}
   - component: {fileID: 1832432751}
   m_Layer: 0
   m_Name: KernelLauncher
@@ -169,9 +168,7 @@ MonoBehaviour:
   m_launchOnStart: 1
   m_stopOnQuit: 1
   m_provideStaticInstance: 1
-  m_configId: Config
-  m_configLoader: {fileID: 1832432752}
-  m_moduleBuildsLoader: {fileID: 1832432751}
+  m_configLoader: {fileID: 1832432751}
 --- !u!114 &1832432751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,18 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832432748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46661946d0748147bacc6a853a23c86, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c961b6da70947544a00d39df94960f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1832432752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832432748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27af3642c5ac5d3489092e188b1c9dbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_config: {fileID: 11400000, guid: 22a3df38f4903f14c9240774ccd83dc4, type: 2}

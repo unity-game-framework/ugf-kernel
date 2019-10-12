@@ -10,33 +10,18 @@ namespace UGF.Kernel.Editor
     [CustomEditor(typeof(KernelLauncher), true)]
     internal class KernelLauncherEditor : UnityEditor.Editor
     {
-        private readonly string[] m_exclude = { "m_Script", "m_configId" };
         private readonly StringBuilder m_builder = new StringBuilder(100);
         private KernelLauncher m_launcher;
-        private SerializedProperty m_propertyScript;
-        private SerializedProperty m_propertyConfigId;
 
         private void OnEnable()
         {
             m_launcher = (KernelLauncher)serializedObject.targetObject;
-            m_propertyScript = serializedObject.FindProperty("m_Script");
-            m_propertyConfigId = serializedObject.FindProperty("m_configId");
         }
 
         public override void OnInspectorGUI()
         {
-            serializedObject.UpdateIfRequiredOrScript();
-
-            using (new EditorGUI.DisabledScope(true))
-            {
-                EditorGUILayout.PropertyField(m_propertyScript);
-            }
-
-            KernelEditorGUIUtility.ResourcesObjectField("Config", m_propertyConfigId, typeof(KernelConfigAsset));
-
-            DrawPropertiesExcluding(serializedObject, m_exclude);
-
-            serializedObject.ApplyModifiedProperties();
+            DrawDefaultInspector();
+            DrawInfo();
         }
 
         private void DrawInfo()
@@ -61,6 +46,7 @@ namespace UGF.Kernel.Editor
                 m_builder.Append("No application.");
             }
 
+            EditorGUILayout.Space();
             EditorGUILayout.HelpBox(m_builder.ToString(), MessageType.Info);
         }
     }
