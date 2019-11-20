@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "com.ugf.module.addressable": "0.2.0-preview",
-    "com.ugf.module.serialize.utf8json": "0.1.0-preview",
-    "com.ugf.module.descriptions": "0.2.0-preview",
-    "com.ugf.module.update": "0.1.0-preview",
-    "com.ugf.module.coroutines": "0.1.0-preview",
     "com.ugf.testing": "0.1.1-preview",
     "com.unity.ide.rider": "1.1.1",
     "com.unity.test-framework": "1.1.5"

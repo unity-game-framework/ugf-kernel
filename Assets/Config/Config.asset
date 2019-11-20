@@ -14,18 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_description:
     m_name: Default
-    m_modules:
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: 49c3d6bf0378a8f47ba833bc85c57bf5, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: 6de9b26e5258f644aaa26b5a1397ac19, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: 43606de62acf6ae4d881e85416b1be6c, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: 96884ddb190faa44287430466a37d3c0, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: 3b45616d103281d4b85e5994c096d1c0, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: d9f928215eb4389418ec92aaf6941bf9, type: 2}
-    - m_active: 1
-      m_builder: {fileID: 11400000, guid: f56353a3acaae464f8edf21d2657e221, type: 2}
+    m_modules: []
