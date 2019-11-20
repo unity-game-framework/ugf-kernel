@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
+using System.Threading.Tasks;
 using UGF.Application.Runtime;
-using UGF.Coroutines.Runtime;
 using UGF.Kernel.Runtime.Loaders;
 using UGF.Logs.Runtime;
 using UnityEngine;
@@ -43,13 +42,9 @@ namespace UGF.Kernel.Runtime
 
         private IKernelConfig m_config;
 
-        protected override IEnumerator PreloadResourcesAsync()
+        protected override async Task PreloadResourcesAsync()
         {
-            ICoroutine<IKernelConfig> coroutine = ConfigLoader.Load();
-
-            yield return coroutine;
-
-            m_config = coroutine.Result;
+            m_config = await ConfigLoader.Load();
 
             Log.Debug($"Config:'{m_config}', name:'{m_config.Name}', modules:'{m_config.Modules.Count}'.");
         }

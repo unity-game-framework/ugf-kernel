@@ -1,9 +1,9 @@
-using UGF.Coroutines.Runtime;
+using System.Threading.Tasks;
 
 namespace UGF.Kernel.Runtime.Loaders
 {
     public interface IKernelConfigLoader
     {
-        ICoroutine<IKernelConfig> Load();
+        Task<IKernelConfig> Load();
     }
 }
