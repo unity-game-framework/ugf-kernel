@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_info: 0
-  m_debug: 1
+  m_debug: 0
   m_warning: 0
   m_error: 0
   m_exception: 0
