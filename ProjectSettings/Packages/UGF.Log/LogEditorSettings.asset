@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f922dbb54c9724fa4297e797868a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_info: 1
+  m_info: 0
   m_debug: 0
-  m_warning: 1
-  m_error: 1
-  m_exception: 1
+  m_warning: 0
+  m_error: 0
+  m_exception: 0
   m_alwaysIncludeInEditor: 1
   m_alwaysIncludeInDevelopmentBuild: 0

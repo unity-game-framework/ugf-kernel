@@ -26,6 +26,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 0.2.0-preview - 2019-11-20
+- [Commits](https://github.com/unity-game-framework/ugf-kernel/compare/0.1.0-preview...0.2.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-kernel/milestone/2?closed=1)
+
+### Changed
+- Package dependencies:
+    - `com.ugf.module`: from `0.1.0-preview` to `0.2.0-preview`.
+- Rework to use async / await.
+
+### Removed
+- Package dependencies:
+    - `com.ugf.coroutines`: from `0.1.0-preview`.
+
 ## 0.1.0-preview - 2019-10-12
 - [Commits](https://github.com/unity-game-framework/ugf-kernel/compare/c9ef1ec...0.1.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-kernel/milestone/1?closed=1)
