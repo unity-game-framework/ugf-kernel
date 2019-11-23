@@ -169,6 +169,7 @@ MonoBehaviour:
   m_stopOnQuit: 1
   m_provideStaticInstance: 1
   m_configLoader: {fileID: 1832432751}
+  m_requestScriptReloadOnQuit: 0
 --- !u!114 &1832432751
 MonoBehaviour:
   m_ObjectHideFlags: 0
