@@ -10,6 +10,7 @@ namespace UGF.Kernel.Runtime
     public class KernelLauncher : ApplicationUnityLauncher
     {
         [SerializeField] private KernelConfigLoader m_configLoader;
+        [SerializeField] private bool m_requestScriptReloadOnQuit;
 
         public IKernelConfigLoader ConfigLoader
         {
@@ -24,6 +25,8 @@ namespace UGF.Kernel.Runtime
             }
             set { m_configLoader = (KernelConfigLoader)value; }
         }
+
+        public bool RequestScriptReloadOnQuit { get { return m_requestScriptReloadOnQuit; } set { m_requestScriptReloadOnQuit = value; } }
 
         public IKernelConfig Config
         {
@@ -64,5 +67,17 @@ namespace UGF.Kernel.Runtime
 
             m_config = null;
         }
+
+#if UNITY_EDITOR
+        protected override void OnQuitting()
+        {
+            base.OnQuitting();
+
+            if (m_requestScriptReloadOnQuit)
+            {
+                UnityEditor.EditorUtility.RequestScriptReload();
+            }
+        }
+#endif
     }
 }
