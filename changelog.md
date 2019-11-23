@@ -26,6 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 0.3.0-preview - 2019-11-23
+- [Commits](https://github.com/unity-game-framework/ugf-kernel/compare/0.2.0-preview...0.3.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-kernel/milestone/3?closed=1)
+
+### Added
+- `KernelLauncher.RequestScriptReloadOnQuit` to request script reload on application quit (editor only).
+
 ## 0.2.0-preview - 2019-11-20
 - [Commits](https://github.com/unity-game-framework/ugf-kernel/compare/0.1.0-preview...0.2.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-kernel/milestone/2?closed=1)
